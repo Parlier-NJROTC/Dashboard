@@ -1,0 +1,79 @@
+---
+import Link from "./Link.astro";
+
+---
+<nav id="menus">
+  <header>
+    <img style="width: 50px; margin-inline: 20px" src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg">
+      <h2 style="margin-inline: -5px;">Parlier</h2><h2 style="margin-inline: 10px;">NJROTC</h2>
+      <label for="box" id="close"></label>
+  </header>
+  <nav id="navi">
+    <Link title="Home" link="" />
+    <Link title="Ribbon" />
+
+  </nav>
+</nav>
+</div>
+
+<style>
+#menus {
+        position: fixed;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background-color: navy;
+        height:100%;
+        border-right:3px solid rgb(23, 23, 146);
+        top: 0px;
+        left: -2px;
+        border-left: 1px solid white;
+        z-index: 99;
+        
+    }
+
+    #box {
+        display: none;
+    }
+
+    header {
+        background-color: darkblue;
+        border-bottom: 5px double black;
+        height: 100px;
+        width: 300px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+    }
+
+    header h2,
+    header label {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+            sans-serif;
+        font-weight: normal;
+        font-size: 30px;
+        margin-inline: 35px;
+    }
+    #navi {
+        position: relative;
+        overflow-y: scroll;
+
+        height: calc(100vh - 130px);
+    }
+
+    a {
+        text-decoration: none;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        padding-right: 20px;
+        color: white;
+        text-align: right;
+        overflow: hidden;
+        grid-row: 1 / -1;
+    }
+
+    a:visited {
+        color: white;
+    }
