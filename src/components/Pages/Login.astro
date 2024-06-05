@@ -3,7 +3,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
 
-    <span>
+    <span style="border: 10px rgb(0, 0, 0) double;">
         <div id="Login" class="sanchez-regular">
             Login
             <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" style="top:130%; position:absolute; width: 60px; height: 60px;">
@@ -14,31 +14,32 @@
                     <label for="username"></label>
                     <input placeholder="Saul Sanchez" type="text" id="username" name="username" required aria-required="true" class="input-text-large">
                 </div>
-                <div class="input-group password-container">
+                <div class="input-group password-container"  style="padding-down: 50px;">
                     <label for="password"></label>
                     <input placeholder="Parlier1" type="password" id="password" name="password" required aria-required="true" class="input-text-large">
                 </div>            
-                <div class="input-group">
-                    <button type="submit">Login</button>
+                <div class="input-group" style="padding-top: 50px;">
+                    <button class="sanchez-regular" type="submit">Login</button>
                 </div>
             </div>
         </form>
     </span>
     <style>
         button{
-            padding: 15px;
+            font-size: 20px;
+            padding: 10px;
             border: none;
             outline: none;
             cursor: pointer;
-            background: linear-gradient(250deg, #105c69, #3c9d9e, #7db5b6, #c8dae5);
+            background: linear-gradient(300deg, #105c69, #3c9d9e, #7db5b6, #c8dae5);
             border-radius: 5px;
             position: relative;
             z-index: 1;
             transition: background 3s ease;
-            border: 5px whitesmoke double;
+            border: 10px whitesmoke double;
         }
         button:hover{
-            background: linear-gradient(300deg, #105c69, #3c9d9e, #7db5b6, #c8dae5);
+            background: linear-gradient(310deg, #105c69, #3c9d9e, #7db5b6, #c8dae5);
         }
         #Login {
             padding: 10px;
@@ -68,19 +69,19 @@
             display: grid;
             justify-items: center;
             align-items: start;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
        .login-form {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 5px;
+          gap: 10px;
         }
 
        .input-group {
           display: flex;
           flex-direction: column;
-          gap: 50px;
+          gap: 0px;
         }
         
        .input-group input[type="text"],
