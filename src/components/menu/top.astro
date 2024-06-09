@@ -1,7 +1,11 @@
+---
+import Setting from '../menu/Setting.astro';
+---
 <header>
-    <span>Welcome Name</span>
-    <span style="font-size: 20px;">NSP{0}</span>
-    <body>
+    <span>NAME
+    <span class="NSText">NS{0}</span>
+    </span>
+    <Setting></Setting>
 </header>
 
 <style>
@@ -23,7 +27,14 @@
         align-items: center;
         z-index: 99;
         position: fixed;
-        overflow-x: hidden;
     }
-
+    .NSText {
+        display: flex;
+        position: absolute;
+        top: 60%;
+        left: 20px;
+        padding: 10px;
+        color: gray;
+        font-size: 25px;
+        }
 </style>
