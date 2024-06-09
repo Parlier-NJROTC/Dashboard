@@ -47,7 +47,7 @@ const { title ,link = title} = Astro.props
         justify-content: center;
         height: 50px;
         text-decoration: none;
-        transition: ease-in 300ms;
+        transition: ease-in-out 150ms;
 
         
 
@@ -60,7 +60,8 @@ const { title ,link = title} = Astro.props
         color: white;
     }
     span a:hover{
+        border-radius: 2px;
         border-right: 4px solid rgb(255, 255, 255);
-        border-left: 4px solid rgb(255, 255, 255);
+        border-left: 5px solid rgb(255, 255, 255);
     }
 </style>
