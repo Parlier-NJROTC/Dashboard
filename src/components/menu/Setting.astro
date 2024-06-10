@@ -1,9 +1,10 @@
-    <div class="dropdown">
+
+<div class="dropdown">
       <button class="dropbtn" style="font-weight: 100;font-size: 40px;">&#9096;</button> 
       <span style="color:black;">Setting</span>
       <div class="dropdown-content">
-        <a href="#Password">New Password</a>
-        <a href="#">Dark Mode</a>
+        <link><a href=`/Dashboard/NewPassword`>New Password</a>
+        <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
         <a href="#">Logout</a>
       </div>
     </div>
@@ -73,8 +74,42 @@
       .dropdown:hover span{
         background-color: rgb(236, 236, 236);
       }
+      /* Light mode styles */
+      body.light-mode {
+        background-color: white;
+        color: black;
+      }
+
+      /* Dark mode styles */
+      body.dark-mode {
+        filter: invert(100%);
+        color: white;
+      }
+
+
     </style>
+<script lang="JS">
+  // Function to toggle dark mode
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode',!localStorage.getItem('darkMode')); // Save the new state
+  }
   
-  </body>
+  // Function to initialize dark mode based on saved state
+  function initDarkMode() {
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    if (darkModeEnabled) {
+      document.body.classList.add('dark-mode');
+    }
+  }
+  
+  // Initialize dark mode on page load
+  initDarkMode();
+  
+  // Attach the toggle function to the "Dark Mode" button
+  document.getElementById('darkModeLink').addEventListener('click', toggleDarkMode);
+  
+</script>
+
   
   </html>
