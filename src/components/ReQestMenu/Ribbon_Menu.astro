@@ -1,0 +1,106 @@
+<span>
+    <div class="menu-container">
+        <div class="menu-item" data-index="1">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
+                alt="Image 1">
+            <div class="overlay-text">Box 1</div>
+        </div>
+        <div class="menu-item" data-index="2">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
+                alt="Image 2">
+            <div class="overlay-text">Box 2</div>
+        </div>
+        <div class="menu-item" data-index="3">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/recruiting_ribbon.png"
+                alt="Image 3">
+            <div class="overlay-text">Box 3</div>
+        </div>
+        <div class="menu-item" data-index="4">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
+                alt="Image 4">
+            <div class="overlay-text">Box 4</div>
+        </div>
+
+    </div>
+</span>
+
+<style>
+    /* styles.css */
+    .menu-container {
+        display: flex;
+        left: 50%;
+        width: calc(83% - 20px);
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .menu-item {
+        flex-basis: calc(15% - 20px);
+        margin: 0px;
+        padding: 15px;
+        background-color: lightblue;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 5px solid lightblue;
+    }
+
+    .selected {
+        background-color: #007bff;
+        border: 5px double #fff;
+    }
+</style>
+<script lang="JS">
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.menu-item');
+        let selectedItems = [];
+
+
+        function selectItem(item) {
+            if (!selectedItems.includes(item)) {
+                item.classList.add('selected');
+                selectedItems.push(item);
+            } else {
+                item.classList.remove('selected');
+                const index = selectedItems.indexOf(item);
+                selectedItems.splice(index, 1);
+            }
+        }
+
+        // Add click event listeners to each menu item
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => selectItem(item));
+        });
+
+        // Optionally, restore previously selected items if available
+        if (localStorage.getItem('selectedItems')) {
+            const savedItems = JSON.parse(localStorage.getItem('selectedItems'));
+            savedItems.forEach(item => {
+                selectItem(document.querySelector(`[data-index="${item}"]`));
+            });
+        }
+    });
+
+</script>
+
+<style>
+    body {
+        position: relative;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    span {
+        position: absolute;
+        top: 100px;
+        left: 300px;
+        background-color: wheat;
+        z-index: 60;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
