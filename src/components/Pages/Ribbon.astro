@@ -1,9 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import List from '../ReQestMenu/Ribbon_LIst.astro'
+import Menu from '../ReQestMenu/Ribbon_Menu.astro';
 ---
 
 <Layout title='Ribbon'></Layout>
-<span id="contentSpan">
+<span>
+<div class="content">
   <div class="box">
     <button id="Button">Open Ribbon Selector</button>
     <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
@@ -11,23 +14,37 @@ import Layout from '../../layouts/Layout.astro';
       <div class="image-preview"></div>
     </div>
   </div>
+</div>
 </span>
   
-  <script lang="JS">
-  function previewImage(inputElement) {
-      const file = inputElement.files[0];
-      if (!file ||!window.FileReader) return;
-  
-      if (/^image\/(jpg|jpeg|png)$/.test(file.type)) {
-          const reader = new FileReader();
-          reader.onloadend = function() {
-              const previewDiv = document.querySelector('.image-preview');
-              previewDiv.style.backgroundImage = `url(${reader.result})`;
-          };
-          reader.readAsDataURL(file);
-      }
-  }
-  </script>
+<div class="astro-component">
+  <Menu></Menu>
+</div>
+
+<script lang="JS">
+function previewImage(inputElement) {
+    const file = inputElement.files[0];
+    if (!file ||!window.FileReader) return;
+
+    if (/^image\/(jpg|jpeg|png)$/.test(file.type)) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            const previewDiv = document.querySelector('.image-preview');
+            previewDiv.style.backgroundImage = `url(${reader.result})`;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+document.getElementById('Button').addEventListener('click', function() {
+  const astroComponent = document.querySelector('.astro-component');
+  astroComponent.style.display = astroComponent.style.display === 'none'? 'none' : 'block';
+
+  const contentElement = document.querySelector('.content');  
+  contentElement.style.display = contentElement.style.display === 'none'? 'flex' : 'none';
+});
+
+</script>
   
   <style>
   .custom-file-upload {
@@ -111,5 +128,9 @@ import Layout from '../../layouts/Layout.astro';
     z-index: 90; 
     top: 330px;
   }
+  .astro-component{
+    display: none;
+  }
+
   </style>
   

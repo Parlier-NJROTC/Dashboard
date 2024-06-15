@@ -1,5 +1,4 @@
-<span>
-    <div class="menu-container">
+<div class="menu-container">
         <div class="menu-item" data-index="1">
             <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
                 alt="Image 1">
@@ -22,14 +21,13 @@
         </div>
 
     </div>
-</span>
 
 <style>
     /* styles.css */
     .menu-container {
         display: flex;
         left: 50%;
-        width: calc(83% - 20px);
+        width: calc(83% - 60px);
         flex-wrap: wrap;
         justify-content: space-between;
     }
@@ -51,28 +49,27 @@
     }
 </style>
 <script lang="JS">
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const menuItems = document.querySelectorAll('.menu-item');
         let selectedItems = [];
-
-
+    
         function selectItem(item) {
             if (!selectedItems.includes(item)) {
                 item.classList.add('selected');
-                selectedItems.push(item);
+                selectedItems.push(item.dataset.index);
+                localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
             } else {
                 item.classList.remove('selected');
-                const index = selectedItems.indexOf(item);
+                const index = selectedItems.indexOf(item.dataset.index);
                 selectedItems.splice(index, 1);
+                localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
             }
         }
-
-        // Add click event listeners to each menu item
+    
         menuItems.forEach(item => {
             item.addEventListener('click', () => selectItem(item));
         });
-
-        // Optionally, restore previously selected items if available
+    
         if (localStorage.getItem('selectedItems')) {
             const savedItems = JSON.parse(localStorage.getItem('selectedItems'));
             savedItems.forEach(item => {
@@ -80,27 +77,6 @@
             });
         }
     });
-
+    
 </script>
-
-<style>
-    body {
-        position: relative;
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    span {
-        position: absolute;
-        top: 100px;
-        left: 300px;
-        background-color: wheat;
-        z-index: 60;
-        padding: 10px;
-        color: rgb(0, 0, 0);
-        font-size: 16px;
-        width: 100%;
-        height: 100%;
-    }
-</style>
+    
