@@ -1,0 +1,45 @@
+---
+
+import ViewTransitions from 'astro/components/ViewTransitions.astro';
+import "./Dashboard.css"
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+---
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>DashBoard | {title}</title>
+		<ViewTransitions />
+</head>
+<body>
+    <div id="Dashboard-Title">
+        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg">
+        <h1>NJROTC Dashboard</h1>
+    </div>
+    <header id="Dashboard-Header">
+        <div id="User-Info">
+            <h1> Cadet <span id="User-Rank">Seaman</span> <span id="User-Name">Doe</span></h1>
+            <h3>NS<span id="Class-Name">4294967296 32-bit integer limit</span></h3>
+        </div>
+    </header>
+    <nav id="Dashboard-Navigation">
+        <a>Home</a>
+        <a>Ribbons</a>
+        <a>More</a>
+    </nav>
+    <main id="Dashboard-Content">
+        <slot></slot>
+    </main>
+</body>
+</html>
