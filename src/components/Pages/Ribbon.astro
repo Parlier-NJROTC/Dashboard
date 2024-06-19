@@ -1,16 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import List from '../ReQestMenu/RibbonList.astro';
-import Menu from '../ReQestMenu/RibbonMenu.astro';
+//import List from '../ReQestMenu/RibbonList.astro';
+import Menu from '../Newname/RibbonMenu.astro';
 ---
 
 <Layout title='Ribbon'></Layout>
   <div class="astro-component">
-    <Menu client:load></Menu>
+    <Menu></Menu>
   </div>
   <span>
     <div class="content">
-      <List></List>
+      <!--<List></List> -->
       <div class="box">
         <button id="Button">Open Ribbon Selector</button>
         <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
