@@ -1,0 +1,176 @@
+    <!--
+<span>
+    <div class="menu-container">
+        <div class="menu-item" data-index="1">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
+                alt="Image 1">
+            <div class="overlay-text">Box 1</div>
+        </div>
+        <div class="menu-item" data-index="2">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
+                alt="Image 2">
+            <div class="overlay-text">Box 2</div>
+        </div>
+        <div class="menu-item" data-index="3">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/recruiting_ribbon.png"
+                alt="Image 3">
+            <div class="overlay-text">Box 3</div>
+        </div>
+        <div class="menu-item" data-index="4">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
+                alt="Image 4">
+            <div class="overlay-text">Box 4</div>
+        </div>
+    
+        <div class="BottomBox">
+            <button style="text-align: center;font-size: 15px;" id="Button">X</button>
+            <p id="selectionCount">Items: 0 / 15</p>
+            <button id="clearSelectionBtn">Clear Selection</button>
+        </div>
+    </div>
+    
+    </span>
+    <style>
+    .menu-container {
+        display: flex;
+        left: 0;
+        width: calc(100% - 5px);
+        flex-wrap: wrap;
+        justify-content: space-between;
+        overflow-y: scroll;
+    }
+    
+    .menu-item {
+        flex-basis: calc(15% - 20px);
+        margin: 0px;
+        padding: 15px;
+        background-color: lightblue;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 5px solid lightblue;
+        transition: ease 250ms;
+    }
+    
+    .selected {
+        background-color: #007bff;
+        border: 5px double #fff;
+        transition: ease 250ms;
+    }
+    .BottomBox{
+        position: absolute;
+        border-top: solid 5px black;
+        background-color: wheat; 
+        width: 100%;
+        height: 15%;
+        left: 0px;
+        bottom: 0px;
+        z-index: 20;
+    }
+    #selectionCount{
+        position: absolute;
+        width: 90px;
+        height: 20px;
+        right: 20%;
+        top: 20%;
+    
+        background-color: white;
+        border: solid 3px black;
+        justify-content: center;
+        align-items: center;
+        transition: ease 250ms;
+    }
+    #Button{
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        top: 30%;
+        left: 2%;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    
+        border: solid 3px black;
+        padding: 5px 2%;
+        height: 40px;
+        transition: ease 250ms;
+    }
+    #Button:hover{
+        background-color: whitesmoke;
+    }
+    #Button:active{
+        background-color: navajowhite;
+    }
+    #clearSelectionBtn{
+        position: relative;
+        background-color: rgb(255, 255, 255);
+        top: 30%;
+        left: calc(93% - 40px);
+        
+        border: solid 3px black;
+        padding: 10px;
+        transition: ease 250ms;
+    }
+    #clearSelectionBtn:hover{
+        background-color: whitesmoke;
+    }
+    #clearSelectionBtn:active{
+        background-color: navajowhite;
+    }
+    span {
+          position: absolute; 
+          top: 50px;
+          left: 10%;
+          background-color: wheat; 
+          border: double 15px black;
+          padding: 10px; 
+          color: rgb(0, 0, 0); 
+          font-size: 16px; 
+          width:80%;
+          height: 80%;
+    
+          box-shadow: 10px 20px 20px black;
+        }
+    </style>
+    <script is:inline lang="js">
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+            const selectionCount = document.getElementById('selectionCount'); // Reference to the count element
+            let selectedCount = 0; 
+        
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (selectedCount >= 3) {
+                        alert('You cannot Request more than 15 Items.');
+                        return; 
+                    }
+                    this.classList.toggle('selected');
+                    updateSelectionCount(); 
+                });
+            });
+        
+            clearSelectionBtn.addEventListener('click', function() {
+                menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
+                selectedCount = 0;
+                updateSelectionCount(); 
+            });
+        
+            function updateSelectionCount() {
+                let count = 0;
+                menuItems.forEach(item => {
+                    if (item.classList.contains('selected')) {
+                        count++;
+                    }
+                });
+                selectionCount.textContent = `Items: ${count} / 15`; 
+                selectedCount = count; 
+            }
+        
+            document.getElementById('Button').addEventListener('click', function() {
+                const astroComponent = document.querySelector('.astro-component');
+                astroComponent.style.display = astroComponent.style.display = 'none';
+            });
+        });
+        
+        </script>
+-->
