@@ -1,52 +1,28 @@
-<div class="message-container"></div>
+
+<span>
+    <div class="message-container"></div>
+</span>
 
 <script lang="JS">
 document.addEventListener('DOMContentLoaded', function() {
     const menuItems = document.querySelectorAll('.menu-item');
-    let selectedItems = [];
     const messageContainer = document.querySelector('.message-container');
 
-    function selectItem(item) {
-        if (!selectedItems.includes(item)) {
-            item.classList.add('selected');
-            selectedItems.push(item.dataset.index);
-            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-            displayMessage();
-        } else {
-            item.classList.remove('selected');
-            const index = selectedItems.indexOf(item.dataset.index);
-            selectedItems.splice(index, 1);
-            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-            displayMessage();
-        }
-    }
-
-    function displayMessage() {
-        const selectedIndices = JSON.parse(localStorage.getItem('selectedItems')) || [];
-        let message = 'You have selected: ';
-        if (selectedIndices.length === 0) {
-            message += 'no items.';
-        } else {
-            message += selectedIndices.map(index => document.querySelector(`[data-index="${index}"].overlay-text`).textContent).join(', ');
-        }
-        messageContainer.textContent = message;
-    }
-
-    // Load previously selected items if available
-    if (localStorage.getItem('selectedItems')) {
-        const savedItems = JSON.parse(localStorage.getItem('selectedItems'));
-        savedItems.forEach(item => {
-            selectItem(document.querySelector(`[data-index="${item}"]`));
-        });
-    }
-
-    // Display initial message
-    displayMessage();
-
-    // Add click event listeners to each menu item
     menuItems.forEach(item => {
-        item.addEventListener('click', () => selectItem(item));
+        item.addEventListener('click', function() {
+            // Toggle 'selected' class on the clicked item
+            this.classList.toggle('selected');
+
+            // Find the img element within the clicked item
+            const imgElement = this.querySelector('img');
+            if (imgElement) {
+                // Update the message container with the ALT text of the image
+                messageContainer.innerHTML = imgElement.alt;
+            } else {
+                // Clear the message container if no image is found
+                messageContainer.innerHTML = '';
+            }
+        });
     });
 });
-
 </script>

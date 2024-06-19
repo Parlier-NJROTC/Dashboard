@@ -4,9 +4,13 @@ import List from '../ReQestMenu/Ribbon_LIst.astro'
 import Menu from '../ReQestMenu/Ribbon_Menu.astro';
 ---
 
-<Layout title='Ribbon'></Layout>
+<Layout title='Ribbon'></Layout>  
+<div class="astro-component">
+  <Menu></Menu>
+</div>
 <span>
 <div class="content">
+  <List></List>
   <div class="box">
     <button id="Button">Open Ribbon Selector</button>
     <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
@@ -16,10 +20,7 @@ import Menu from '../ReQestMenu/Ribbon_Menu.astro';
   </div>
 </div>
 </span>
-  
-<div class="astro-component">
-  <Menu></Menu>
-</div>
+
 
 <script lang="JS">
 function previewImage(inputElement) {
@@ -130,6 +131,7 @@ document.getElementById('Button').addEventListener('click', function() {
   }
   .astro-component{
     display: none;
+    z-index: 9999;
   }
 
   </style>
