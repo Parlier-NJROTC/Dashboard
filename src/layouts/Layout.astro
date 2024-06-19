@@ -1,22 +1,35 @@
 ---
-
 import ViewTransitions from 'astro/components/ViewTransitions.astro';
 interface Props {
 	title: string;
+	backgroundImg?:string;
 }
 
-const { title } = Astro.props;
+const { title, backgroundImg = "" } = Astro.props;
 
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>DashBoard | {title}</title>
-		<ViewTransitions />
+		<style>
+			body{
+				background: url('https://images.unsplash.com/photo-1511307172940-38ec278f7ce2?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center center;
+			}
+		</style>
 	</head>
+	<body>
+		<slot></slot>
+	</body>
+</html>
