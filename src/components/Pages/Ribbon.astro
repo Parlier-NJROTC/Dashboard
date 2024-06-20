@@ -10,7 +10,6 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       <List></List>
       <div class="box">
         <button id="Buttonn">Open Ribbon Selector</button>
-        <button id="Buttonn">Open Ribbon Selector</button>
         <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
         <div class="custom-file-upload" onclick="document.getElementById('fileInput').click()">
           <div class="image-preview"></div>
@@ -18,7 +17,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       </div>
     </div>
 
-  <script is:inline lang="js">
+  <script lang="js">
     function previewImage(inputElement) {
       const file = inputElement.files[0];
       if (!file ||!window.FileReader) return;
@@ -32,8 +31,6 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
         reader.readAsDataURL(file);
       }
     }
-    // it would get id="Button" not class=Button
-    console.log(document.getElementById('Button'))
 
     document.getElementById('Buttonn').addEventListener('mousedown', function() {
       const astroComponent = document.querySelector('.astro-component');
@@ -103,7 +100,6 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       height: 75%;
     }
     #Buttonn {
-    #Buttonn {
       background-color: rgb(255, 255, 255);
       border: 5px double #000000;
       border-radius: 5px;
@@ -115,7 +111,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       position: absolute;
       height: 50px;
       z-index: 90;
-      top: 0px;
+      top: 330px;
     }
     @keyframes fadeIn {
       0% {
