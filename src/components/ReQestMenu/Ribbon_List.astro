@@ -1,0 +1,28 @@
+
+<span>
+    <div class="message-container"></div>
+</span>
+
+<script lang="JS">
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const messageContainer = document.querySelector('.message-container');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Toggle 'selected' class on the clicked item
+            this.classList.toggle('selected');
+
+            // Find the img element within the clicked item
+            const imgElement = this.querySelector('img');
+            if (imgElement) {
+                // Update the message container with the ALT text of the image
+                messageContainer.innerHTML = imgElement.alt;
+            } else {
+                // Clear the message container if no image is found
+                messageContainer.innerHTML = '';
+            }
+        });
+    });
+});
+</script>
