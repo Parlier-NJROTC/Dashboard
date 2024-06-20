@@ -1,21 +1,25 @@
 ---
+import Layout from '../../layouts/Layout.astro';
 import List from '../ReQestMenu/Ribbon_List.astro';
-import Menu from '../ReQestMenu/ItemMenu.astro';
+import Menu from '../ReQestMenu/RibbonMenu.astro';
 ---
 
+<Layout title='Ribbon'></Layout>
   <div class="astro-component">
     <Menu></Menu>
   </div>
+  <span>
     <div class="content">
       <List></List>
       <div class="box">
-        <button id="Buttonn">Open Ribbon Selector</button>
+        <button id="Button">Open Ribbon Selector</button>
         <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
         <div class="custom-file-upload" onclick="document.getElementById('fileInput').click()">
           <div class="image-preview"></div>
         </div>
       </div>
     </div>
+  </span>
 
   <script lang="js">
     function previewImage(inputElement) {
@@ -32,10 +36,9 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       }
     }
 
-    document.getElementById('Buttonn').addEventListener('mousedown', function() {
+    document.getElementById('Button').addEventListener('mousedown', function() {
       const astroComponent = document.querySelector('.astro-component');
       astroComponent.style.display = 'block';
-      astroComponent.style.opacity = '1';
     });
   </script>
 
@@ -80,7 +83,19 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       margin: 0;
       overflow: hidden;
     }
-    #Buttonn:active {
+    span {
+      position: absolute;
+      top: 100px;
+      left: 300px;
+      background-color: wheat;
+      z-index: 50;
+      padding: 10px;
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      width: 100%;
+      height: 100%;
+    }
+    #Button:active {
       background-color: rgb(0, 0, 0);
       border: 5px double #ffffff;
       color: white;
@@ -90,7 +105,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       justify-content: center;
       align-items: flex-end;
       position: absolute;
-      right: 50px;
+      right: 350px;
       background-color: whitesmoke;
       z-index: 90;
       padding: 10px;
@@ -99,7 +114,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       width: 25%;
       height: 75%;
     }
-    #Buttonn {
+    #Button {
       background-color: rgb(255, 255, 255);
       border: 5px double #000000;
       border-radius: 5px;
@@ -113,21 +128,10 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       z-index: 90;
       top: 330px;
     }
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
    .astro-component {
-      animation: fadeIn 0.5s ease-in-out forwards;
       position: relative;
       display: none;
       z-index: 9999;
-      width: 100%;
       height: 100%;
     }
   </style>
