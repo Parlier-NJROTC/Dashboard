@@ -25,6 +25,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>DashBoard | {title}</title>
 		<ViewTransitions fallback="animate"/>
+        
 </head>
 <body>
     <div id="Dashboard-Title">
@@ -41,8 +42,11 @@ const { title } = Astro.props;
         <Link title="Home">Home</Link>
         <Link title="Ribbon">Ribbons</Link>
     </nav>
-    <main id="Dashboard-Content">
-        <slot></slot>
+    <main id="Dashboard-Content" >
+        <!-- This is just a wrapper for animation to work on seperate browers -->
+        <div transition:animate={fade({ duration: '0.25s' })}>
+            <slot ></slot>
+        </div>
     </main>
     <Setting></Setting>
 </body>
