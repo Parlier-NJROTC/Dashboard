@@ -1,0 +1,115 @@
+
+<div class="dropdown">
+      <button class="dropbtn" style="font-weight: 100;font-size: 40px;">&#9096;</button> 
+      <span style="color:black;">Setting</span>
+      <div class="dropdown-content">
+        <link><a href=`/Dashboard/NewPassword`>New Password</a>
+        <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+
+    <style>
+      span{
+        display: flex; 
+        background-color: whitesmoke;
+        background-color: none;
+        color: rgb(0, 0, 0);
+        border: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .dropbtn {
+        display: flex; 
+        height: 45px;
+        background-color: whitesmoke;
+        background-color: none;
+        color: rgb(0, 0, 0);
+        min-width: 118px;
+        padding: 14px;
+        border: none;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .dropdown {
+        position: absolute;
+        left: 73%;
+      }
+  
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 130px; 
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        right: 0;
+        margin-right: -2px;
+      }
+  
+  
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        border:double 1px;
+        display: block;
+      }
+  
+      .dropdown-content a:hover {
+        border: double 0px;
+        background-color: rgb(240, 223, 190);
+        border: 4px double black;
+        padding: 9px 12px;
+      }
+  
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+  
+      .dropdown:hover .dropbtn {
+        background-color: rgb(236, 236, 236);
+        
+      }
+      .dropdown:hover span{
+        background-color: rgb(236, 236, 236);
+      }
+      /* Light mode styles */
+      body.light-mode {
+        background-color: white;
+        color: black;
+      }
+
+      /* Dark mode styles */
+      body.dark-mode {
+        filter: invert(100%);
+        color: white;
+      }
+
+
+    </style>
+<script lang="JS">
+  // Function to toggle dark mode
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode',!localStorage.getItem('darkMode')); // Save the new state
+  }
+  
+  // Function to initialize dark mode based on saved state
+  function initDarkMode() {
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    if (darkModeEnabled) {
+      document.body.classList.add('dark-mode');
+    }
+  }
+  
+  // Initialize dark mode on page load
+  initDarkMode();
+  
+  // Attach the toggle function to the "Dark Mode" button
+  document.getElementById('darkModeLink').addEventListener('click', toggleDarkMode);
+  
+</script>
+
+  
+  </html>

@@ -1,5 +1,5 @@
 ---
-
+import { fade } from 'astro:transitions';
 import ViewTransitions from 'astro/components/ViewTransitions.astro';
 import "./Dashboard.css"
 interface Props {
@@ -21,6 +21,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>DashBoard | {title}</title>
 		<ViewTransitions fallback="animate"/>
+        
 </head>
 <body>
     <div id="Dashboard-Title">
@@ -34,13 +35,16 @@ const { title } = Astro.props;
         </div>
     </header>
     <nav id="Dashboard-Navigation">
-        <a href="/Home">Home</a>
-        <a href="/Ribbon">Ribbons</a>
+        <a href="/Dashboard/Home">Home</a>
+        <a href="/Dashboard/Ribbon">Ribbons</a>
         <a>More</a>
         <a>Hmmm yes random error</a>
     </nav>
-    <main id="Dashboard-Content">
-        <slot></slot>
+    <main id="Dashboard-Content" >
+        <!-- This is just a wrapper for animation to work on seperate browers -->
+        <div transition:animate={fade({ duration: '0.25s' })}>
+            <slot ></slot>
+        </div>
     </main>
 </body>
 </html>
