@@ -1,28 +1,86 @@
 
 <span>
+    <input type="text" readonly="readonly" id="dateTimeInput"><input placeholder="Your Full Name" type="text" id="text">
+    
+    <div class="box"></div>
     <div class="message-container"></div>
 </span>
 
-<script lang="js">
+<style>
+    #dateTimeInput {
+        overflow: hidden;
+        width: 216.5px;
+        cursor: default;
+    }
+    #dateTimeInput::selection{
+        background-color: navy;
+        color: #ffffff;
+    }
+    #text {
+        position: absolute;
+        width: 232px;
+    }
+    #text::spelling-error{
+        text-decoration-line: none;
+    }
+    #text::selection{
+        background-color: navy;
+        color: #ffffff;
+    }
+    span {
+        display: block;
+        position: absolute;
+        left: 330px;
+        top: 130px;
+        width: 30%;
+        height: 75%;
+        background-color: gainsboro;
+        border: double 8px black;
+        color: black;
+    }
+    input[type="text"] {
+        height: 60px;
+        border: none;
+        border-bottom: solid 5px black;
+        font-size: 24px;
+        outline: none;
+    }
+    input[type="text"]::selection {
+        border: dotted 2px black;
+    }
+</style>
+<script lang="JS">
 document.addEventListener('DOMContentLoaded', function() {
     const menuItems = document.querySelectorAll('.menu-item');
     const messageContainer = document.querySelector('.message-container');
 
     menuItems.forEach(item => {
         item.addEventListener('click', function() {
-            // Toggle 'selected' class on the clicked item
             this.classList.toggle('selected');
 
-            // Find the img element within the clicked item
             const imgElement = this.querySelector('img');
             if (imgElement) {
-                // Update the message container with the ALT text of the image
                 messageContainer.innerHTML = imgElement.alt;
             } else {
-                // Clear the message container if no image is found
                 messageContainer.innerHTML = '';
             }
         });
+    });
+
+    let intervalId = setInterval(updateTimeAndName, 1000);
+
+    function updateTimeAndName() {
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        var dateTimeString = now.toISOString().slice(0,16); 
+        var fullString = dateTimeString + " - "; 
+        document.getElementById('dateTimeInput').value = fullString;
+    }
+
+    updateTimeAndName();
+
+    document.getElementById('dateTimeInput').addEventListener('focus', function() {
+        clearInterval(intervalId);
     });
 });
 </script>

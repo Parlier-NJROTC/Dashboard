@@ -1,11 +1,17 @@
 ---
-//import Layout from '../../layouts/Layout.astro';
-//import Bed from '../../layouts/Bed.astro';
+import Dashboard from "../../layouts/Dashboard.astro";
 import Home from '../../components/Pages/Ribbon.astro';
-import Dashboard from '../../layouts/Dashboard.astro';
 ---
-<Dashboard title="Ribbons">
-    <!-- I don't suggest you do this because it creates another unesseary file -->
-    <!-- But its not aginst the way astro works so its ok-->
-    <Home></Home>
+
+<Dashboard title='Ribbon'>
+<Home></Home>
 </Dashboard>
+
+
+</body>
+<style>
+    Home{
+        z-index: 999;
+    }
+</style>
+</html>
