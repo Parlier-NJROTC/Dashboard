@@ -7,14 +7,27 @@
 </span>
 
 <style>
-    #dateTimeInput{
-        width: 47%;
+    #dateTimeInput {
+        overflow: hidden;
+        width: 216.5px;
+        cursor: default;
     }
-    #text{
+    #dateTimeInput::selection{
+        background-color: navy;
+        color: #ffffff;
+    }
+    #text {
         position: absolute;
-        width: 52%;
+        width: 232px;
     }
-    span{
+    #text::spelling-error{
+        text-decoration-line: none;
+    }
+    #text::selection{
+        background-color: navy;
+        color: #ffffff;
+    }
+    span {
         display: block;
         position: absolute;
         left: 330px;
@@ -22,45 +35,40 @@
         width: 30%;
         height: 75%;
         background-color: gainsboro;
-
         border: double 8px black;
         color: black;
     }
-    input[type="text"]{
+    input[type="text"] {
         height: 60px;
         border: none;
-
         border-bottom: solid 5px black;
         font-size: 24px;
-        outline: none
+        outline: none;
     }
-    input[type="text"]::selection{
+    input[type="text"]::selection {
         border: dotted 2px black;
-        
     }
 </style>
 <script lang="JS">
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuItems = document.querySelectorAll('.menu-item');
-        const messageContainer = document.querySelector('.message-container');
-    
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Toggle 'selected' class on the clicked item
-                this.classList.toggle('selected');
-    
-                // Find the img element within the clicked item
-                const imgElement = this.querySelector('img');
-                if (imgElement) {
-                    // Update the message container with the ALT text of the image
-                    messageContainer.innerHTML = imgElement.alt;
-                } else {
-                    // Clear the message container if no image is found
-                    messageContainer.innerHTML = '';
-                }
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const messageContainer = document.querySelector('.message-container');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            this.classList.toggle('selected');
+
+            const imgElement = this.querySelector('img');
+            if (imgElement) {
+                messageContainer.innerHTML = imgElement.alt;
+            } else {
+                messageContainer.innerHTML = '';
+            }
         });
     });
+
+    let intervalId = setInterval(updateTimeAndName, 1000);
+
     function updateTimeAndName() {
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -68,10 +76,11 @@
         var fullString = dateTimeString + " - "; 
         document.getElementById('dateTimeInput').value = fullString;
     }
+
     updateTimeAndName();
-    setInterval(updateTimeAndName, 1000);
+
     document.getElementById('dateTimeInput').addEventListener('focus', function() {
         clearInterval(intervalId);
     });
-    var intervalId = setInterval(updateTimeAndName, 1000);
+});
 </script>
