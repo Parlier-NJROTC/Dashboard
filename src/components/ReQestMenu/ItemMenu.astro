@@ -1,35 +1,54 @@
 <span>
     <div class="menu-container">
-        <div class="menu-item" data-index="1">
-            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
-                alt="Image 1">
-            <div class="overlay-text">Box 1</div>
+        <div id="Ribbon-Listing">
+            <div class="menu-item" data-index="1">
+                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
+                    alt="Image 1">
+                <div class="overlay-text">Box 1</div>
+            </div>
+            <div class="menu-item" data-index="2">
+                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
+                    alt="Image 2">
+                <div class="overlay-text">Box 2</div>
+            </div>
+            <div class="menu-item" data-index="3">
+                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/recruiting_ribbon.png"
+                    alt="Image 3">
+                <div class="overlay-text">Box 3</div>
+            </div>
+            <div class="menu-item" data-index="4">
+                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
+                    alt="Image 4">
+                <div class="overlay-text">Box 4</div>
+            </div>
+
+            <div class="BottomBox">
+                <button style="text-align: center;font-size: 15px;" id="Button">X</button>
+                <div class="carousel-controls">
+                    <button id="prevBtn">&lt;</button>
+                    <div class="carousel-container">
+                        <a href="#RibbonListing">
+                            <div class="carousel-item active">Ribbons</div>
+                        </a>
+                        <a href="#StarListing">
+                            <div class="carousel-item">Stars</div>
+                        </a>
+                        <div class="carousel-item">Item 3</div>
+                    </div>
+                    <button id="nextBtn">&gt;</button>
+                </div>
+                <p id="selectionCount">Items: 0 / 15</p>
+                <button id="clearSelectionBtn">Clear Selection</button>
+            </div>
         </div>
-        <div class="menu-item" data-index="2">
-            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
-                alt="Image 2">
-            <div class="overlay-text">Box 2</div>
-        </div>
-        <div class="menu-item" data-index="3">
-            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/recruiting_ribbon.png"
-                alt="Image 3">
-            <div class="overlay-text">Box 3</div>
-        </div>
-        <div class="menu-item" data-index="4">
-            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
-                alt="Image 4">
-            <div class="overlay-text">Box 4</div>
-        </div>
-    
-        <div class="BottomBox">
-            <button style="text-align: center;font-size: 15px;" id="Button">X</button>
-            <p id="selectionCount">Items: 0 / 15</p>
-            <button id="clearSelectionBtn">Clear Selection</button>
-        </div>
-    </div>
-    
-    </span>
-    <style>
+
+</span>
+<style>
+    .BottomBox a {
+        color: black;
+        text-decoration: none;
+    }
+
     .menu-container {
         display: flex;
         left: 0;
@@ -37,9 +56,18 @@
         flex-wrap: wrap;
         justify-content: space-between;
         overflow-y: scroll;
-        
+
     }
-    
+
+    #Ribbon-Listing {
+        display: flex;
+        left: 0;
+        width: calc(100% - 5px);
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+
     .menu-item {
         flex-basis: calc(15% - 20px);
         margin: 0px;
@@ -51,44 +79,119 @@
         border: 5px solid lightblue;
         transition: cubic-bezier(0.25, 0.1, 0, 1.4) 250ms;
     }
-    
+
     .selected {
         background-color: #007bff;
         border: 5px double #fff;
         transition: ease 250ms;
     }
-    .BottomBox{
+
+    .BottomBox {
         position: absolute;
         border-top: solid 5px black;
-        background-color: wheat; 
+        background-color: wheat;
         width: 100%;
         height: 15%;
         left: 0px;
         bottom: 0px;
         z-index: 20;
     }
-    #selectionCount{
+
+    .carousel-controls {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        width: 15%;
+        top: 10px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #prevBtn,
+    #nextBtn {
+        background: none;
+        border: none;
+        font-size: 20px;
+
+        transition: cubic-bezier(0, 2.39, 1, 1) 250ms;
+    }
+
+    #prevBtn:active {
+        transform: translate(-20px, 0%);
+        transform: scale(2, 1);
+    }
+
+    #nextBtn:active {
+        transform: translate(20px, 0%);
+        transform: scale(2, 1);
+
+    }
+
+    .carousel-container {
+        position: relative;
+        top: 20%;
+        flex-grow: 1;
+        overflow: hidden;
+        height: 50px;
+        margin: 0 10px;
+
+        background: white;
+        border-radius: 5px;
+        padding: -15px;
+        border: 5px double black;
+        transition: ease-in-out 250ms;
+        background-clip: padding-box;
+    }
+
+    .carousel-container:hover {
+        background: whitesmoke;
+        perspective: 50em;
+        background-clip: padding-box;
+    }
+
+    .carousel-container.active-perspective {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+
+    .carousel-item {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .active {
+        display: flex;
+    }
+
+    #selectionCount {
         position: absolute;
         width: 100px;
         height: 20px;
         right: 20%;
         top: 20%;
-    
+
         background-color: white;
         border: solid 3px black;
         justify-content: center;
         align-items: center;
         transition: ease 250ms;
     }
+
     @keyframes fadeOut {
-      0% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
     }
-    #Button{
+    #Button {
         position: absolute;
         background-color: rgb(255, 255, 255);
         top: 30%;
@@ -96,90 +199,128 @@
         justify-content: center;
         align-items: center;
         color: black;
-    
+
         border: solid 3px black;
         padding: 5px 2%;
         height: 40px;
         transition: ease 250ms;
-        
+
     }
-    #Button:hover{
+
+    #Button:hover {
         background-color: whitesmoke;
     }
-    #Button:active{
+
+    #Button:active {
         background-color: navajowhite;
     }
-    #clearSelectionBtn{
-        position: relative;
+
+    #clearSelectionBtn {
+        position: absolute;
         background-color: rgb(255, 255, 255);
         top: 30%;
         left: calc(93% - 55px);
-        
+
         border: solid 3px black;
         padding: 10px;
         transition: ease 250ms;
     }
-    #clearSelectionBtn:hover{
+
+    #clearSelectionBtn:hover {
         background-color: whitesmoke;
     }
-    #clearSelectionBtn:active{
+
+    #clearSelectionBtn:active {
         background-color: navajowhite;
         animation: fadeOut 0.5s ease-in-out forwards;
     }
+
     span {
-          position: absolute; 
-          top: 0px;
-          left: 0%;
-          background-color: wheat; 
-          border: double 15px black;
-          padding: 10px; 
-          color: rgb(0, 0, 0); 
-          font-size: 16px; 
-          width:80%;
-          height: 80%;
-    
-          box-shadow: 10px 20px 20px black;
-        }
-    </style>
-    <script is:inline lang="js">
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const clearSelectionBtn = document.getElementById('clearSelectionBtn');
-            const selectionCount = document.getElementById('selectionCount'); 
-            let selectedCount = 0; 
-        
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    if (selectedCount >= 3) {
-                        alert('You cannot Request more than 15 Items.');
-                        return; 
-                    }
-                    this.classList.toggle('selected');
-                    updateSelectionCount(); 
-                });
-            });
-        
-            clearSelectionBtn.addEventListener('click', function() {
-                menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
-                selectedCount = 0;
-                updateSelectionCount(); 
-            });
-        
-            function updateSelectionCount() {
-                let count = 0;
-                menuItems.forEach(item => {
-                    if (item.classList.contains('selected')) {
-                        count++;
-                    }
-                });
-                selectionCount.textContent = `Items: ${count} / 15`; 
-                selectedCount = count; 
-            }
-        
-            document.getElementById('Button').addEventListener('click', function() {
-                const astroComponent = document.querySelector('.astro-component');
-                astroComponent.style.display = astroComponent.style.display = 'none';
+        position: absolute;
+        top: 0px;
+        left: 0%;
+        background-color: wheat;
+        border: double 15px black;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        width: 80%;
+        height: 80%;
+
+        box-shadow: 10px 20px 20px black;
+    }
+</style>
+<script is:inline lang="js">
+    document.addEventListener('DOMContentLoaded', function () {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const carouselContainer = document.querySelector('.carousel-container');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+        const selectionCount = document.getElementById('selectionCount');
+        let selectedCount = 0;
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function () {
+                if (selectedCount >= 3) {
+                    alert('You cannot Request more than 15 Items.');
+                    return;
+                }
+                this.classList.toggle('selected');
+                updateSelectionCount();
             });
         });
-        
-        </script>
+
+        clearSelectionBtn.addEventListener('click', function () {
+            menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
+            selectedCount = 0;
+            updateSelectionCount();
+        });
+
+        function updateSelectionCount() {
+            let count = 0;
+            menuItems.forEach(item => {
+                if (item.classList.contains('selected')) {
+                    count++;
+                }
+            });
+            selectionCount.textContent = `Items: ${count} / 15`;
+            selectedCount = count;
+        }
+
+        document.getElementById('Button').addEventListener('click', function () {
+            const astroComponent = document.querySelector('.astro-component');
+            astroComponent.style.display = astroComponent.style.display = 'none';
+        });
+
+        let currentIndex = 0;
+
+        function updateCarousel(index) {
+            carouselItems.forEach((item, i) => {
+                item.style.display = i === index ? 'flex' : 'none';
+            });
+        }
+        // Carousel THing
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            updateCarousel(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            updateCarousel(currentIndex);
+        });
+
+        updateCarousel(currentIndex);
+    });
+
+   
+    carouselContainer.addEventListener('mousedown', function () {
+        this.classList.add('active-perspective');
+    });
+    document.addEventListener('mouseup', function () {
+        carouselContainer.classList.remove('active-perspective');
+    });
+
+</script>
