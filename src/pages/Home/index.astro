@@ -2,9 +2,9 @@
 import Dashboard from "../../layouts/Dashboard.astro";
 import DropDown from '../../components/Repeat/Dropdown.astro'
 
+import Clock from '../../components/Nonrenew/Clock.astro'
 ---
 
 <Dashboard title='Home'>
-
-    <DropDown DWName="Test"></DropDown>
+        <DropDown DWName="Test"> <div id="myDropdown" class="dropdown-content"><Clock></Clock></div> </DropDown>
 </Dashboard>
