@@ -1,0 +1,100 @@
+<div id="arud">
+    <div id="MyDateDisplay" class="date"></div>
+    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+</div>  
+  <style>
+    #arud {
+        background: black;
+    }
+  .clock,.date { 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-size: 60px;
+        font-family: "Prompt";
+        letter-spacing: 7px;
+        transition: color 0.5s ease-in-out;
+    }
+  
+  .date {
+        top: 40%; 
+    }
+  .glow-morning,.glow-midday,.glow-sunset,.glow-night {
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+    }
+  
+  </style>
+  
+  <script lang="JS">
+      function showTime(){
+        var date = new Date();
+        var day = date.getDate(); 
+        var monthIndex = date.getMonth(); 
+        var year = date.getFullYear();
+  
+        var months = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"];
+  
+        var formattedDate = `${months[monthIndex]} ${day}, ${year}`;
+  
+        document.getElementById("MyDateDisplay").innerText = formattedDate;
+  
+        var h = date.getHours(); 
+        var m = date.getMinutes(); 
+        var s = date.getSeconds(); 
+        var session = "AM";
+  
+        if(h == 0){
+            h = 12;
+        }
+  
+        if(h > 12){
+            session = "PM";
+        }
+  
+        h = (h < 10)? "0" + h : h;
+        m = (m < 10)? "0" + m : m;
+        s = (s < 10)? "0" + s : s;
+  
+        var time = h + ":" + m + ":" + s + " " + session;
+        document.getElementById("MyClockDisplay").innerText = time;
+        document.getElementById("MyClockDisplay").textContent = time;
+  
+        var currentTimeClass;
+        var periodText;
+        if (h >= 6 && h < 12) { 
+            currentTimeColor = "#FFD700"; 
+        } else if (h >= 12 && h < 18) { 
+            currentTimeColor = "#FFFF00"; 
+        } else if (h >= 18 && h < 21) { 
+            currentTimeColor = "#FF4500"; 
+        } else { 
+            currentTimeColor = "#0000FF"; 
+        }
+  
+        document.getElementById("MyDateDisplay").style.color = currentTimeColor;
+        
+        document.getElementById("MyDateDisplay").classList.add(currentTimeClass);
+        document.getElementById("MyClockDisplay").style.color = currentTimeColor;
+        document.getElementById("MyClockDisplay").classList.add(currentTimeClass);
+  
+          setTimeout(showTime, 1000);
+            }
+  
+            function adjustFontSize() {
+                const width = window.innerWidth;
+                let fontSize = Math.min(width * 0.05, 60); 
+                document.querySelector('.clock').style.fontSize = `${fontSize}px`;
+                document.querySelector('.date').style.fontSize = `${fontSize}px`;
+            }
+  
+            
+            window.addEventListener('resize', adjustFontSize);
+            window.addEventListener('load', adjustFontSize);
+  
+  
+    showTime();
+  </script>

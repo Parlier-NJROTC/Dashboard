@@ -1,0 +1,183 @@
+---
+interface Props {
+    DWName: string,
+}
+
+const {DWName} = Astro.props
+
+
+---
+
+<style>
+    #Housing {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+      background-clip: padding-box;
+      transition: ease-in-out;
+      font-family: "Sanchez";
+      background-color: white;
+    }
+
+    #Housing:hover {
+      box-shadow: 0px 0px 5px black;
+    }
+
+    .dropbtn {
+      background-color: #ffffff;
+      color: #41526E !important;
+      padding: 16px;
+      width: 500px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+
+      text-align: left;
+      font-family: "Sanchez";
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .Arrowbox {
+      background-color: #ffffff;
+      color: #41526E !important;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .Arrow {
+      font-family: "Sanchez";
+      font-size: 15px;
+      font-weight: 600;
+      font-style: normal;
+      transition: transform 250ms cubic-bezier(0.96, -0.33, 0, 0.09);
+    }
+
+    .flipped {
+      animation: spinFlipped 350ms linear forwards;
+    }
+
+    .unflipped {
+      animation: spinUnflipped 350ms linear forwards;
+    }
+
+    @keyframes spinFlipped {
+      25% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(-180deg);
+      }
+
+      75% {
+        transform: rotate(-230deg);
+      }
+
+      100% {
+        transform: rotate(-180deg);
+      }
+    }
+
+    @keyframes spinUnflipped {
+      25% {
+        transform: rotate(-180deg);
+      }
+
+      50% {
+        transform: rotate(0deg);
+      }
+
+      75% {
+        transform: rotate(-10deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 545px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+
+      border: dashed 2px black;
+      border-top: solid 1px;
+      background-clip: border-box;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown a:hover {
+      background-color: #ddd;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body style="background-color:wheat;">
+
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="myFunction()" class="dropbtn">{DWName}</button> <button onclick="myFunction()" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="myDropdown" class="dropdown-content">
+      </div>
+    </div>
+  </div>
+  <script>
+
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    window.onclick = function (event) {
+      if (!event.target.closest('#Housing') && !event.target.matches('#Housing *')) {
+        var dropdowns = document.querySelectorAll(".dropdown-content");
+        dropdowns.forEach(function (openDropdown) {
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        });
+      }
+    }
+    let container = document.querySelector('.Arrow');
+    let housimgs = document.querySelectorAll('.Arrowbox,.dropbtn');
+
+    housimgs.forEach(function (housimg) {
+      housimg.addEventListener('click', function () {
+        if (container.classList.contains('flipped')) {
+          container.classList.remove('flipped');
+          container.classList.add('unflipped');
+        } else {
+          container.classList.remove('unflipped');
+          container.classList.add('flipped');
+        }
+      });
+    });
+
+  </script>
