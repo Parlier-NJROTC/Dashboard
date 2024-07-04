@@ -4,6 +4,14 @@
     
     <div class="box"></div>
     <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
+    <div class="message-container"></div>
 </span>
 
 <style>
@@ -50,37 +58,54 @@
     }
 </style>
 <script lang="JS">
-document.addEventListener('DOMContentLoaded', function() {
-    const menuItems = document.querySelectorAll('.menu-item');
-    const messageContainer = document.querySelector('.message-container');
-
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            this.classList.toggle('selected');
-
-            const imgElement = this.querySelector('img');
-            if (imgElement) {
-                messageContainer.innerHTML = imgElement.alt;
-            } else {
-                messageContainer.innerHTML = '';
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        const mainContainer = document.querySelector('span'); // Assuming 'span' is the parent container where message-containers should be added
+    
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('selected');
+    
+                const imgElement = this.querySelector('img');
+                let content = '';
+                if (imgElement) {
+                    content = '<hr>' + imgElement.alt + '<hr>';
+                } else {
+                    content = '<hr><br><hr>';
+                }
+    
+                // Check if the item was just selected or deselected
+                if (this.classList.contains('selected')) {
+                    // Create a new message container and append it to the main container
+                    const newMessageContainer = document.createElement('div');
+                    newMessageContainer.className = 'message-container';
+                    newMessageContainer.innerHTML = content;
+                    mainContainer.appendChild(newMessageContainer);
+                } else {
+                    // Remove the last added message container
+                    const messageContainers = document.querySelectorAll('.message-container');
+                    if (messageContainers.length > 1) { // Ensure there's at least one message container remaining
+                        mainContainer.removeChild(messageContainers[messageContainers.length - 1]);
+                    }
+                }
+            });
+        });
+    
+        let intervalId = setInterval(updateTimeAndName, 1000);
+    
+        function updateTimeAndName() {
+            var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            var dateTimeString = now.toISOString().slice(0,16); 
+            var fullString = dateTimeString + " - "; 
+            document.getElementById('dateTimeInput').value = fullString;
+        }
+    
+        updateTimeAndName();
+    
+        document.getElementById('dateTimeInput').addEventListener('focus', function() {
+            clearInterval(intervalId);
         });
     });
-
-    let intervalId = setInterval(updateTimeAndName, 1000);
-
-    function updateTimeAndName() {
-        var now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        var dateTimeString = now.toISOString().slice(0,16); 
-        var fullString = dateTimeString + " - "; 
-        document.getElementById('dateTimeInput').value = fullString;
-    }
-
-    updateTimeAndName();
-
-    document.getElementById('dateTimeInput').addEventListener('focus', function() {
-        clearInterval(intervalId);
-    });
-});
+    
 </script>

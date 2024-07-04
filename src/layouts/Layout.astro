@@ -17,7 +17,7 @@ const { title, backgroundImg = "" } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/public/NJROTC.svg" />
+		<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>DashBoard | {title}</title>
 		<style>
@@ -26,7 +26,25 @@ const { title, backgroundImg = "" } = Astro.props;
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center center;
+
+				user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-drag: none;
+				-moz-user-drag: none;
+				-ms-user-drag: none;
 			}
+			img {
+				user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-drag: none;
+				-moz-user-drag: none;
+				-ms-user-drag: none;
+			}
+			
 		</style>
 	</head>
 	<body>
