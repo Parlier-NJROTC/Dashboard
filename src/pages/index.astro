@@ -9,7 +9,7 @@ import Box from '../components/Pages/Login.astro';
             Login
             <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" style="top:130%; position:absolute; width: 60px; height: 60px;">
         </div>
-        <form action="localhost:8080/" method="post" id="The-Login-Form">
+        <form id="The-Login-Form">
             <div class="login-form">
                 <div class="input-group">
                     <label for="username"></label>
@@ -20,12 +20,51 @@ import Box from '../components/Pages/Login.astro';
                     <input placeholder="Parlier1" type="password" id="password" name="password" required aria-required="true" class="input-text-large">
                 </div>
                 <div class="input-group" style="padding-top: 50px;">
-                    <button class="sanchez-regular" type="submit">Login</button>
+                    <button class="sanchez-regular">Login</button>
                 </div>
             </div>
         </form>
     </span>
 </Layout>
+
+<!-- screw this im setting the default language to js -->
+<script lang="js">
+    /**
+     * @type {HTMLFormElement}
+     */
+    let form = document.getElementById("The-Login-Form")
+
+    form.onsubmit = async (ev)=>{
+        ev.preventDefault() // stop it from loading it and putting it in url, its dam spegetti
+
+        const formData = new FormData(form);
+        const jsonObject = {};
+        formData.forEach((value, key) => {
+            jsonObject[key] = value;
+        });
+
+
+        let loginResponse = await fetch("localhost:8080/api/alpha/v1/users/signup",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(formData)
+        }).then(((res)=>{
+            if(res.ok){
+                return res.json()
+            }else{
+                throw new Error("welp something messed up")
+            }
+        })).then((data)=>{
+            console.log(data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+        console.log(jsonObject);
+    }
+
+</script>
 
 
     <style>
