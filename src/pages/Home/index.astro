@@ -1,10 +1,54 @@
 ---
 import Dashboard from "../../layouts/Dashboard.astro";
-import DropDown from '../../components/Repeat/Dropdown.astro'
 
-import Clock from '../../components/One_Time_Use/Clock.astro'
+import '../../components/SmalCompents/DropDown.css'
+
+// Dropdown Content
+
+import Clock from "../../components/SmalCompents/Clock.astro";
+import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
 ---
 
+
 <Dashboard title='Home'>
-        <DropDown DWName="Test"> <div id="myDropdown" class="dropdown-content"><Clock></Clock></div> </DropDown>
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="toggleDropdown('clock')" class="dropbtn1">Clock</button>
+      <button onclick="toggleDropdown('clock')" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="clockDropdown" class="dropdown-content1">
+        <Clock />
+      </div>
+    </div>
+  </div>
+  
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="toggleDropdown('whiteboard')" class="dropbtn1">WhiteBoard</button>
+      <button onclick="toggleDropdown('whiteboard')" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="whiteboardDropdown" class="dropdown-content1">
+        <WhiteBoard />
+      </div>
+    </div>
+  </div>
 </Dashboard>
+
+<script lang="JS">
+  function toggleDropdown(dropdownId) {
+    const dropdownContent = document.getElementById(`${dropdownId}Dropdown`);
+    dropdownContent.classList.toggle("show");
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('#Housing') && !event.target.matches('#Housing *')) {
+      const dropdownContents = document.querySelectorAll(".dropdown-content1");
+      dropdownContents.forEach(content => {
+        if (content.classList.contains('show')) {
+          content.classList.remove('show');
+        }
+      });
+    }
+  };

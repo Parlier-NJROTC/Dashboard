@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Example</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    scrollbar-width: 0px;
+  }
+
+  #container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto; 
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; 
+  }
+</style>
+<script lang="JS">
+document.addEventListener('DOMContentLoaded', function() {
+  const iframe = document.querySelector('#container iframe');
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+});
+</script>
+</head>
+<body>
+
+<div id="container">
+  <iframe src="https://witeboard.com/c060cea0-358f-11ef-a45c-6d90bed0a6b5" title="WhiteBoard" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+</div>
+
+</body>
+</html>
