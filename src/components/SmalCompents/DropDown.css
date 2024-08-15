@@ -12,6 +12,7 @@
     background-color: white;
 
     width: 400px;
+    flex-direction: row;
 }
 
 
@@ -59,7 +60,6 @@
   .unflipped {
     animation: spinUnflipped 350ms linear forwards;
   }
-
   @keyframes spinFlipped {
     25% {
       transform: rotate(0deg);

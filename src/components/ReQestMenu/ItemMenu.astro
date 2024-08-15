@@ -302,6 +302,8 @@
             });
         }
         // Carousel THing
+        
+        // scoll
         prevBtn.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
             updateCarousel(currentIndex);
@@ -312,10 +314,23 @@
             updateCarousel(currentIndex);
         });
 
+        document.addEventListener('keydown', (event) => {
+    if (event.key === ',') {
+        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        updateCarousel(currentIndex);
+    }
+});
+        document.addEventListener('keydown', (event) => {
+    if (event.key === '.') {
+        currentIndex = (currentIndex + 1) % carouselItems.length;
+        updateCarousel(currentIndex);
+    }
+});
+
         updateCarousel(currentIndex);
     });
 
-   
+   // cool Active thjing
     carouselContainer.addEventListener('mousedown', function () {
         this.classList.add('active-perspective');
     });
