@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Example</title>
 <style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-
-    scrollbar-width: 0px;
-  }
-
   #container {
     position: absolute;
     top: 0;
@@ -19,8 +6,9 @@
     right: 0;
     bottom: 0;
     overflow: auto; 
+    scrollbar-width: none; 
   }
-
+  
   iframe {
     position: absolute;
     top: 0;
@@ -28,21 +16,62 @@
     width: 100%;
     height: 100%;
     border: none; 
+    scrollbar-width: none; 
   }
-</style>
-<script lang="JS">
-document.addEventListener('DOMContentLoaded', function() {
-  const iframe = document.querySelector('#container iframe');
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-});
-</script>
-</head>
-<body>
+  
+  #fullscreenBtn {
+    position: relative;
+    filter: invert(100%);
 
-<div id="container">
-  <iframe src="https://witeboard.com/c060cea0-358f-11ef-a45c-6d90bed0a6b5" title="WhiteBoard" frameborder="0" scrolling="yes" allowfullscreen></iframe>
-</div>
+    background: none;
+    border: none;
 
-</body>
-</html>
+    top: 20px;
+    left: 10px;
+  
+    z-index: 1000;
+    cursor: pointer;
+  }
+  </style>
+  <script lang="js">
+  document.addEventListener('DOMContentLoaded', function() {
+    const iframe = document.querySelector('#container iframe');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+  
+    // Fullscreen button functionality
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    fullscreenBtn.addEventListener('click', function() {
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) { /* Firefox */
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+        iframe.msRequestFullscreen();
+      }
+    });
+  
+    // Listen for fullscreen change to update button state or UI accordingly
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
+        console.log(`Exited fullscreen`);
+        // Update button state or UI here if needed
+      }
+    });
+  });
+  </script>
+  </head>
+  <body>
+  
+  <div id="container">
+    <iframe src="https://infiniboards.com/room.html?code=c4e1a3c8-af6f-4945-acdb-9c0a4f1c66e7" title="WhiteBoard" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+  </div>
+  
+  <!-- Fullscreen Button -->
+  <button id="fullscreenBtn" ><img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/326650_fullscreen_icon.svg" alt="Fullscreen Icon">
+  </button>
+  
+  </body>
+  </html>

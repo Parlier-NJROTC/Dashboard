@@ -36,19 +36,48 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
   </div>
 </Dashboard>
 
+<style>
+  #Dashboard-Content{
+    display: grid;
+    justify-content: space-around;
+    align-content: space-around;
+}
+</style>
+
 <script lang="JS">
   function toggleDropdown(dropdownId) {
     const dropdownContent = document.getElementById(`${dropdownId}Dropdown`);
     dropdownContent.classList.toggle("show");
+
+    // Find the arrow within the same parent as the clicked button
+    const arrow = event.currentTarget.parentElement.querySelector('.Arrow');
+    
+    // Toggle flip classes on the found arrow
+    if (arrow.classList.contains('flipped')) {
+      arrow.classList.remove('flipped');
+      arrow.classList.add('unflipped');
+    } else {
+      arrow.classList.remove('unflipped');
+      arrow.classList.add('flipped');
+    }
   }
 
   window.onclick = function(event) {
-    if (!event.target.closest('#Housing') && !event.target.matches('#Housing *')) {
+    if (!event.target.matches('#Housing') && !event.target.matches('#Housing *')) {
       const dropdownContents = document.querySelectorAll(".dropdown-content1");
       dropdownContents.forEach(content => {
         if (content.classList.contains('show')) {
           content.classList.remove('show');
         }
       });
+      
+      // Ensure arrows return to default state when clicking outside
+      const arrows = document.querySelectorAll('.Arrow.flipped');
+      arrows.forEach(arrow => {
+        arrow.classList.remove('flipped');
+        arrow.classList.add('unflipped');
+      });
     }
   };
+</script>
+

@@ -41,6 +41,15 @@ body{
     -webkit-user-drag: none;
     -moz-user-drag: none;
     -ms-user-drag: none;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 img {
     user-select: none;
