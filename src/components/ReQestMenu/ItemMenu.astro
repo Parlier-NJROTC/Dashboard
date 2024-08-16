@@ -252,55 +252,67 @@
 </style>
 <script is:inline lang="js">
     document.addEventListener('DOMContentLoaded', function () {
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const carouselContainer = document.querySelector('.carousel-container');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const menuItems = document.querySelectorAll('.menu-item');
-        const clearSelectionBtn = document.getElementById('clearSelectionBtn');
-        const selectionCount = document.getElementById('selectionCount');
-        let selectedCount = 0;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const menuItems = document.querySelectorAll('.menu-item');
+    const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+    const selectionCount = document.getElementById('selectionCount');
+    let selectedCount = 0;
 
-        menuItems.forEach(item => {
-            item.addEventListener('click', function () {
-                if (selectedCount >= 3) {
-                    alert('You cannot Request more than 15 Items.');
-                    return;
-                }
-                this.classList.toggle('selected');
-                updateSelectionCount();
-            });
-        });
+    // Load previously selected items from Local Storage
+    const savedSelections = JSON.parse(localStorage.getItem('selectedItems')) || [];
+    savedSelections.forEach(itemID => {
+        document.querySelector(`[data-index="${itemID}"]`).classList.add('selected');
+    });
 
-        clearSelectionBtn.addEventListener('click', function () {
-            menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
-            selectedCount = 0;
+    menuItems.forEach(item => {
+        item.addEventListener('click', function () {
+            if (selectedCount >= 3) {
+                alert('You cannot Request more than 15 Items.');
+                return;
+            }
+            this.classList.toggle('selected');
             updateSelectionCount();
+
+            // Save the current state to Local Storage
+            const selectedItems = Array.from(document.querySelectorAll('.selected')).map(item => item.dataset.index);
+            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
         });
+    });
 
-        function updateSelectionCount() {
-            let count = 0;
-            menuItems.forEach(item => {
-                if (item.classList.contains('selected')) {
-                    count++;
-                }
-            });
-            selectionCount.textContent = `Items: ${count} / 15`;
-            selectedCount = count;
-        }
+    clearSelectionBtn.addEventListener('click', function () {
+        menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
+        selectedCount = 0;
+        updateSelectionCount();
+        // Clear the saved selections in Local Storage
+        localStorage.removeItem('selectedItems');
+    });
 
-        document.getElementById('Button').addEventListener('click', function () {
-            const astroComponent = document.querySelector('.astro-component');
-            astroComponent.style.display = astroComponent.style.display = 'none';
+    function updateSelectionCount() {
+        let count = 0;
+        menuItems.forEach(item => {
+            if (item.classList.contains('selected')) {
+                count++;
+            }
         });
+        selectionCount.textContent = `Items: ${count} / 15`;
+        selectedCount = count;
+    }
 
-        let currentIndex = 0;
+    document.getElementById('Button').addEventListener('click', function () {
+        const astroComponent = document.querySelector('.astro-component');
+        astroComponent.style.display = astroComponent.style.display = 'none';
+    });
 
-        function updateCarousel(index) {
-            carouselItems.forEach((item, i) => {
-                item.style.display = i === index ? 'flex' : 'none';
-            });
-        }
+    let currentIndex = 0;
+
+    function updateCarousel(index) {
+        carouselItems.forEach((item, i) => {
+            item.style.display = i === index ? 'flex' : 'none';
+        });
+    }
         // Carousel THing
         
         // scoll

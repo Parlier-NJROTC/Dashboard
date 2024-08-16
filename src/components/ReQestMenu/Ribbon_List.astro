@@ -64,54 +64,29 @@
     }
 </style>
 <script lang="JS">
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuItems = document.querySelectorAll('.menu-item');
-        const mainContainer = document.querySelector('span'); // Assuming 'span' is the parent container where message-containers should be added
+    let intervalId = setInterval(updateTimeAndName, 1000);
+
+    function updateTimeAndName() {
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        var dateTimeString = now.toISOString().slice(0, 16);
+        var fullString = dateTimeString + " - ";
+        document.getElementById('dateTimeInput').value = fullString;
+    }
     
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                this.classList.toggle('selected');
+    updateTimeAndName();
     
-                const imgElement = this.querySelector('img');
-                let content = '';
-                if (imgElement) {
-                    content = '<hr>' + imgElement.alt + '<hr>';
-                } else {
-                    content = '<hr><br><hr>';
-                }
+    document.getElementById('dateTimeInput').addEventListener('focus', function() {
+        clearInterval(intervalId);
+    });
     
-                // Check if the item was just selected or deselected
-                if (this.classList.contains('selected')) {
-                    // Create a new message container and append it to the main container
-                    const newMessageContainer = document.createElement('div');
-                    newMessageContainer.className = 'message-container';
-                    newMessageContainer.innerHTML = content;
-                    mainContainer.appendChild(newMessageContainer);
-                } else {
-                    // Remove the last added message container
-                    const messageContainers = document.querySelectorAll('.message-container');
-                    if (messageContainers.length > 1) { // Ensure there's at least one message container remaining
-                        mainContainer.removeChild(messageContainers[messageContainers.length - 1]);
-                    }
-                }
-            });
-        });
+    const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
     
-        let intervalId = setInterval(updateTimeAndName, 1000);
-    
-        function updateTimeAndName() {
-            var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            var dateTimeString = now.toISOString().slice(0,16); 
-            var fullString = dateTimeString + " - "; 
-            document.getElementById('dateTimeInput').value = fullString;
-        }
-    
-        updateTimeAndName();
-    
-        document.getElementById('dateTimeInput').addEventListener('focus', function() {
-            clearInterval(intervalId);
-        });
+    const messageContainer = document.querySelector('.message-container');
+    selectedItems.forEach(item => {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = `Item ${item} is selected.`;
+        messageContainer.appendChild(messageElement);
     });
     
 </script>
