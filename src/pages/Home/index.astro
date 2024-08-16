@@ -11,6 +11,8 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
 
 
 <Dashboard title='Home'>
+<div id="ContentTape">
+
   <div id="Housing">
     <div class="dropdown">
       <button onclick="toggleDropdown('clock')" class="dropbtn1">Clock</button>
@@ -34,13 +36,57 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
       </div>
     </div>
   </div>
+
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="toggleDropdown('p1')" class="dropbtn1">PlaceHolder</button>
+      <button onclick="toggleDropdown('p1')" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="p1Dropdown" class="dropdown-content1">
+        <WhiteBoard />
+      </div>
+    </div>
+  </div>
+
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="toggleDropdown('p2')" class="dropbtn1">Placeholder</button>
+      <button onclick="toggleDropdown('p2')" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="p2Dropdown" class="dropdown-content1">
+        <WhiteBoard />
+      </div>
+    </div>
+  </div>
+
+  <div id="Housing">
+    <div class="dropdown">
+      <button onclick="toggleDropdown('p3')" class="dropbtn1">Placeholder</button>
+      <button onclick="toggleDropdown('p3')" class="Arrowbox">
+        <div class="Arrow">V</div>
+      </button>
+      <div id="p3Dropdown" class="dropdown-content1">
+        <WhiteBoard />
+      </div>
+    </div>
+  </div>
+
+</div> <!-- Part of id="ContentTape" -->
 </Dashboard>
 
-<style>
-  #Dashboard-Content{
-    display: grid;
-    justify-content: space-around;
-    align-content: space-around;
+<style>  
+#ContentTape{
+  display: flex;
+  justify-content: center; 
+  align-items: start; 
+  flex-wrap: wrap; 
+}
+
+#Housing {
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 </style>
 
@@ -49,29 +95,27 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
     const dropdownContent = document.getElementById(`${dropdownId}Dropdown`);
     dropdownContent.classList.toggle("show");
 
-    // Find the arrow within the same parent as the clicked button
     const arrow = event.currentTarget.parentElement.querySelector('.Arrow');
-    
-    // Toggle flip classes on the found arrow
-    if (arrow.classList.contains('flipped')) {
-      arrow.classList.remove('flipped');
-      arrow.classList.add('unflipped');
-    } else {
-      arrow.classList.remove('unflipped');
-      arrow.classList.add('flipped');
+    if (arrow) { // Check if arrow exists
+      if (arrow.classList.contains('flipped')) {
+        arrow.classList.remove('flipped');
+        arrow.classList.add('unflipped');
+      } else {
+        arrow.classList.remove('unflipped');
+        arrow.classList.add('flipped');
+      }
     }
   }
 
   window.onclick = function(event) {
-    if (!event.target.matches('#Housing') && !event.target.matches('#Housing *')) {
+    if (!event.target.closest('.dropdown-content1') && !event.target.closest('.dropdown')) {
       const dropdownContents = document.querySelectorAll(".dropdown-content1");
       dropdownContents.forEach(content => {
         if (content.classList.contains('show')) {
           content.classList.remove('show');
         }
       });
-      
-      // Ensure arrows return to default state when clicking outside
+
       const arrows = document.querySelectorAll('.Arrow.flipped');
       arrows.forEach(arrow => {
         arrow.classList.remove('flipped');
@@ -80,4 +124,3 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
     }
   };
 </script>
-

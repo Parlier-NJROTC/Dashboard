@@ -83,30 +83,34 @@
       /* Dark mode styles */
       body.dark-mode {
         filter: invert(100%);
-        color: white;
+        color: rgb(0, 0, 0);
+      }
+      #Dashboard-Navigation.dark-mode{
+        filter: invert(100%);
       }
 
 
     </style>
 <script lang="JS">
-  // Function to toggle dark mode
   function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode',!localStorage.getItem('darkMode')); // Save the new state
+    const darkModeState = localStorage.getItem('darkMode') === 'true'; 
+    localStorage.setItem('darkMode', !darkModeState); 
   }
   
-  // Function to initialize dark mode based on saved state
+
   function initDarkMode() {
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true'; 
     if (darkModeEnabled) {
       document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode'); 
     }
   }
   
-  // Initialize dark mode on page load
   initDarkMode();
   
-  // Attach the toggle function to the "Dark Mode" button
+
   document.getElementById('darkModeLink').addEventListener('click', toggleDarkMode);
   
 </script>
