@@ -79,14 +79,23 @@
     document.getElementById('dateTimeInput').addEventListener('focus', function() {
         clearInterval(intervalId);
     });
-    
-    const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-    
-    const messageContainer = document.querySelector('.message-container');
-    selectedItems.forEach(item => {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = `Item ${item} is selected.`;
-        messageContainer.appendChild(messageElement);
-    });
-    
+
+    function updateMessages() {
+        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        const messageContainers = document.querySelectorAll('.message-container');
+        messageContainers.forEach(container => container.innerHTML = '');
+        
+        selectedItems.forEach((item, index) => {
+            const messageElement = document.createElement('div');
+            // Use innerHTML to allow HTML tags to be rendered
+            messageElement.innerHTML = '<hr/>' + `Item ${item} ` + '<hr/>';
+            messageContainers[index].appendChild(messageElement);
+        });
+    }
+
+    updateMessages();
+
+    setInterval(() => {
+        updateMessages();
+    }, 1000);
 </script>
