@@ -1,6 +1,7 @@
 ---
 import Link from "../components/menu/Link.astro";
 import Setting from '../components/menu/Setting.astro';
+import Fvfer from '../components/SmalCompents/Line.astro';
 import "./Dashboard.css";
 interface Props {
 	title: string;
@@ -33,10 +34,12 @@ const { title } = Astro.props;
         <div id="User-Info">
             <h1> Cadet <span id="User-Rank">Seaman Recruit</span> <span id="User-Name">Sanchez</span></h1>
             <h3>NS<span id="Class-Name">0</span></h3>
+            <Fvfer></Fvfer>
         </div>
     </header>
     <nav id="Dashboard-Navigation">
         <Link title="Home">Home</Link>
+        <hr>
         <Link title="Request">Request</Link>
     </nav>
     <main id="Dashboard-Content">
@@ -44,4 +47,11 @@ const { title } = Astro.props;
     </main>
     <Setting></Setting>
 </body>
+<style>
+        hr{
+        width: 10px;
+        margin-right: 156px;
+        margin-bottom: 0px;
+    }
+</style>
 </html>

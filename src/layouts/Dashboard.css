@@ -1,11 +1,11 @@
 :root{
     --nav-width:300px;
-    --nav-bg-color:navy;
+    --top-nav-bg-color:navy;
+    --nav-bg-color:rgb(0, 0, 164);
     --nav-txt-color:white;
 
     --header-height:105px;
     --header-bg-color:whitesmoke;
-    --header-border:5px double black;
 
     --main-content-color:wheat;
 }
@@ -69,10 +69,12 @@ img {
     justify-content: center;
 
     column-gap: 5px;
+    box-shadow: 0px 5px 5px navy;
 
     border-bottom: var(--header-border);
-    background: var(--nav-bg-color);
+    background: var(--top-nav-bg-color);
     color: var(--nav-txt-color);
+    z-index: 1;
 }
 #Dashboard-Title img{
     width: 40px;
@@ -94,6 +96,7 @@ img {
 
     border-bottom: var(--header-border);
     background-color: var(--header-bg-color);
+    z-index: 3;
 }
 #Dashboard-Header h1{
     font-weight: normal;
