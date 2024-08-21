@@ -1,13 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Box from '../components/Pages/Login.astro';
+import "../components/SmalCompents/Alert.css";
 ---
 
 <Layout title="Login">
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong><div id="WL"></div></strong> <div id="TW"></div>
+    </div>
     <span style="border: 10px rgb(0, 0, 0) double;">
         <div id="Login" class="sanchez-regular">
             Login
-            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" style="top:130%; position:absolute; width: 60px; height: 60px;">
+            <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/NJROTC-Seal.svg" style="top:170%; position:absolute; width: 80px; height: 80px;">
         </div>
         <form id="The-Login-Form">
             <div class="login-form">
@@ -74,7 +79,7 @@ import Box from '../components/Pages/Login.astro';
 
 
     <style>
-        button{
+        button {
             font-size: 20px;
             padding: 10px;
             border: none;
@@ -84,13 +89,14 @@ import Box from '../components/Pages/Login.astro';
             border-radius: 5px;
             position: relative;
             z-index: 1;
-            transition: background 3s ease;
-            border: 10px whitesmoke double;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        button:hover{
-            background: linear-gradient(310deg, #105c69, #3c9d9e, #7db5b6, #c8dae5);
-        }
-        #Login {
+
+        button:hover {
+            transform: scale(1.05); 
+            box-shadow: 15px 15px 20px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.23);
+        }    
+    #Login {
             padding: 10px;
             position: relative;
             font-size: 50px;
@@ -113,8 +119,8 @@ import Box from '../components/Pages/Login.astro';
             z-index: 99;
             padding: 10px;
             color: rgb(0, 0, 0);
-            width: 30%;
-            height: 80%;
+            width: calc(30% - 25px);
+            height: calc(80% - 25px);
             display: grid;
             justify-items: center;
             align-items: start;
