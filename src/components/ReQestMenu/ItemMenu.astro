@@ -1,12 +1,12 @@
 <span>
     <div class="menu-container">
         <div id="Ribbon-Listing">
-            <div class="menu-item" data-index="1"> <!-- BTW data-index is the Name that Shows to the User -->
+            <div class="menu-item" data-index="Naval Science I Outstanding Cadet Ribbon"> <!-- BTW data-index is the Name that Shows to the User -->
                 <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
                     alt="Image 1">
                 <div class="overlay-text">Box 1</div>
             </div>
-            <div class="menu-item" data-index="2">
+            <div class="menu-item" data-index="Community Service Ribbon">
                 <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
                     alt="Image 2">
                 <div class="overlay-text">Box 2</div>
@@ -20,6 +20,13 @@
                 <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
                     alt="Image 4">
                 <div class="overlay-text">Box 4</div>
+            </div>
+            <div id="StarListing">
+                <div class="menu-item" data-index="4">
+                    <img src="https://www.vanguardmil.com/cdn/shop/products/7718200_1024x1024.jpg?v=1617287837"
+                        alt="Image 5">
+                    <div class="overlay-text">Box 4</div>
+                </div>
             </div>
 
             <div class="BottomBox">
@@ -59,6 +66,13 @@
 
     }
 
+    #StarListing {
+        display: flex;
+        left: 0;
+        width: calc(100% - 5px);
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
     #Ribbon-Listing {
         display: flex;
         left: 0;
@@ -131,7 +145,6 @@
         position: relative;
         top: 20%;
         flex-grow: 1;
-        overflow: hidden;
         height: 50px;
         margin: 0 10px;
 
@@ -144,6 +157,7 @@
     }
 
     .carousel-container:hover {
+        border-radius: 0px;
         background: whitesmoke;
         perspective: 50em;
         background-clip: padding-box;

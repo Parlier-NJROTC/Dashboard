@@ -1,6 +1,7 @@
 ---
 import List from '../ReQestMenu/Request_List.astro';
 import Menu from '../ReQestMenu/ItemMenu.astro';
+import File from '../ReQestMenu/file_upload.astro'
 ---
 
   <div class="astro-component">
@@ -9,6 +10,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
     <div class="content">
       <List></List>
       <div class="box">
+        <File></File>
         <button id="Buttonn">Open Ribbon Selector</button>
         <input type="file" id="fileInput" accept=".jpg,.png,.jpeg" style="display:none;" onchange="previewImage(this)" />
         <div class="custom-file-upload" onclick="document.getElementById('fileInput').click()">
@@ -18,19 +20,6 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
     </div>
 
   <script lang="js">
-    function previewImage(inputElement) {
-      const file = inputElement.files[0];
-      if (!file ||!window.FileReader) return;
-
-      if (/^image\/(jpg|jpeg|png)$/.test(file.type)) {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-          const previewDiv = document.querySelector('.image-preview');
-          previewDiv.style.backgroundImage = `url(${reader.result})`;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
 
     document.getElementById('Buttonn').addEventListener('mousedown', function() {
       const astroComponent = document.querySelector('.astro-component');
@@ -40,40 +29,6 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
   </script>
 
   <style>
-   .custom-file-upload {
-      cursor: pointer;
-      background-color: #FFFF7F;
-      border: 5px double #000000;
-      border-radius: 5px;
-      padding: 10px;
-      color: #495057;
-      font-size: 16px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      height: 150px;
-      filter: invert(100%);
-      background-image: url(https://icon-library.com/images/input-icon/input-icon-3.jpg);
-      background-position: center;
-      background-size: 25% 50%;
-      background-repeat: no-repeat;
-      z-index: 90;
-    }
-   .image-preview {
-      filter: invert(100%);
-      min-width: 130%;
-      min-height: 113.5%;
-      border-radius: 5px;
-      object-fit: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      margin-left: -54px;
-      margin-top: -10px;
-    }
-    #fileInput {
-      display: none;
-    }
     body {
       position: relative;
       height: 100vh;
@@ -87,6 +42,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
 
     }
    .box {
+      top: 130px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -112,7 +68,7 @@ import Menu from '../ReQestMenu/ItemMenu.astro';
       position: absolute;
       height: 50px;
       z-index: 90;
-      bottom: 200px;
+      bottom: 150px;
     }
     @keyframes fadeIn {
       0% {

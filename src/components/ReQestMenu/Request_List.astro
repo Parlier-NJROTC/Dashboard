@@ -88,7 +88,7 @@
         selectedItems.forEach((item, index) => {
             const messageElement = document.createElement('div');
             // Use innerHTML to allow HTML tags to be rendered
-            messageElement.innerHTML = '<hr/>' + `Item ${item} ` + '<hr/>';
+            messageElement.innerHTML = '<hr/>' + `${item} ` + '<hr/>';
             messageContainers[index].appendChild(messageElement);
         });
     }
