@@ -17,13 +17,6 @@
 
     </style>
 <script lang="JS">
-  function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const darkModeState = localStorage.getItem('darkMode') === 'true'; 
-    localStorage.setItem('darkMode', !darkModeState); 
-  }
-  
-
   function initDarkMode() {
     const darkModeEnabled = localStorage.getItem('darkMode') === 'true'; 
     if (darkModeEnabled) {
@@ -37,7 +30,7 @@
   
 
   document.getElementById('darkModeLink').addEventListener('click', toggleDarkMode);
-  
+
 </script>
 
   

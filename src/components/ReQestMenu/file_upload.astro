@@ -1,4 +1,5 @@
 
+
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
   <div class="image-upload-wrap">
@@ -15,24 +16,21 @@
   </div>
 
 <script lang="js">
-    function readURL(input) {
+function readURL(input) {
   if (input.files && input.files[0]) {
-
     var reader = new FileReader();
-
+    
     reader.onload = function(e) {
       $('.image-upload-wrap').hide();
-
+      
       $('.file-upload-image').attr('src', e.target.result);
       $('.file-upload-content').show();
-
+      
       $('.image-title').html(input.files[0].name);
     };
-
+    
     reader.readAsDataURL(input.files[0]);
 
-  } else {
-    removeUpload();
   }
 }
 
@@ -41,11 +39,34 @@ function removeUpload() {
   $('.file-upload-content').hide();
   $('.image-upload-wrap').show();
 }
+
 $('.image-upload-wrap').bind('dragover', function () {
-		$('.image-upload-wrap').addClass('image-dropping');
-	});
-	$('.image-upload-wrap').bind('dragleave', function () {
-		$('.image-upload-wrap').removeClass('image-dropping');
+  $(this).addClass('image-dropping');
+});
+
+$('.image-upload-wrap').bind('dragleave', function () {
+  $(this).removeClass('image-dropping');
+});
+
+$('.image-upload-wrap').on('drop', function(event) {
+  event.preventDefault();
+  
+  if (event.originalEvent.dataTransfer.items) {
+    var dt = event.originalEvent.dataTransfer;
+    var files = [];
+    for (var i = 0; i < dt.items.length; i++) {
+      var item = dt.items[i];
+      if (item.kind === 'file') {
+        files.push(item.getAsString(this));
+      }
+    }
+  } else {
+    var files = event.originalEvent.dataTransfer.files;
+  }
+
+  if (files.length > 0) {
+    readURL(files[0]);
+  }
 });
 
 </script>

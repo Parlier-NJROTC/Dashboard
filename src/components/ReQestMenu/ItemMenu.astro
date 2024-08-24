@@ -21,13 +21,14 @@
                     alt="Image 4">
                 <div class="overlay-text">Box 4</div>
             </div>
+        </div>
+        <div class="menu-container">
             <div id="StarListing">
-                <div class="menu-item" data-index="4">
-                    <img src="https://www.vanguardmil.com/cdn/shop/products/7718200_1024x1024.jpg?v=1617287837"
+                <div class="menu-item" data-index="Naval Science I Outstanding Cadet Ribbon"> <!-- BTW data-index is the Name that Shows to the User -->
+                    <img src=""
                         alt="Image 5">
-                    <div class="overlay-text">Box 4</div>
+                    <div class="overlay-text">Box 5</div>
                 </div>
-            </div>
 
             <div class="BottomBox">
                 <button style="text-align: center;font-size: 15px;" id="Button">X</button>
@@ -64,9 +65,11 @@
         justify-content: space-between;
         overflow-y: scroll;
 
+
     }
 
     #StarListing {
+        height: 95px;
         display: flex;
         left: 0;
         width: calc(100% - 5px);
@@ -92,6 +95,8 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border: 5px solid lightblue;
         transition: cubic-bezier(0.25, 0.1, 0, 1.4) 250ms;
+
+        margin-bottom: 20px;
     }
 
     .selected {
