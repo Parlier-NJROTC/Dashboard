@@ -34,40 +34,47 @@ import Box from '../components/Pages/Login.astro';
      */
     let form = document.getElementById("The-Login-Form")
 
+    // these are notes because I forget what this does
     form.onsubmit = async (ev)=>{
         ev.preventDefault() // stop it from loading it and putting it in url, its dam spegetti
 
+        //All this does is just parse form to json
         const formData = new FormData(form);
         const jsonObject = {};
         formData.forEach((value, key) => {
             jsonObject[key] = value;
         });
-        console.log(JSON.stringify(jsonObject))
+        console.log("Parsed Data"+JSON.stringify(jsonObject))
 
-        let loginResponse = await fetch("http://localhost:8080/api/alpha/v1/users/login",{
+        //Send request with data
+        await fetch("http://localhost:8080/api/alpha/v1/users/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(jsonObject)
-        }).then(((res)=>{
+        })
+        //log response
+        .then(async (res)=>{
             console.log(res)
+            console.log(typeof await res.text())
             if(res.ok){
                 return res.text()
             }else{
                 throw new Error("welp something messed up")
             }
-        })).then((data)=>{
+        })/*.then((data)=>{
             console.log(data)
             if(data){
                 window.location.href = "/Dashboard/Home"
             }else{
+                console.log("nope")
                 // code goes here for handleing incorrecto username/pwasord
             }
         }).catch((err)=>{
             console.log(err)
         })
-        console.log(jsonObject);
+        console.log(jsonObject);*/
     }
 
 </script>
