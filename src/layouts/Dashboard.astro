@@ -3,6 +3,8 @@ import Link from "../components/menu/Link.astro";
 import Setting from '../components/menu/Setting.astro';
 import Fvfer from '../components/SmalCompents/Line.astro';
 import "./Dashboard.css";
+
+import ViewTransitions from "astro/components/ViewTransitions.astro";
 interface Props {
 	title: string;
 }
@@ -24,8 +26,13 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>DashBoard | {title}</title>
+        <ViewTransitions/>
+
 </head>
 <body>
+    <script lang="js">
+        console.log("mannn")
+    </script>
     <div id="Dashboard-Title">
         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg">
         <h1>NJROTC Dashboard</h1>
@@ -40,19 +47,35 @@ const { title } = Astro.props;
                 <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
                 <a id="Logout">Logout</a>
             </div>
-            
         </div>
     </header>
+    <script lang="js">
+        console.log("mannn2")
+    </script>
     <nav id="Dashboard-Navigation">
         <br>
         <Link title="Home">Home</Link>
         <hr>
         <Link title="Request">Request</Link>
     </nav>
+    <script lang="js">
+        console.log("mannn3")
+    </script>
     <main id="Dashboard-Content">
         <slot></slot>
     </main>
     <Setting></Setting>
+    <script lang="js">
+        console.log("mannn4")
+    </script>
+    <script lang="js">
+        console.log("mann5")
+        console.log("amfpoejfipaj")
+        fetch("http://localhost:8080/api/alpha/v1/home/info/general",{
+            method:"GET"
+        })
+    </script>
+    
 </body>
 <style>
     hr{

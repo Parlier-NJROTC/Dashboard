@@ -5,6 +5,7 @@ import Box from '../components/Pages/Login.astro';
 
 <Layout title="Login">
     <div id="Status"><!-- Uncomment for place holder: Error 404: Lorem Ipsum --></div>
+    <a id="hiddenRedirectionBecauseAstroOnlyDoesThisNow" href="/Dashboard/Home">this is supposed to be hidden</a>
     <span>
         <div id="Login" class="sanchez-regular">
             Login
@@ -61,7 +62,7 @@ import Box from '../components/Pages/Login.astro';
         const Data = await Response.json()
 
         if(Data.success){
-            window.location.href = "/Dashboard/Home"
+            document.getElementById("hiddenRedirectionBecauseAstroOnlyDoesThisNow").click()
         }else{
             document.getElementById("Status").innerText = `Error ${Response.status}: ${Data.message}`
         }
