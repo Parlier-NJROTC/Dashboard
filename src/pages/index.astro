@@ -4,6 +4,7 @@ import Box from '../components/Pages/Login.astro';
 ---
 
 <Layout title="Login">
+    <div id="Status"><!-- Uncomment for place holder: Error 404: Lorem Ipsum --></div>
     <span>
         <div id="Login" class="sanchez-regular">
             Login
@@ -44,37 +45,26 @@ import Box from '../components/Pages/Login.astro';
         formData.forEach((value, key) => {
             jsonObject[key] = value;
         });
-        console.log("Parsed Data"+JSON.stringify(jsonObject))
+        console.log("Parsed Data" + JSON.stringify(jsonObject))
 
         //Send request with data
-        await fetch("http://localhost:8080/api/alpha/v1/users/login",{
+        const Response = await fetch("http://localhost:8080/api/alpha/v1/users/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(jsonObject)
         })
-        //log response
-        .then(async (res)=>{
-            console.log(res)
-            console.log(typeof await res.text())
-            if(res.ok){
-                return res.text()
-            }else{
-                throw new Error("welp something messed up")
-            }
-        })/*.then((data)=>{
-            console.log(data)
-            if(data){
-                window.location.href = "/Dashboard/Home"
-            }else{
-                console.log("nope")
-                // code goes here for handleing incorrecto username/pwasord
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
-        console.log(jsonObject);*/
+        /**
+         * @type {{success:Boolean,message:String}}
+         */
+        const Data = await Response.json()
+
+        if(Data.success){
+            window.location.href = "/Dashboard/Home"
+        }else{
+            document.getElementById("Status").innerText = `Error ${Response.status}: ${Data.message}`
+        }
     }
 
 </script>
