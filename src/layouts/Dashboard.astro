@@ -89,7 +89,7 @@ const { title } = Astro.props;
         }).then((res)=>{
             if(res.status != 200){
                 console.log("an error occured, returning to login")
-                window.location.href = "/dashboard"
+                window.location.href = "/Dashboard/"
             }
             console.log("sup")
             return res.json()
