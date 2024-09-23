@@ -69,7 +69,7 @@ img {
     justify-content: center;
 
     column-gap: 5px;
-    box-shadow: 0 10px 5px navy, 0px -40px 5px #0000a4;
+    box-shadow: 0 10px 5px var(--nav-bg-color), 0px -40px 5px #0000a4;
 
     border-bottom: var(--header-border);
     background: var(--top-nav-bg-color);
@@ -130,8 +130,8 @@ img {
     width: 100%;
     max-width: 100%;
 
-    border-inline: 0px solid white;
-    color:white;
+    border-inline: 0px solid var(--nav-txt-color);
+    color: var(--nav-txt-color);
     text-decoration: none;
     text-align: center;
 
@@ -144,7 +144,7 @@ img {
 }
 #Dashboard-Navigation Link:hover{
     transform: skewX(0deg);
-    border-inline: 5px solid white;
+    border-inline: 5px solid var(--nav-txt-color);
 }
 
 
@@ -159,5 +159,6 @@ img {
     overflow-y: scroll;
 }
 Link{
-    font-family: 'Sanchez'
+    font-family: 'Sanchez';
+    color: var(--nav-txt-color);
 }

@@ -5,7 +5,7 @@ import Box from '../components/Pages/Login.astro';
 
 <Layout title="Login">
     <div id="Status"><!-- Uncomment for place holder: Error 404: Lorem Ipsum --></div>
-    <a id="hiddenRedirectionBecauseAstroOnlyDoesThisNow" href="/Dashboard/Home">this is supposed to be hidden</a>
+    <a id="hiddenRedirectionBecauseAstroOnlyDoesThisNow" href="/Dashboard/Home" style="display: none;">this is supposed to be hidden</a>
     <span>
         <div id="Login" class="sanchez-regular">
             Login
@@ -66,9 +66,11 @@ import Box from '../components/Pages/Login.astro';
 
         if(Data.success){
             localStorage.setItem("Token",Data.token)
+            document.getElementById("Status").innerText = `${Data.message}`
             document.getElementById("hiddenRedirectionBecauseAstroOnlyDoesThisNow").click()
+            console.log(Data)
         }else{
-            document.getElementById("Status").innerText = `Error ${Response.status}: ${Data.message}`
+            document.getElementById("Status").innerText = `${Data.message}`
         }
     }
 
@@ -76,6 +78,23 @@ import Box from '../components/Pages/Login.astro';
 
 
     <style>
+        #Status{
+            left: 50%;
+            transform: translate(-50%,0%);
+            color: white;
+            font-family: "Sanchez", serif;
+            font-weight: 400;
+            font-style: normal;
+
+            position: absolute;
+            top: 25px;
+            padding-left: 15px;
+            padding-right: 15px;
+
+            background-color: navy;
+            transition: ease-in 450ms;
+
+        }
         button {
             font-size: 20px;
             padding: 10px;
@@ -150,17 +169,17 @@ import Box from '../components/Pages/Login.astro';
         .input-group input[type="text"]::placeholder,
         .input-group input[type="password"]::placeholder {
         color: rgb(0, 0, 0);
-        opacity: 1; /* Firefox */
+        opacity: 1; 
         }
 
         .input-group input[type="text"]::-ms-input-placeholder,
-        .input-group input[type="password"]::-ms-input-placeholder { /* Edge 12-18 */
+        .input-group input[type="password"]::-ms-input-placeholder { 
         color: rgb(0, 0, 0);
+        background: none !important;
         }
         .input-text-large {
             font-size: 24px;
         }
-        /* Ensures the custom focus style is visible against the background */
         .input-group input[type="text"],
         .input-group input[type="password"] {
             background: none;
@@ -171,6 +190,17 @@ import Box from '../components/Pages/Login.astro';
 
             color: #000;
         }
+        input:-webkit-autofill ,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            background: none !important;
+        }
+        input:-moz-autofill {
+            background-image: none !important;
+            background-color: transparent !important;
+        }
+
         .sanchez-regular {
             font-family: "Sanchez", serif;
             font-weight: 400;

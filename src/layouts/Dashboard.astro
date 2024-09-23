@@ -62,7 +62,6 @@ const { title } = Astro.props;
     <main id="Dashboard-Content">
         <slot></slot>
     </main>
-    <Setting></Setting>
     <script lang="js">
         console.log("mannn4")
     </script>
@@ -71,7 +70,7 @@ const { title } = Astro.props;
         console.log("proof script is running")
 
         // so if you add "await" to stop execution until it is complete, normally
-        // now the script won't run anyways if you add it
+        ///////////////////////////////// now the script won't run anyways if you add it
         // wizard type sheit, i got my phd im shenanigans from hogwards school of detroit
 
         // edit 2:14a.m. I think something is seriously wrong with this projects
@@ -92,6 +91,7 @@ const { title } = Astro.props;
                 window.location.href = "/Dashboard/"
             }
             console.log("sup")
+            console.log("Fortnite")
             return res.json()
         }).then(data =>{
             //document.getElementById("User-class").innerText = data.class
@@ -138,6 +138,22 @@ const { title } = Astro.props;
     .dropdown-content a:hover {
         background-color: #f1f1f1;
     }
+    body.light-mode {
+        background-color: white;
+        color: black;
+      }
+
+      /* Dark mode styles */
+      body.dark-mode {
+        filter: invert(100%);
+        color: rgb(0, 0, 0);
+        --top-nav-bg-color:rgb(255, 255, 255);
+        --nav-bg-color:rgb(255, 255, 255);
+        --nav-txt-color:rgb(0, 0, 0);
+      }
+      body.dark-mode img{
+        filter: invert(100%);
+      }
 
 </style>
 <script lang="js">
@@ -150,6 +166,34 @@ const { title } = Astro.props;
             dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
         });
     });
+
+    // DO NOT TOUCH!!!!
+    function toggleDarkMode() {
+            const body = document.body;
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'true');
+            }
+        }
+
+        function initDarkMode() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        initDarkMode();
+
+        document.getElementById('darkModeLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleDarkMode();
+        });
     </script>
     
 </html>

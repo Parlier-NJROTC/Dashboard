@@ -4,6 +4,7 @@ interface Props {
     link?: string,
 }
 
+
 const { title ,link = title} = Astro.props
 
 
@@ -57,7 +58,7 @@ const { title ,link = title} = Astro.props
         font-family: 'Sanchez';
         
 
-        color: white;
+        color: var(--nav-txt-color);
     }
     span a:hover{
         border-radius: 2px;
