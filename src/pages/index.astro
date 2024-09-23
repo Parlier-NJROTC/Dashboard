@@ -28,9 +28,11 @@ import Box from '../components/Pages/Login.astro';
         </form>
     </span>
 </Layout>
-
 <!-- screw this im setting the default language to js -->
 <script lang="js">
+//import { login } from "../duck-tape/login";
+
+    //login()
     /**
      * @type {HTMLFormElement}
      */
@@ -49,7 +51,7 @@ import Box from '../components/Pages/Login.astro';
         console.log("Parsed Data" + JSON.stringify(jsonObject))
 
         //Send request with data
-        const Response = await fetch("http://localhost:8080/api/alpha/v1/users/login",{
+        const Response = await fetch("http://localhost:8080/api/alpha/v1/auth/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -60,8 +62,10 @@ import Box from '../components/Pages/Login.astro';
          * @type {{success:Boolean,message:String}}
          */
         const Data = await Response.json()
+        console.log(Data)
 
         if(Data.success){
+            localStorage.setItem("Token",Data.token)
             document.getElementById("hiddenRedirectionBecauseAstroOnlyDoesThisNow").click()
         }else{
             document.getElementById("Status").innerText = `Error ${Response.status}: ${Data.message}`
