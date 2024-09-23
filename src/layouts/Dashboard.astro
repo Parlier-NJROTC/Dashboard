@@ -94,27 +94,23 @@ const { title } = Astro.props;
             console.log("sup")
             return res.json()
         }).then(data =>{
-            document.getElementById("User-class").innerText = data.class
-            document.getElementById("User-rank").innerText = data.rank
-            document.getElementById("User-primaryLastName").innerText = data.primaryLastName
-
-
-            /**
-             * this confirms its cursed
+            //document.getElementById("User-class").innerText = data.class
+            //document.getElementById("User-rank").innerText = data.rank
+            //document.getElementById("User-primaryLastName").innerText = data.primaryLastName
             for(let i in data){
                 console.log(i+":"+data[i])
                 console.log("User-"+i == "User-class") // true at last
 
                 //this changes the text
-                document.getElementById("User-class").innerText = data[i]
+                //document.getElementById("User-class").innerText = data[i]
 
-                this does not wtf
-                if(document.getElementById("User"+i)){
+                //this does not wtf
+                if(document.getElementById("User-"+i)){
                     console.log("Updating: User-"+i)
                     document.getElementById("User-"+i).innerText = data[i]
                 }
             }
-             */
+            
         })
     </script>
 </body>
