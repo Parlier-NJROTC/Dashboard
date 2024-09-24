@@ -88,7 +88,8 @@ const { title } = Astro.props;
         }).then((res)=>{
             if(res.status != 200){
                 console.log("an error occured, returning to login")
-                window.location.href = "/Dashboard/"
+                // disable for development
+                //window.location.href = "/Dashboard/"
             }
             console.log("sup")
             console.log("Fortnite")

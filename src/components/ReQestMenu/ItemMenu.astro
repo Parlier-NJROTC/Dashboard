@@ -1,35 +1,26 @@
-<span>
-    <div class="menu-container">
-        <div id="Ribbon-Listing">
-            <div class="menu-item" data-index="NS1 outstanding cadet"> <!-- BTW data-index is the Name that Shows to the User -->
-                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
-                    alt="Image 1">
-                <div class="overlay-text">Box 1</div>
-            </div>
-            <div class="menu-item" data-index="Community Service Ribbon">
-                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/community_service_ribbon.png"
-                    alt="Image 2">
-                <div class="overlay-text">Box 2</div>
-            </div>
-            <div class="menu-item" data-index="3">
-                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/recruiting_ribbon.png"
-                    alt="Image 3">
-                <div class="overlay-text">Box 3</div>
-            </div>
-            <div class="menu-item" data-index="4">
-                <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/participation_ribbon.png"
-                    alt="Image 4">
-                <div class="overlay-text">Box 4</div>
-            </div>
-        </div>
-        <div class="menu-container">
-            <div id="StarListing">
-                <div class="menu-item" data-index="Naval Science I Outstanding Cadet Ribbon"> <!-- BTW data-index is the Name that Shows to the User -->
-                    <img src=""
-                        alt="Image 5">
-                    <div class="overlay-text">Box 5</div>
-                </div>
+<!-----
 
+structure, I wont question
+
+<div id="Ribbon-Listing">
+        <div class="menu-item" data-index="NS1 outstanding cadet"> !-- BTW data-index is the Name that Shows to the User --
+        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Ribbon/naval_science_i_outstanding_cadet_ribbon.png"
+        alt="Image 1">
+    <div class="overlay-text">Box 1</div>
+</div>
+
+
+
+--- -->
+
+
+
+<span>
+    <div id="ribbon-listings" class="menu-container">
+
+    </div>
+    <div class="menu-container">
+        <div id="StarListing">
             <div class="BottomBox">
                 <button style="text-align: center;font-size: 15px;" id="Button">X</button>
                 <div class="carousel-controls">
@@ -49,8 +40,41 @@
                 <button id="clearSelectionBtn">Clear Selection</button>
             </div>
         </div>
-
+    </div>
 </span>
+
+<script>
+    console.log("no error? I guess typescript now works in astro")
+    let x:number = 5
+    console.log(x)
+
+    import ribbons from "./ribbons.json"
+
+    for(let i in ribbons){
+        let box = document.createElement("div")
+        box.innerText = i
+        box.className = "a-ribbon-listing" // werid name so that no one will use
+        document.getElementById("ribbon-listings")?.appendChild(box)
+    }
+</script>
+
+<style is:inline>
+    .a-ribbon-listing{
+        background-color: lightblue;
+        width:200px;
+        height: 200px;
+        display:flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+
+        margin:10px;
+        border: 1px solid black;
+    }
+</style>
+
+<!-- DO NOT ADD IS:INLINE TO STYLE TAG, is cursed as heccc -->
+
 <style>
     .BottomBox a {
         color: black;
@@ -268,7 +292,9 @@
 
         box-shadow: 10px 20px 20px black;
     }
-</style>
+</>
+
+<!--
 <script is:inline lang="js">
     document.addEventListener('DOMContentLoaded', function () {
     const prevBtn = document.getElementById('prevBtn');
@@ -369,4 +395,5 @@
         carouselContainer.classList.remove('active-perspective');
     });
 
-</script>
+<script/>
+-->
