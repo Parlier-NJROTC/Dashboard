@@ -71,6 +71,9 @@ $('.image-upload-wrap').on('drop', function(event) {
 
 </script>
 <style>
+  :root{
+    --img-invert:0%;
+}
   .file-upload {
   background-color: #ffffff;
   width: 600px;
@@ -106,7 +109,7 @@ $('.image-upload-wrap').on('drop', function(event) {
 }
 
 .file-upload-content {
-top: 0px;
+  top: 0px;
   position: absolute;
   display: none;
   text-align: center;
@@ -157,6 +160,8 @@ top: 0px;
     max-width: 200px;
     margin-top: 45px;
     padding: 20px;
+
+    filter: invert(var(--img-invert));
   }
   
   .remove-image {
