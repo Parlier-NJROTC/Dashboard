@@ -1,6 +1,5 @@
 ---
 import Link from "../components/menu/Link.astro";
-import Setting from '../components/menu/Setting.astro';
 import Fvfer from '../components/SmalCompents/Line.astro';
 import "./Dashboard.css";
 
@@ -43,7 +42,7 @@ const { title } = Astro.props;
             <div class="dropdown-content" style="display: none;">
                 <a href="/Dashboard/NewPassword">New Password</a>
                 <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
-                <a id="Logout">Logout</a>
+                <a id="Logout" onclick="location.reload();window.localStorage.clear();">Logout</a>
             </div>
         </div>
     </header>
@@ -70,14 +69,14 @@ const { title } = Astro.props;
         console.log("proof script is running")
 
         // so if you add "await" to stop execution until it is complete, normally
-        ///////////////////////////////// now the script won't run anyways if you add it
+        // now the script won't run anyways if you add it
         // wizard type sheit, i got my phd im shenanigans from hogwards school of detroit
 
         // edit 2:14a.m. I think something is seriously wrong with this projects
 
         if(localStorage.getItem("Token") == "" || localStorage.getItem("Token") == null){
             console.log("not logged in, returing to to login")
-            window.location.href = "/dashboard"
+            window.location.href = "/Dashboard/"
         }
         fetch("http://localhost:8080/api/alpha/v1/home/info",{
             method:"GET",
@@ -112,6 +111,7 @@ const { title } = Astro.props;
             }
             
         })
+
     </script>
 </body>
 <style>
@@ -125,7 +125,6 @@ const { title } = Astro.props;
         background-color: #f9f9f9;
         min-width: 400px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
     }
 
     .dropdown-content a {
@@ -141,6 +140,7 @@ const { title } = Astro.props;
     body.light-mode {
         background-color: white;
         color: black;
+        --img-invert:0%;
       }
 
       /* Dark mode styles */
@@ -148,8 +148,10 @@ const { title } = Astro.props;
         filter: invert(100%);
         color: rgb(0, 0, 0);
         --top-nav-bg-color:rgb(255, 255, 255);
-        --nav-bg-color:rgb(255, 255, 255);
+        --nav-bg-color:#f0f0f0;
         --nav-txt-color:rgb(0, 0, 0);
+        --img-invert:100%;
+        --dropdown-textcolor:#bead91;
       }
       body.dark-mode img{
         filter: invert(100%);

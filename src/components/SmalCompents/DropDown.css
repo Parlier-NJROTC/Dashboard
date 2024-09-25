@@ -1,3 +1,6 @@
+:root{
+  --dropdown-textcolor: #41526E;
+}
 #Housing {
   position: relative;
   display: flex;
@@ -20,7 +23,7 @@
 
 .dropbtn1 {
   background-color: #ffffff;
-  color: #41526E !important;
+  color: var(--dropdown-textcolor) !important;
   padding: 16px;
   width: 350px; /* Corrected width to use pixels */
   font-size: 16px;
@@ -35,7 +38,7 @@
 
 .Arrowbox {
   background-color: #ffffff;
-  color: #41526E !important;
+  color: var(--dropdown-textcolor) !important;
   padding: 16px;
   font-size: 16px;
   border: none;
