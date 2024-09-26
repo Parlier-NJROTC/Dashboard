@@ -3,7 +3,7 @@
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
   <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/.remove-image" />
     <div class="drag-text">
       <h3>Drag and drop a file or select add Image</h3>
     </div>
@@ -142,6 +142,8 @@ $('.image-upload-wrap').on('drop', function(event) {
   .image-title-wrap {
     padding: 0 15px 15px 15px;
     color: #222;
+
+    
   }
   
   .drag-text {
@@ -176,6 +178,7 @@ $('.image-upload-wrap').on('drop', function(event) {
     border-radius: 5px;
     padding: 10px;
     width: 95%;
+    height: 80px;
 
     color: #495057;
     font-size: 16px;
@@ -184,7 +187,31 @@ $('.image-upload-wrap').on('drop', function(event) {
     text-transform: uppercase;
     font-weight: 700;
 
+    overflow: hidden;
+    overflow-y: scroll;
+    text-overflow: ellipsis;
+    direction: rtl;
+
+
     margin-bottom: 20px;
+  }
+  .remove-image {
+    scrollbar-width: none;
+    scrollbar-color: #ffffff #ffffff;
+  }
+
+  .remove-image::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .remove-image::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  .remove-image::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 0px;
+    border: 0px none #ffffff;
   }
   
   .remove-image:hover {
