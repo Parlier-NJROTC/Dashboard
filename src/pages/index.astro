@@ -39,9 +39,10 @@ import { API_URL } from 'astro:env/client';
 </script>
 <!-- screw this im setting the default language to js -->
 <script lang="js" define:vars={{API_URL}}>
-//import { login } from "../duck-tape/login";
-console.log(API_URL)
     //login()
+
+import { API_URL } from "astro:env/client";
+
     /**
      * @type {HTMLFormElement}
      */
@@ -60,7 +61,7 @@ console.log(API_URL)
         console.log("Parsed Data" + JSON.stringify(jsonObject))
 
         //Send request with data
-        const Response = await fetch("http://localhost:8080/api/alpha/v1/auth/login",{
+        const Response = await fetch(API_URL+"auth/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
