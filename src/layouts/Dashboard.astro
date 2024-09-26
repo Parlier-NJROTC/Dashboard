@@ -9,6 +9,9 @@ interface Props {
 
 const { title } = Astro.props;
 
+import { API_URL } from 'astro:env/client';
+
+
 ---
 
 
@@ -64,7 +67,7 @@ const { title } = Astro.props;
     <script lang="js">
         console.log("mannn4")
     </script>
-    <script lang="js" is:inline defer>
+    <script lang="js" is:inline defer define:vars={{API_URL}}>
 
         console.log("proof script is running")
 
@@ -78,7 +81,7 @@ const { title } = Astro.props;
             console.log("not logged in, returing to to login")
             window.location.href = "/Dashboard/"
         }
-        fetch("http://localhost:8080/api/alpha/v1/home/info",{
+        fetch(API_URL+"home/info",{
             method:"GET",
             headers:{
                 'Authorization': `Bearer ${localStorage.getItem("Token")}`,
@@ -87,6 +90,7 @@ const { title } = Astro.props;
         }).then((res)=>{
             if(res.status != 200){
                 console.log("an error occured, returning to login")
+                // turn off in development when needed
                 window.location.href = "/Dashboard/"
             }
             console.log("sup")

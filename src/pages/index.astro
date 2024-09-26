@@ -1,10 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Box from '../components/Pages/Login.astro';
+
+import { API_URL } from 'astro:env/client';
+
 ---
 
 <Layout title="Login">
-    <div id="Status"><!-- Uncomment for place holder: Error 404: Lorem Ipsum --></div>
+    <div id="Status"><!-- Uncomment for place holder: Error 404: Lorem Ipsum --> aa</div>
     <a id="hiddenRedirectionBecauseAstroOnlyDoesThisNow" href="/Dashboard/Home" style="display: none;">this is supposed to be hidden</a>
     <span>
         <div id="Login" class="sanchez-regular">
@@ -32,11 +34,13 @@ import Box from '../components/Pages/Login.astro';
         </form>
     </span>
 </Layout>
+<script>
+    
+</script>
 <!-- screw this im setting the default language to js -->
-<script lang="js">
-//import { login } from "../duck-tape/login";
+<script lang="js" define:vars={{API_URL}}>
 
-    //login()
+    console.log("work pls")
     /**
      * @type {HTMLFormElement}
      */
@@ -55,7 +59,7 @@ import Box from '../components/Pages/Login.astro';
         console.log("Parsed Data" + JSON.stringify(jsonObject))
 
         //Send request with data
-        const Response = await fetch("http://localhost:8080/api/alpha/v1/auth/login",{
+        const Response = await fetch(API_URL+"auth/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -82,7 +86,7 @@ import Box from '../components/Pages/Login.astro';
         var x = document.getElementById("password");
         var showIcon = document.querySelector('.hide-icon');
         var hideIcon = document.querySelector('.show-icon');
-        
+
         if (x.type === "password") {
             x.type = "text";
             showIcon.style.display = 'block';
