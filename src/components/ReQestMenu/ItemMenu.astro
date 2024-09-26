@@ -16,30 +16,13 @@ structure, I wont question
 
 
 <span>
-    <div id="ribbon-listings" class="menu-container">
+    <div id="ribbon-listings">
 
     </div>
-    <div class="menu-container">
-        <div id="StarListing">
-            <div class="BottomBox">
-                <button style="text-align: center;font-size: 15px;" id="Button">X</button>
-                <div class="carousel-controls">
-                    <button id="prevBtn">&lt;</button>
-                    <div class="carousel-container">
-                        <a href="#RibbonListing">
-                            <div class="carousel-item active">Ribbons</div>
-                        </a>
-                        <a href="#StarListing">
-                            <div class="carousel-item">Stars</div>
-                        </a>
-                        <div class="carousel-item">Item 3</div>
-                    </div>
-                    <button id="nextBtn">&gt;</button>
-                </div>
-                <p id="selectionCount">Items: 0 / 15</p>
-                <button id="clearSelectionBtn">Clear Selection</button>
-            </div>
-        </div>
+    <div id="taskbar" class="BottomBox">
+        <button id="Button" class="saul-signature-style" style="width:44px;" >X</button>
+        <p id="selectionCount" class="saul-signature-style">Items: 0 / 28</p>
+        <button id="clearSelectionBtn" class="saul-signature-style">Clear Selection</button>
     </div>
 </span>
 
@@ -50,8 +33,28 @@ structure, I wont question
 
     import ribbons from "./ribbons.json"
 
+    let ribbons_Selected = 0
+    let ribbons_count = 0
+
     for(let i in ribbons){
+        ribbons_count++
+
+        let chosen = false // ts/js is werid, this variable is only accessible to those in the loop
+
         let box = document.createElement("div")
+        box.onclick = ()=>{
+            // watch and learn
+            chosen = !chosen
+            console.log(chosen)
+            if(chosen){
+                ribbons_Selected++
+                box.style.backgroundColor = "rgb(27, 165, 211)"
+            }else{
+                ribbons_Selected--
+                box.style.backgroundColor = "lightblue"
+            }
+            document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}`
+        }
         box.className = "a-ribbon-listing" // werid name so that no one will use
             let ribbon = document.createElement("img")
             ribbon.src = "/Dashboard/ribbons/"+i+".png"
@@ -62,176 +65,82 @@ structure, I wont question
             box.appendChild(ribbon_name)
         document.getElementById("ribbon-listings")?.appendChild(box)
     }
+    document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}` // for good measure
 </script>
 
 <style is:inline>
     .a-ribbon-listing{
         background-color: lightblue;
-        width:200px;
-        height: 200px;
+        width:120px;
+        height: 150px;
         display:flex;
         flex-direction: column;
         text-align: center;
         justify-content: center;
         align-items: center;
 
+        transition: 100ms;
+
         margin:10px;
         border: 1px solid black;
+    }
+    #ribbon-listings{
+        overflow-y: scroll;
+        grid: "Ribbons";
+
+        background-color: tan;
+        border-radius: 10px;
+
+        display: flex;
+
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        justify-content: space-around;
     }
 </style>
 
 <!-- DO NOT ADD IS:INLINE TO STYLE TAG, is cursed as heccc -->
 
 <style>
-    .BottomBox a {
-        color: black;
-        text-decoration: none;
-    }
+    #taskbar{
+        grid:"Taskbar";
 
-    .menu-container {
         display: flex;
-        left: 0;
-        width: calc(100% - 5px);
-        flex-wrap: wrap;
+
+        flex-direction: row;
+
+        align-items: center;
         justify-content: space-between;
-        overflow-y: scroll;
 
-
-    }
-
-    #StarListing {
-        height: 95px;
-        display: flex;
-        left: 0;
-        width: calc(100% - 5px);
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    #Ribbon-Listing {
-        display: flex;
-        left: 0;
-        width: calc(100% - 5px);
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-
-    .menu-item {
-        flex-basis: calc(15% - 20px);
-        margin: 0px;
-        padding: 15px;
-        background-color: lightblue;
-        text-align: center;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border: 5px solid lightblue;
-        transition: cubic-bezier(0.25, 0.1, 0, 1.4) 250ms;
-
-        margin-bottom: 20px;
-    }
-
-    .selected {
-        background-color: #007bff;
-        border: 5px double #fff;
-        transition: ease 250ms;
-    }
-
-    .BottomBox {
-        position: absolute;
-        border-top: solid 5px black;
-        background-color: wheat;
-        width: 100%;
-        height: 15%;
-        left: 0px;
-        bottom: 0px;
-        z-index: 20;
-    }
-
-    .carousel-controls {
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        width: 15%;
-        top: 10px;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    #prevBtn,
-    #nextBtn {
-        background: none;
-        border: none;
-        font-size: 20px;
-
-        transition: cubic-bezier(0, 2.39, 1, 1) 250ms;
-    }
-
-    #prevBtn:active {
-        transform: translate(-20px, 0%);
-        transform: scale(2, 1);
-    }
-
-    #nextBtn:active {
-        transform: translate(20px, 0%);
-        transform: scale(2, 1);
-
-    }
-
-    .carousel-container {
-        position: relative;
-        top: 20%;
-        flex-grow: 1;
-        height: 50px;
-        margin: 0 10px;
-
-        background: white;
-        border-radius: 5px;
-        padding: -15px;
         border: 5px double black;
-        transition: ease-in-out 250ms;
-        background-clip: padding-box;
+        border-radius: 10px;
+
+        margin:5px;
+        margin-block:15px;
+
+        padding-inline: 10%;
     }
 
-    .carousel-container:hover {
-        border-radius: 0px;
-        background: whitesmoke;
-        perspective: 50em;
-        background-clip: padding-box;
-    }
+    .saul-signature-style{
+        font-family: "Sanchez";
 
-    .carousel-container.active-perspective {
-        perspective: 1000px;
-        transform-style: preserve-3d;
-    }
-
-    .carousel-item {
-        flex-shrink: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-    }
-
-    .active {
         display: flex;
-    }
 
-    #selectionCount {
-        position: absolute;
-        width: 100px;
-        height: 20px;
-        right: 20%;
-        top: 20%;
-
-        background-color: white;
-        border: solid 3px black;
-        justify-content: center;
         align-items: center;
-        transition: ease 250ms;
-    }
+        justify-content: center;
 
+        padding-inline:15px;
+
+        margin:10px;
+
+        height: 44px;
+        min-height: 44px;
+        max-height: 44px;
+
+        border: 3px solid black;
+        background-color: white;
+    }
     @keyframes fadeOut {
         0% {
             opacity: 1;
@@ -241,50 +150,6 @@ structure, I wont question
             opacity: 0;
         }
     }
-    #Button {
-        position: absolute;
-        background-color: rgb(255, 255, 255);
-        top: 30%;
-        left: 2%;
-        justify-content: center;
-        align-items: center;
-        color: black;
-
-        border: solid 3px black;
-        padding: 5px 2%;
-        height: 40px;
-        transition: ease 250ms;
-
-    }
-
-    #Button:hover {
-        background-color: whitesmoke;
-    }
-
-    #Button:active {
-        background-color: navajowhite;
-    }
-
-    #clearSelectionBtn {
-        position: absolute;
-        background-color: rgb(255, 255, 255);
-        top: 30%;
-        left: calc(93% - 55px);
-
-        border: solid 3px black;
-        padding: 10px;
-        transition: ease 250ms;
-    }
-
-    #clearSelectionBtn:hover {
-        background-color: whitesmoke;
-    }
-
-    #clearSelectionBtn:active {
-        background-color: navajowhite;
-        animation: fadeOut 0.5s ease-in-out forwards;
-    }
-
     span {
         position: absolute;
         top: 0px;
@@ -297,110 +162,13 @@ structure, I wont question
         width: 80%;
         height: 80%;
 
+        display: grid;
+        grid-template-areas:
+        "Ribbons"
+        "Taskbar"
+        ;
+        grid-template-rows: auto 100px;
+
         box-shadow: 10px 20px 20px black;
     }
-</>
-
-<!--
-<script is:inline lang="js">
-    document.addEventListener('DOMContentLoaded', function () {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const carouselContainer = document.querySelector('.carousel-container');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const menuItems = document.querySelectorAll('.menu-item');
-    const clearSelectionBtn = document.getElementById('clearSelectionBtn');
-    const selectionCount = document.getElementById('selectionCount');
-    let selectedCount = 0;
-
-    // Load previously selected items from Local Storage
-    const savedSelections = JSON.parse(localStorage.getItem('selectedItems')) || [];
-    savedSelections.forEach(itemID => {
-        document.querySelector(`[data-index="${itemID}"]`).classList.add('selected');
-    });
-
-    menuItems.forEach(item => {
-        item.addEventListener('click', function () {
-            if (selectedCount >= 3) {
-                alert('You cannot Request more than 15 Items.');
-                return;
-            }
-            this.classList.toggle('selected');
-            updateSelectionCount();
-
-            // Save the current state to Local Storage
-            const selectedItems = Array.from(document.querySelectorAll('.selected')).map(item => item.dataset.index);
-            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-        });
-    });
-
-    clearSelectionBtn.addEventListener('click', function () {
-        menuItems.forEach(menuItem => menuItem.classList.remove('selected'));
-        selectedCount = 0;
-        updateSelectionCount();
-        // Clear the saved selections in Local Storage
-        localStorage.removeItem('selectedItems');
-    });
-
-    function updateSelectionCount() {
-        let count = 0;
-        menuItems.forEach(item => {
-            if (item.classList.contains('selected')) {
-                count++;
-            }
-        });
-        selectionCount.textContent = `Items: ${count} / 15`;
-        selectedCount = count;
-    }
-
-    document.getElementById('Button').addEventListener('click', function () {
-        const astroComponent = document.querySelector('.astro-component');
-        astroComponent.style.display = astroComponent.style.display = 'none';
-    });
-
-    let currentIndex = 0;
-
-    function updateCarousel(index) {
-        carouselItems.forEach((item, i) => {
-            item.style.display = i === index ? 'flex' : 'none';
-        });
-    }
-        // Carousel THing
-        
-        // scoll
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-            updateCarousel(currentIndex);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            updateCarousel(currentIndex);
-        });
-
-        document.addEventListener('keydown', (event) => {
-    if (event.key === ',') {
-        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-        updateCarousel(currentIndex);
-    }
-});
-        document.addEventListener('keydown', (event) => {
-    if (event.key === '.') {
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        updateCarousel(currentIndex);
-    }
-});
-
-        updateCarousel(currentIndex);
-    });
-
-   // cool Active thjing
-    carouselContainer.addEventListener('mousedown', function () {
-        this.classList.add('active-perspective');
-    });
-    document.addEventListener('mouseup', function () {
-        carouselContainer.classList.remove('active-perspective');
-    });
-
-<script/>
--->
+</style>
