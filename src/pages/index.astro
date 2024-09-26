@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Box from '../components/Pages/Login.astro';
+
+import { API_URL } from 'astro:env/client';
+
 ---
 
 <Layout title="Login">
@@ -32,10 +34,13 @@ import Box from '../components/Pages/Login.astro';
         </form>
     </span>
 </Layout>
+<script>
+    
+</script>
 <!-- screw this im setting the default language to js -->
-<script lang="js">
+<script lang="js" define:vars={{API_URL}}>
 //import { login } from "../duck-tape/login";
-
+console.log(API_URL)
     //login()
     /**
      * @type {HTMLFormElement}
