@@ -27,6 +27,7 @@ structure, I wont question
 </span>
 
 <script>
+    
     console.log("no error? I guess typescript now works in astro")
     let x:number = 5
     console.log(x)
@@ -45,16 +46,17 @@ structure, I wont question
         box.onclick = ()=>{
             // watch and learn
             chosen = !chosen
-            console.log(chosen)
             if(chosen){
                 ribbons_Selected++
-                box.style.backgroundColor = "rgb(27, 165, 211)"
+                box.style.backgroundColor = "#007bff"
+                box.style.border= "5px double #fff"
             }else{
                 ribbons_Selected--
                 box.style.backgroundColor = "lightblue"
             }
-            document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}`
+            document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / 15`
         }
+        //Ribbons 
         box.className = "a-ribbon-listing" // werid name so that no one will use
             let ribbon = document.createElement("img")
             ribbon.src = "/Dashboard/ribbons/"+i+".png"
@@ -66,6 +68,14 @@ structure, I wont question
         document.getElementById("ribbon-listings")?.appendChild(box)
     }
     document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}` // for good measure
+    
+</script>
+<!-- My Classic Scripts -->
+<script lang="js">
+    document.getElementById('Button').addEventListener('click', function () {
+        const astroComponent = document.querySelector('.astro-component'); 
+        astroComponent.style.display = astroComponent.style.display = 'none';
+    })
 </script>
 
 <style is:inline>
@@ -113,8 +123,7 @@ structure, I wont question
         align-items: center;
         justify-content: space-between;
 
-        border: 5px double black;
-        border-radius: 10px;
+        border-top: 5px double black;
 
         margin:5px;
         margin-block:15px;
