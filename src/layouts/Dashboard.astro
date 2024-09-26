@@ -90,8 +90,8 @@ import { API_URL } from 'astro:env/client';
         }).then((res)=>{
             if(res.status != 200){
                 console.log("an error occured, returning to login")
-                // stopping redirects for development
-                //window.location.href = "/Dashboard/"
+                // turn off in development when needed
+                window.location.href = "/Dashboard/"
             }
             console.log("sup")
             console.log("Fortnite")
