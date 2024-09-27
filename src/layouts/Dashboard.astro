@@ -83,6 +83,8 @@ import { API_URL } from 'astro:env/client';
         if(localStorage.getItem("Token") == "" || localStorage.getItem("Token") == null){
             console.log("not logged in, returing to to login")
             window.location.href = "/Dashboard/"
+            window.localStorage.removeItem('Token');
+            window.localStorage.removeItem('selectedItems');
         }
         fetch(API_URL+"home/info",{
             method:"GET",
@@ -95,6 +97,8 @@ import { API_URL } from 'astro:env/client';
                 console.log("an error occured, returning to login")
                 // turn off in development when needed
                 window.location.href = "/Dashboard/"
+                window.localStorage.removeItem('Token');
+                window.localStorage.removeItem('selectedItems');
             }
             console.log("sup")
             console.log("Fortnite")

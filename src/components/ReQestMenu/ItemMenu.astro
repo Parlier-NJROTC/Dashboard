@@ -35,7 +35,7 @@ structure, I wont question
             <button id="nextBtn">&gt;</button>
         </div>
         <p id="selectionCount" class="saul-signature-style">Items: 0 / 28</p>
-        <button id="clearSelectionBtn" class="saul-signature-style" onclick="window.localStorage.removeItem('selectedItems');">Clear Selection</button>
+        <button id="clearSelectionBtn" class="saul-signature-style">Clear Selection</button>
     </div>
 </span>
 
@@ -107,7 +107,6 @@ function updateSelectionCount() {
     }
 }
 
-// Main execution
 document.addEventListener('DOMContentLoaded', () => {
     for (let i in ribbons) {
         ribbons_count++;
@@ -119,6 +118,23 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSavedSelections();
     updateSelectionCount();
 });
+document.getElementById('clearSelectionBtn').addEventListener('click', clearSelections);
+
+function clearSelections() {
+    const selectedItems = [];
+    const ribbonBoxes = document.querySelectorAll('.a-ribbon-listing');
+
+    ribbonBoxes.forEach(box => {
+        box.style.backgroundColor = 'lightblue';
+        box.dataset.selected = 'false';
+    });
+
+    ribbons_Selected = 0;
+    updateSelectionCount();
+
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+}
+
 </script>
 
 <script lang="js">
