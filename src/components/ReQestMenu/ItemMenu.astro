@@ -21,51 +21,155 @@ structure, I wont question
     </div>
     <div id="taskbar" class="BottomBox">
         <button id="Button" class="saul-signature-style" style="width:44px;" >X</button>
+        <div class="carousel-controls">
+            <button id="prevBtn">&lt;</button>
+                    <div class="carousel-container">
+                        <a href="#RibbonListing">
+                            <div class="carousel-item active">Ribbons</div>
+                        </a>
+                        <a href="#StarListing">
+                            <div class="carousel-item">Stars</div>
+                        </a>
+                        <div class="carousel-item">Item 3</div>
+                    </div>
+            <button id="nextBtn">&gt;</button>
+        </div>
         <p id="selectionCount" class="saul-signature-style">Items: 0 / 28</p>
-        <button id="clearSelectionBtn" class="saul-signature-style">Clear Selection</button>
+        <button id="clearSelectionBtn" class="saul-signature-style" onclick="window.localStorage.removeItem('selectedItems');">Clear Selection</button>
     </div>
 </span>
 
 <script>
-    console.log("no error? I guess typescript now works in astro")
-    let x:number = 5
-    console.log(x)
+console.log("no error? I guess typescript now works in astro")
+let x:number = 5
+console.log(x)
 
-    import ribbons from "./ribbons.json"
+import ribbons from "./ribbons.json"
 
-    let ribbons_Selected = 0
-    let ribbons_count = 0
+let ribbons_Selected = 0
+let ribbons_count = 0
+const MAX_SELECTIONS = 15;
 
-    for(let i in ribbons){
-        ribbons_count++
-
-        let chosen = false // ts/js is werid, this variable is only accessible to those in the loop
-
-        let box = document.createElement("div")
-        box.onclick = ()=>{
-            // watch and learn
-            chosen = !chosen
-            console.log(chosen)
-            if(chosen){
-                ribbons_Selected++
-                box.style.backgroundColor = "rgb(27, 165, 211)"
-            }else{
-                ribbons_Selected--
-                box.style.backgroundColor = "lightblue"
+function loadSavedSelections() {
+    try {
+        const savedSelections = JSON.parse(localStorage.getItem('selectedItems') || '[]');
+        savedSelections.forEach((ribbonName: string) => {
+            const ribbonBox = document.querySelector(`[data-name="${ribbonName}"]`) as HTMLElement | null;
+            if (ribbonBox && ribbonBox instanceof HTMLElement) {
+                ribbonBox.style.backgroundColor = "rgb(27, 165, 211)";
+                ribbons_Selected++;
             }
-            document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}`
-        }
-        box.className = "a-ribbon-listing" // werid name so that no one will use
-            let ribbon = document.createElement("img")
-            ribbon.src = "/Dashboard/ribbons/"+i+".png"
-            box.appendChild(ribbon)
-
-            let ribbon_name = document.createElement("span")
-            ribbon_name.innerText = i
-            box.appendChild(ribbon_name)
-        document.getElementById("ribbon-listings")?.appendChild(box)
+        });
+    } catch (error) {
+        console.error("Error loading saved selections:", error);
     }
-    document.getElementById("selectionCount")!.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}` // for good measure
+}
+
+function createRibbonBox(i: string): HTMLElement {
+    const box = document.createElement("div");
+    box.dataset.name = i;
+    box.className = "a-ribbon-listing";
+
+    const ribbon = document.createElement("img");
+    ribbon.src = `/Dashboard/ribbons/${i}.png`;
+    box.appendChild(ribbon);
+
+    const ribbon_name = document.createElement("span");
+    ribbon_name.innerText = i;
+    box.appendChild(ribbon_name);
+
+    box.onclick = () => {
+        const isSelected = box.style.backgroundColor === "rgb(27, 165, 211)";
+
+        if (!isSelected && ribbons_Selected >= MAX_SELECTIONS) {
+            alert('You cannot select more than 15 Items.');
+            return;
+        }
+
+        box.style.backgroundColor = isSelected ? "lightblue" : "rgb(27, 165, 211)";
+        ribbons_Selected += isSelected ? -1 : 1;
+
+        const selectedItems = Array.from(document.querySelectorAll<HTMLElement>('.a-ribbon-listing'))
+        .filter(item => item.style.backgroundColor === "rgb(27, 165, 211)")
+        .map(item => item.dataset.name);
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+
+    updateSelectionCount();
+};
+
+    return box;
+}
+
+function updateSelectionCount() {
+    const selectionCountElement = document.getElementById("selectionCount");
+    if (selectionCountElement) {
+        selectionCountElement.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}`;
+    }
+}
+
+// Main execution
+document.addEventListener('DOMContentLoaded', () => {
+    for (let i in ribbons) {
+        ribbons_count++;
+
+        const box = createRibbonBox(i);
+        document.getElementById("ribbon-listings")?.appendChild(box);
+    }
+
+    loadSavedSelections();
+    updateSelectionCount();
+});
+</script>
+
+<script lang="js">
+document.getElementById('Button').addEventListener('click', function () {
+    const astroComponent = document.querySelector('.astro-component');
+    astroComponent.style.display = astroComponent.style.display = 'none';
+});
+let currentIndex = 0;
+
+    function updateCarousel(index) {
+        carouselItems.forEach((item, i) => {
+            item.style.display = i === index ? 'flex' : 'none';
+        });
+    }
+        // Carousel THing
+        
+        // scoll
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            updateCarousel(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            updateCarousel(currentIndex);
+        });
+
+        document.addEventListener('keydown', (event) => {
+    if (event.key === ',') {
+        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        updateCarousel(currentIndex);
+    }
+});
+        document.addEventListener('keydown', (event) => {
+    if (event.key === '.') {
+        currentIndex = (currentIndex + 1) % carouselItems.length;
+        updateCarousel(currentIndex);
+    }
+});
+
+        updateCarousel(currentIndex);
+    ;
+
+   // cool Active thjing
+    carouselContainer.addEventListener('mousedown', function () {
+        this.classList.add('active-perspective');
+    });
+    document.addEventListener('mouseup', function () {
+        carouselContainer.classList.remove('active-perspective');
+    });
+
 </script>
 
 <style is:inline>
@@ -98,6 +202,9 @@ structure, I wont question
 
         justify-content: space-around;
     }
+    img{
+        filter: invert(var(--img-invert));
+    }
 </style>
 
 <!-- DO NOT ADD IS:INLINE TO STYLE TAG, is cursed as heccc -->
@@ -113,8 +220,7 @@ structure, I wont question
         align-items: center;
         justify-content: space-between;
 
-        border: 5px double black;
-        border-radius: 10px;
+        border-top: 5px double black;
 
         margin:5px;
         margin-block:15px;
@@ -170,5 +276,71 @@ structure, I wont question
         grid-template-rows: auto 100px;
 
         box-shadow: 10px 20px 20px black;
+    }
+    .carousel-controls {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        width: 15%;
+        top: 10px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #prevBtn,
+    #nextBtn {
+        background: none;
+        border: none;
+        font-size: 20px;
+
+        transition: cubic-bezier(0, 2.39, 1, 1) 250ms;
+    }
+
+    #prevBtn:active {
+        transform: translate(-20px, 0%);
+        transform: scale(2, 1);
+    }
+
+    #nextBtn:active {
+        transform: translate(20px, 0%);
+        transform: scale(2, 1);
+
+    }
+
+    .carousel-container {
+        position: relative;
+        top: 20%;
+        flex-grow: 1;
+        height: 50px;
+        margin: 0 10px;
+
+        background: white;
+        border-radius: 5px;
+        padding: -15px;
+        border: 5px double black;
+        transition: ease-in-out 250ms;
+        background-clip: padding-box;
+    }
+
+    .carousel-container:hover {
+        border-radius: 0px;
+        background: whitesmoke;
+        perspective: 50em;
+        background-clip: padding-box;
+    }
+
+    .carousel-container.active-perspective {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+
+    .carousel-item {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
     }
 </style>

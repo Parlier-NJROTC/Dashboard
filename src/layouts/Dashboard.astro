@@ -45,8 +45,11 @@ import { API_URL } from 'astro:env/client';
             <div class="dropdown-content" style="display: none;">
                 <a href="/Dashboard/NewPassword">New Password</a>
                 <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
-                <a id="Logout" onclick="location.reload();window.localStorage.clear();">Logout</a>
+                <a id="Logout" onclick="location.reload();window.localStorage.removeItem('Token');window.localStorage.removeItem('selectedItems');">Logout</a>
             </div>
+        </div>
+        <div id="tooltip-container">
+            <span id="tooltip">↑ Click That ↑</span>
         </div>
     </header>
     <script lang="js">
@@ -147,6 +150,38 @@ import { API_URL } from 'astro:env/client';
         --img-invert:0%;
       }
 
+        #tooltip-container {
+            position: absolute;
+            top: 17%;
+            transform: translateY(-50%);
+            left: 43.5vw;
+            cursor: pointer;
+        }
+
+        #tooltip {
+            background-color: #333;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        #tooltip {
+            opacity: 1;
+            width: 90px;
+            text-align: center;
+        }
+        #User-Info{
+            border: 2px solid black;
+        }
+
       /* Dark mode styles */
       body.dark-mode {
         filter: invert(100%);
@@ -199,6 +234,24 @@ import { API_URL } from 'astro:env/client';
             e.preventDefault();
             toggleDarkMode();
         });
+        document.addEventListener('DOMContentLoaded', function() {
+    const dashboardHeader = document.getElementById('Dashboard-Header');
+    const Userinfo = document.getElementById('User-Info');
+    const tooltipContainer = document.getElementById('tooltip-container');
+    
+    if (!localStorage.getItem('dashboardClicked')) {
+        
+        dashboardHeader.addEventListener('click', function() {
+            localStorage.setItem('dashboardClicked', 'true');
+            tooltipContainer.style.display = 'none';
+            Userinfo.style.border = 'none';
+        });
+    } else {
+        tooltipContainer.style.display = 'none';
+        Userinfo.style.border = 'none';
+    }
+});
+
     </script>
     
 </html>
