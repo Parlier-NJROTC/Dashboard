@@ -20,8 +20,8 @@ structure, I wont question
 
     </div>
     <div id="taskbar" class="BottomBox">
-        <button id="Button" class="saul-signature-style" style="width:44px;" >X</button>
-        <div class="carousel-controls">
+        <button id="Button" class="saul-signature-style" style="width:44px;margin-top: 30px;" >X</button>
+        <div class="carousel-controls" style="margin-top: 30px;">
             <button id="prevBtn">&lt;</button>
                     <div class="carousel-container">
                         <a href="#RibbonListing">
@@ -34,8 +34,8 @@ structure, I wont question
                     </div>
             <button id="nextBtn">&gt;</button>
         </div>
-        <p id="selectionCount" class="saul-signature-style">Items: 0 / 28</p>
-        <button id="clearSelectionBtn" class="saul-signature-style">Clear Selection</button>
+        <p id="selectionCount" class="saul-signature-style"style="margin-top: 30px;">Items: 0 / 28</p>
+        <button id="clearSelectionBtn" class="saul-signature-style"style="margin-top: 30px;">Clear Selection</button>
     </div>
 </span>
 
@@ -63,6 +63,23 @@ function loadSavedSelections() {
     } catch (error) {
         console.error("Error loading saved selections:", error);
     }
+}
+
+document.getElementById('clearSelectionBtn')!.addEventListener('click', clearSelections);
+
+function clearSelections() {
+    const selectedItems: never[] = []; // THis is not a Error
+    const ribbonBoxes = document.querySelectorAll('.a-ribbon-listing');
+
+    ribbonBoxes.forEach(box => {
+        box.style.backgroundColor = 'lightblue'; // THis is not a Error
+        box.dataset.selected = 'false'; // THis is not a Error
+    });
+
+    ribbons_Selected = 0;
+    updateSelectionCount();
+
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems)); // THis is not a Error
 }
 
 function createRibbonBox(i: string): HTMLElement {
@@ -100,10 +117,11 @@ function createRibbonBox(i: string): HTMLElement {
     return box;
 }
 
+
 function updateSelectionCount() {
     const selectionCountElement = document.getElementById("selectionCount");
     if (selectionCountElement) {
-        selectionCountElement.innerText = `Items: ${ribbons_Selected} / ${ribbons_count}`;
+        selectionCountElement.innerText = `Items: ${ribbons_Selected} / 15`;
     }
 }
 
@@ -118,26 +136,15 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSavedSelections();
     updateSelectionCount();
 });
-document.getElementById('clearSelectionBtn').addEventListener('click', clearSelections);
-
-function clearSelections() {
-    const selectedItems = [];
-    const ribbonBoxes = document.querySelectorAll('.a-ribbon-listing');
-
-    ribbonBoxes.forEach(box => {
-        box.style.backgroundColor = 'lightblue';
-        box.dataset.selected = 'false';
-    });
-
-    ribbons_Selected = 0;
-    updateSelectionCount();
-
-    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-}
-
 </script>
 
 <script lang="js">
+    document.addEventListener('DOMContentLoaded', function () {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+
 document.getElementById('Button').addEventListener('click', function () {
     const astroComponent = document.querySelector('.astro-component');
     astroComponent.style.display = astroComponent.style.display = 'none';
@@ -185,14 +192,21 @@ let currentIndex = 0;
     document.addEventListener('mouseup', function () {
         carouselContainer.classList.remove('active-perspective');
     });
-
+    });
 </script>
 
 <style is:inline>
     .a-ribbon-listing{
+        padding: 15px;
         background-color: lightblue;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 5px solid lightblue;
+        transition: cubic-bezier(0.25, 0.1, 0, 1.4) 250ms;
+
         width:120px;
-        height: 150px;
+
         display:flex;
         flex-direction: column;
         text-align: center;
@@ -202,7 +216,8 @@ let currentIndex = 0;
         transition: 100ms;
 
         margin:10px;
-        border: 1px solid black;
+    }
+    .a-ribbon-listing span{
     }
     #ribbon-listings{
         overflow-y: scroll;
@@ -240,9 +255,8 @@ let currentIndex = 0;
 
         margin:5px;
         margin-block:15px;
-
-        padding-inline: 10%;
     }
+    
 
     .saul-signature-style{
         font-family: "Sanchez";
@@ -298,7 +312,6 @@ let currentIndex = 0;
         justify-content: center;
         align-items: stretch;
         width: 15%;
-        top: 10px;
         margin: 0 auto;
         position: relative;
     }
@@ -325,7 +338,6 @@ let currentIndex = 0;
 
     .carousel-container {
         position: relative;
-        top: 20%;
         flex-grow: 1;
         height: 50px;
         margin: 0 10px;
@@ -337,17 +349,15 @@ let currentIndex = 0;
         transition: ease-in-out 250ms;
         background-clip: padding-box;
     }
+    a{
+        color: #000;
+        text-decoration: none;
+    }
 
     .carousel-container:hover {
         border-radius: 0px;
         background: whitesmoke;
-        perspective: 50em;
         background-clip: padding-box;
-    }
-
-    .carousel-container.active-perspective {
-        perspective: 1000px;
-        transform-style: preserve-3d;
     }
 
     .carousel-item {

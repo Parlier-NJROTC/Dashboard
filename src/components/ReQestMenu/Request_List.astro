@@ -70,7 +70,7 @@
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         var dateTimeString = now.toISOString().slice(0, 16);
-        var fullString = dateTimeString + " - ";
+        var fullString = dateTimeString.replace('T',' ') + " - ";
         document.getElementById('dateTimeInput').value = fullString;
     }
     
@@ -79,7 +79,7 @@
     document.getElementById('dateTimeInput').addEventListener('focus', function() {
         clearInterval(intervalId);
     });
-
+//Joes DO NOT TOUCH THIS IS THE THING THAT GETS THE LOCAL STORAGE AND DISPLAYS IT
     function updateMessages() {
         const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
         const messageContainers = document.querySelectorAll('.message-container');
@@ -87,8 +87,7 @@
         
         selectedItems.forEach((item, index) => {
             const messageElement = document.createElement('div');
-            // Use innerHTML to allow HTML tags to be rendered
-            messageElement.innerHTML = '<hr/>' + `${item} ` + '<hr/>';
+            messageElement.innerHTML = '<hr/>' + `${item} ` + '<hr/>'; 
             messageContainers[index].appendChild(messageElement);
         });
     }
