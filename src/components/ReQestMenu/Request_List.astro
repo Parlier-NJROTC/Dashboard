@@ -1,6 +1,6 @@
 
 <span>
-    <input type="text" readonly="readonly" id="dateTimeInput"><input placeholder="Your Full Name" type="text" id="text">
+    <input type="text" readonly="readonly" id="dateTimeInput"><input placeholder="Your Full Name" type="text" id="text" onclick="print();" >
     
     <div class="box"></div>
     <div class="message-container"></div>
@@ -51,6 +51,11 @@
         border: double 8px black;
         color: black;
         overflow-x: hidden;
+    }
+    @media print {
+        span{
+			display:block;
+		}
     }
     input[type="text"] {
         height: 60px;

@@ -3,15 +3,20 @@ import Dashboard from "../../layouts/Dashboard.astro";
 import Home from '../../components/Pages/Ribbon.astro';
 ---
 
-<Dashboard title='Request'>
-<Home></Home>
-</Dashboard>
+<Dashboard title='Request' class="noPrint">
+<Home class="noPrint"></Home>
+</Dashboard >
 
 
 </body>
 <style>
     Home{
         z-index: 999;
+    }
+    @media print {
+    .noPrint{
+        display:none;
+    }
     }
 </style>
 </html>
