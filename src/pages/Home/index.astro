@@ -6,7 +6,8 @@ import '../../components/SmalCompents/DropDown.css'
 // Dropdown Content
 
 import Clock from "../../components/SmalCompents/Clock.astro";
-import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
+import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro";
+import Event from "../../components/SmalCompents/event.astro";
 ---
 
 
@@ -20,7 +21,7 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
         <div class="Arrow">V</div>
       </button>
       <div id="clockDropdown" class="dropdown-content1">
-        <!-- <Clock /> -->
+        <Clock />
       </div>
     </div>
   </div>
@@ -32,7 +33,7 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
         <div class="Arrow">V</div>
       </button>
       <div id="whiteboardDropdown" class="dropdown-content1">
-        <!--<WhiteBoard /> -->
+        <WhiteBoard>
       </div>
     </div>
   </div>
@@ -44,7 +45,8 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
         <div class="Arrow">V</div>
       </button>
       <div id="p1Dropdown" class="dropdown-content1">
-        <!--<WhiteBoard /> -->
+        <Event type="!" date="5 OCT 24" time="07:00" name="Selma Swat Meet"/>
+        
       </div>
     </div>
   </div>
@@ -56,7 +58,6 @@ import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro"
         <div class="Arrow">V</div>
       </button>
       <div id="p2Dropdown" class="dropdown-content1">
-        <!--<WhiteBoard /> -->
       </div>
     </div>
   </div>

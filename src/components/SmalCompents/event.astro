@@ -1,0 +1,167 @@
+---
+interface Props {
+    name: string,
+    date: string,
+    type: string,
+    time: string,
+}
+
+
+const { name ,date, type ,time} = Astro.props
+---
+<body>
+    <div class="boxo" data-alt={type}> <!-- FT = Field Trip. ? = Optional Event. ! = Important Event. -->
+      <div class="img-preview"></div>
+      <div class="TextHolder">
+        <div class="EventName">{name}</div>
+        <div class="rightline"></div>
+        <div class="EventDate">{date} {time}</div>
+      </div>
+    </div>
+    <div class="tooltip">
+      <div class="tooltiptext"></div>
+    </div>
+
+    <style>
+      .EventName {
+        z-index: 90;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        position: relative;
+        left: -10px;
+        width: 180px;
+        transform: translateX(-40%);
+      }
+      .EventDate {
+        z-index: 90;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        position: relative;
+        left: -10px;
+        width: 180px;
+        transform: translateX(-40%);
+      }
+
+      .boxo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 386px;
+        height: 290px;
+        background-color: rgb(255, 255, 255);
+        border: black 5px solid;
+        flex-direction: column;
+
+        overflow: hidden;
+      }
+      .rightline {
+        display: flex;
+        width: 210px;
+        height: 0px;
+        position: relative;
+        z-index: 55;
+        border-bottom: black 10px double;
+        margin: auto;
+        left: 30%;
+        transform: translateX(-80%);
+      }
+      .rightangle{
+        width: 0;
+        height: 0;
+        align-self: self-start;
+        
+        
+        border-right: 387px solid transparent;
+
+        border-bottom: 227px solid green;
+        
+      }
+      .img-preview {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 220px;
+        transform: scale(0.5);
+        background-repeat: no-repeat;
+      }
+      .img-preview:hover {
+        animation: Lighten 1s infinite;
+      }
+
+      .tooltip {
+      position: absolute;
+      left: 220px;
+      display: none;
+      padding: 5px;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+      z-index: 99999999999999;
+      transform: translateY(-500%);
+    }
+  
+    .event-item {
+      position: relative;
+    }
+      @keyframes Lighten {
+        25% {
+          filter: brightness(100%);
+        }
+        50% {
+          filter: brightness(130%);
+        }
+        75% {
+          filter: brightness(130%);
+        }
+        100% {
+          filter: brightness(100%);
+        }
+      }
+    </style>
+    <script lang="js">
+  document.addEventListener("DOMContentLoaded", function () {
+    var boxo = document.querySelector(".boxo");
+    var imgPreview = document.querySelector(".img-preview");
+    var tooltip = document.querySelector(".tooltip");
+    var tooltipText = document.querySelector(".tooltiptext");
+
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+      function updateTooltipText(dataAltValue) {
+          switch (dataAltValue) {
+            case "!":
+              imgPreview.style.backgroundImage =
+                "url('https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/pixil-frame-0.png')";
+              tooltipText.textContent = "This is a Important Event";
+              break;
+            case "?":
+              imgPreview.style.backgroundImage =
+                "url('https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/pixil-frame-0%20(3).png')";
+              tooltipText.textContent = "This a Optional Event";
+              break;
+            case "FT":
+              imgPreview.style.backgroundImage =
+                "url('https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/Other/pixil-frame-0%20(4).png')";
+              tooltipText.textContent = "This is a Field Trip";
+              break;
+            default:
+              tooltip.style.display = "none";
+              break;
+          }
+        }
+
+    updateTooltipText(boxo.getAttribute("data-alt"));
+
+    imgPreview.addEventListener("mouseover", function () {
+      tooltip.style.display = "block";
+    });
+
+    imgPreview.addEventListener("mouseout", function () {
+      tooltip.style.display = "none";
+    });
+  });
+
+    </script>
+  </body>
+</html>
