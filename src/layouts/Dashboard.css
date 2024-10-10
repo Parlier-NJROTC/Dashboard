@@ -1,17 +1,28 @@
 :root{
     --nav-width:300px;
     --top-nav-bg-color:navy;
-    --nav-bg-color:rgb(0, 0, 164);
+    --nav-bg-color:#0000a4;
     --nav-txt-color:white;
 
     --header-height:105px;
     --header-bg-color:whitesmoke;
+    --header-txt-color:black;
+    --header-h2-color:#808080;
 
     --main-content-color:wheat;
 }
 
 
+svg{
+    position: absolute;
+    bottom: 0%;
+    filter: invert(var(--img-invert));
 
+    transition:250ms ease;
+}
+svg:active{
+    transform: rotate(90deg);
+}
 body{
     display: grid;
     grid-template-areas:
@@ -101,10 +112,12 @@ img {
 #Dashboard-Header h1{
     font-weight: normal;
     margin: 0;
+
+    color: var(--header-txt-color);
 }
 #Dashboard-Header h3{
     font-weight: normal;
-    color:grey;
+    color:var(--header-h2-color);
     margin: 0;
 }
 
