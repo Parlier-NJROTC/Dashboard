@@ -1,73 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customizable Colors</title>
-    <style>
-        #tffdxewd{
-            width: 100%;
-            height: 50px;
-            background-color: white;
-            border: 1px solid black;
-            border-radius: 5px;
-        }
-        #tffdxewd:active{
-            background-color: rgb(115, 115, 115);
-            color: #fff;
-            border: 1px solid rgb(255, 255, 255);
-        }
-        .custom-span {
-            position: relative;
-            width: 80%;
-            height: 80%;
-        }
-        #auto-update-span {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--top-nav-bg-color);
-            color: var(--nav-txt-color);
-        }
-        table {
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        input[type="color"] {
-            width: 50px;
-        }
-        button {
-            margin-top: 10px;
-        }
-        .reset-button {
-            font-size: 10px;
-            padding: 2px 5px;
-            margin-left: 5px;
-                    
-            background-color: whitesmoke;
-            border: solid 1px black;
-            border-radius: 5px;
-            color: #000;
-        }
-        .reset-button:active{
-            background-color: black;
-            border: solid 1px whitesmoke;
-            border-radius: 5px;
-            color: #fff;
-        }
-    </style>
 </head>
 <body>
 <h3 style="text-align: center;">Advanced Settings</h3>
@@ -131,8 +61,74 @@
     <button class="reset-button" onclick="localStorage.removeItem('Token')">Clear Token</button>
     <button class="reset-button" onclick="localStorage.removeItem('darkMode')">Clear darkMode</button>
     <button class="reset-button" onclick="localStorage.removeItem('selectedItems')">Clear selectedItems</button>
+    <button class="reset-button" onclick="localStorage.removeItem('savedDebtAmount')">Clear savedDebtAmount</button>
     <button class="reset-button" onclick="localStorage.setItem()">Clear All Local Storage</button>
 </div>
+
+<style>
+    #tffdxewd{
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    #tffdxewd:active{
+        background-color: rgb(115, 115, 115);
+        color: #fff;
+        border: 1px solid rgb(255, 255, 255);
+    }
+    .custom-span {
+        position: relative;
+        width: 80%;
+        height: 80%;
+    }
+    #auto-update-span {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--top-nav-bg-color);
+        color: var(--nav-txt-color);
+    }
+    table {
+        margin-bottom: 20px;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    input[type="color"] {
+        width: 50px;
+    }
+    button {
+        margin-top: 10px;
+    }
+    .reset-button {
+        font-size: 10px;
+        padding: 2px 5px;
+        margin-left: 5px;
+                
+        background-color: whitesmoke;
+        border: solid 1px black;
+        border-radius: 5px;
+        color: #000;
+    }
+    .reset-button:active{
+        background-color: black;
+        border: solid 1px whitesmoke;
+        border-radius: 5px;
+        color: #fff;
+    }
+</style>
 
 <script lang="js">
     function updateSpan() {
@@ -180,7 +176,6 @@
         input.value = defaultColor;
     });}
 
-    // Initialize colors
     window.onload = function() {
         updateSpan();
     };

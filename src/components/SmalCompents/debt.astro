@@ -1,0 +1,121 @@
+</head>
+<body>
+    <div id="Debtde">
+        <h1 style="display: flex;align-items: baseline;gap: 15px;">
+            <div style="font-family: HandWriting;font-size: 25px;">USA </div> Debt Counter
+        </h1>
+        <div id="debt-counter">$0.00</div>
+
+        <div class="WitDsH">Why is the Debt so High?</div>
+        <div class="tooltip3">
+            <div class="tooltiptext3"></div>
+        </div>
+    </div>
+    <style>
+        #debt-counter {
+            font-size: 25px;
+            margin-top: 50px;
+        }
+        #Debtde {
+            justify-content: center;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .WitDsH{
+            font-size: 15px;
+            font-weight: bolder;
+
+            margin-top: 110px;
+
+            color: navy;
+
+            transition: ease-in-out 250ms;
+        }
+        .WitDsH:hover{
+            font-size: 15px;
+            font-weight: bolder;
+
+            color: navy;
+            text-decoration: underline;
+        }
+        .tooltip3 {
+            position: absolute;
+
+            display: none;
+            padding: 5px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            z-index: 99999999999999;
+        }
+    </style>
+    <script lang="js">
+    document.addEventListener("DOMContentLoaded", function () {
+    
+    var tooltip = document.querySelector(".tooltip3");
+    var tooltipText = document.querySelector(".tooltiptext3");
+    var Debtmore = document.querySelector(".WitDsH",".tooltip3",".tooltiptext3");
+        // I am Scared to Touch the API code
+    
+    Debtmore.addEventListener("mouseover", function () {
+        tooltipText.textContent = "One of the primary reasons for the United States' substantial debt is continuous overspending. In 2023 alone, the country spent $381 billion more than it earned. Despite common belief, the majority of this money is not allocated to defense. In reality, Social Security alone consumed $1.34 trillion in a year, as reported by FiscalData.Treasury.gov, a government website. The high debt can be attributed to factors such as the COVID-19 pandemic, tax cuts, stimulus programs, increased government spending, and reduced tax revenue due to widespread unemployment.";
+        tooltip.style.display = "block";
+        });
+
+    Debtmore.addEventListener("mouseout", function () {
+        tooltip.style.display = "none";
+        });
+    });
+
+    </script>
+    <script src="https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny"></script>
+    <script lang="js">
+        // TIP: Don't Touch the JS unless you want to spend all day trying to fix it
+        const debtCounter = document.getElementById('debt-counter');
+
+        // Cuz the API is Dog Water and Dies Every 2 Seconds
+        function getSavedDebtAmount() {
+            return localStorage.getItem('savedDebtAmount') || null;
+        }
+
+        // Cuz the API is Dog Water and Dies Every 2 Seconds
+        function saveDebtAmount(amount) {
+            localStorage.setItem('savedDebtAmount', amount);
+        }
+
+        async function fetchDebt() {
+            try {
+                const URL = fetch('https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?filter=record_date:gte:2024-10-10&format=json');
+                const response = await URL;
+                const data = await response.json();
+
+                if (data.data && data.data[0] && data.data[0].tot_pub_debt_out_amt) {
+                    const debtAmount = Number(data.data[0].tot_pub_debt_out_amt).toLocaleString();
+                    debtCounter.textContent = `$${debtAmount}`;
+                    //console.log({debtAmount});
+                    
+                    
+                    // Cuz the API is Dog Water and Dies Every 2 Seconds
+                    saveDebtAmount(debtAmount);
+                } else {
+                    //console.error('Error fetching debt data'); // Error go BRUURE
+                }
+            } catch (error) {
+                //console.error('API request failed:', error); // Error go BRUURE
+
+                // TIP: Don't Touch the JS unless you want to spend all day trying to fix it
+                const savedAmount = getSavedDebtAmount();
+                if (savedAmount !== null) {
+                    debtCounter.textContent = `$${savedAmount}`;
+                } else {
+                    debtCounter.textContent = 'Failed to Fetch Debt And Debt Not Saved';
+                }
+            }
+        }
+
+        setInterval(fetchDebt, 500);
+    </script>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import '../../components/SmalCompents/DropDown.css'
 import Clock from "../../components/SmalCompents/Clock.astro";
 import WhiteBoard from "../../components/SmalCompents/Whitebroad.astro";
 import Event from "../../components/SmalCompents/event.astro";
+import Debt from "../../components/SmalCompents/debt.astro"
 ---
 
 
@@ -40,7 +41,7 @@ import Event from "../../components/SmalCompents/event.astro";
 
   <div id="Housing">
     <div class="dropdown">
-      <button onclick="toggleDropdown('p1')" class="dropbtn1">PlaceHolder</button>
+      <button onclick="toggleDropdown('p1')" class="dropbtn1">Event</button>
       <button onclick="toggleDropdown('p1')" class="Arrowbox">
         <div class="Arrow">V</div>
       </button>
@@ -53,11 +54,12 @@ import Event from "../../components/SmalCompents/event.astro";
 
   <div id="Housing">
     <div class="dropdown">
-      <button onclick="toggleDropdown('p2')" class="dropbtn1">Placeholder</button>
+      <button onclick="toggleDropdown('p2')" class="dropbtn1">USA Debt</button>
       <button onclick="toggleDropdown('p2')" class="Arrowbox">
         <div class="Arrow">V</div>
       </button>
       <div id="p2Dropdown" class="dropdown-content1">
+        <Debt /> <!-- Debt Counter More like Error Counter -->
       </div>
     </div>
   </div>
@@ -69,7 +71,7 @@ import Event from "../../components/SmalCompents/event.astro";
         <div class="Arrow">V</div>
       </button>
       <div id="p3Dropdown" class="dropdown-content1">
-        <!--<WhiteBoard /> -->
+        
       </div>
     </div>
   </div>
