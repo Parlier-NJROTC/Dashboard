@@ -11,8 +11,13 @@ import Layout from '../../layouts/Layout.astro';
         <input placeholder="Password" type="password">
         <input placeholder="Password" type="password">
         <div>NS<input type="number" id="Year3321" min="1" max="4"></div>
-        
+        <input type="submit">
     </div>
+    <a href="/Dashboard/">
+    <div id="Backtologin" >
+        <div class="CCCw">Login</div>
+    </div>
+    </a>
 </Layout>
 
 <style>
@@ -170,7 +175,26 @@ import Layout from '../../layouts/Layout.astro';
         background-color: transparent !important;
     }
     #Backtologin{
-        
+        position:absolute;
+        width: 0;
+        height: 0;
+        border-right: 150px solid transparent;
+
+        border-bottom: 200px solid #0000808f;
+
+
+        left:0px;
+        bottom:0px;
+    }
+    .CCCw{
+        color:white;
+
+        margin-top:50px;
+        margin-left:30px;
+
+        font-family:Sanchez;
+        font-size:35px;
+        transform: rotate(90deg);
     }
 </style>
 <script lang="js">

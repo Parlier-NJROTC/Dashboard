@@ -33,6 +33,11 @@ import { API_URL } from 'astro:env/client';
             </div>
         </form>
     </span>
+    <a href="/Dashboard/SignUp">
+        <div id="Backtologin" >
+            <div class="CCCw">Signup</div>
+        </div>
+    </a>
 </Layout>
 <script>
     
@@ -267,6 +272,28 @@ import { API_URL } from 'astro:env/client';
             opacity: 0.7;
             transform: scale(0.9);
         }
+        #Backtologin{
+        position:absolute;
+        width: 0;
+        height: 0;
+        border-right: 150px solid transparent;
+
+        border-bottom: 200px solid #0000808f;
+
+
+        left:0px;
+        bottom:0px;
+    }
+    .CCCw{
+        color:white;
+
+        margin-top:45px;
+        margin-left:30px;
+
+        font-family:Sanchez;
+        font-size:35px;
+        transform: rotate(90deg);
+    }
     </style>
 
 <!--
