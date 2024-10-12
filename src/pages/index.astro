@@ -273,25 +273,31 @@ import { API_URL } from 'astro:env/client';
             transform: scale(0.9);
         }
         #Backtologin{
-        position:absolute;
-        width: 0;
-        height: 0;
-        border-right: 150px solid transparent;
+            position:absolute;
+            width: 20px;
+            height: 200px;
 
-        border-bottom: 200px solid #0000808f;
+            background:navy;
+            display: flex;
 
 
-        left:0px;
-        bottom:0px;
-    }
+            left:0px;
+            bottom:20px;
+
+
+            align-items: center;
+            justify-content: center;
+
+            transition:250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
+        }
+        #Backtologin:hover{
+            width: 50px;
+        }
     .CCCw{
         color:white;
 
-        margin-top:45px;
-        margin-left:30px;
-
         font-family:Sanchez;
-        font-size:35px;
+        font-size:20px;
         transform: rotate(90deg);
     }
     </style>
