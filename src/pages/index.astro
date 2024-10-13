@@ -35,7 +35,7 @@ import { API_URL } from 'astro:env/client';
     </span>
     <a href="/Dashboard/SignUp">
         <div id="Backtologin" >
-            <div class="CCCw">Signup</div>
+            <div class="CCCw">Login</div>
         </div>
     </a>
 </Layout>
@@ -277,29 +277,43 @@ import { API_URL } from 'astro:env/client';
             width: 20px;
             height: 200px;
 
-            background:navy;
             display: flex;
+            border-top-right-radius:10px;
+            border-bottom-right-radius:10px;
+
+            box-shadow: 0 0 1rem #0003;
+            background-color: #ffffff26;
+            backdrop-filter: blur(5px);
 
 
             left:0px;
             bottom:20px;
+            --font-size-CCw: 20px;
 
 
             align-items: center;
             justify-content: center;
 
+            border: #ffffff26 solid 5px;
+            background-clip: border-box;
+            border-left:none;
+
             transition:250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
         }
-        #Backtologin:hover{
-            width: 50px;
-        }
-    .CCCw{
-        color:white;
-
-        font-family:Sanchez;
-        font-size:20px;
+        .CCCw {
+        color: white;
+        font-family: Sanchez;
+        font-size: var(--font-size-CCw);
         transform: rotate(90deg);
+        transition: font-size 250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
     }
+
+    #Backtologin:hover {
+        width: 50px;
+        --font-size-CCw: 35px;
+        transition: width 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71), --font-size-CCw 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71),; 
+    }
+    
     </style>
 
 <!--
