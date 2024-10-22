@@ -4,6 +4,9 @@ import { defineConfig, envField } from 'astro/config';
 export default defineConfig({
     site:"https://parlier-njrotc.github.io/Dashboard/",
     base:"Dashboard/",
+    compilerOptions: {
+        allowSyntheticDefaultImports: true,
+    },
     experimental:{
         env:{
             schema:{
