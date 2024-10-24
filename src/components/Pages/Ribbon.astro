@@ -1,7 +1,10 @@
 ---
 import List from '../ReQestMenu/Request_List.astro';
 import Menu from '../ReQestMenu/ItemMenu.astro';
-import File from '../ReQestMenu/file_upload.astro'
+import File from '../ReQestMenu/file_upload.astro';
+
+
+import { API_URL } from 'astro:env/client';
 ---
 
   <div class="astro-component">
@@ -12,10 +15,29 @@ import File from '../ReQestMenu/file_upload.astro'
       <div class="box">
         <File></File>
         <button id="Buttonn">Open Items Selector</button>
-        <button id="Submit">Sumite</button>
+        <button id="SubmitRibbons">Sumite</button>
         </div>
       </div>
     </div>
+
+  <!-- if it work no touchy until I says so -->
+  <script>
+    import { API_URL } from 'astro:env/client';
+    document.getElementById("SubmitRibbons").onclick = async () =>{
+      const Response = await fetch(API_URL+"home/request/",{
+            method:"POST",
+            headers:{
+              'Authorization':`Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+              requestedList:localStorage.getItem("selectedItems")
+              // look just dont name it ribbons for some dumb reason
+              //ribbons:["what"]//localStorage.getItem("selectedItems")
+            })
+      })
+    }
+  </script>
 
   <script lang="js">
 
@@ -73,7 +95,7 @@ import File from '../ReQestMenu/file_upload.astro'
 
       font-family: 'Sanchez';
     }
-    #Submit{
+    #SubmitRibbons{
       position: absolute;
       bottom: 40px;
 
