@@ -1,0 +1,75 @@
+---
+import Dashboard from '../../../layouts/PhoneDashboard.astro';
+
+import '../../../components/SmalCompents/DropDown2.css';
+
+// Dropdown Content
+
+import Clock from "../../../components/SmalCompents/Clock.astro";
+import WhiteBoard from "../../../components/SmalCompents/Whitebroad.astro";
+import Event from "../../../components/SmalCompents/event.astro";
+import Debt from "../../../components/SmalCompents/debt.astro"
+---
+
+
+<Dashboard title='Home'>
+
+</Dashboard>
+
+
+<style>
+body{
+    background-color: wheat;
+}
+#ContentTape{
+  display: flex;
+  justify-content: center; 
+  align-items: start; 
+  flex-wrap: wrap; 
+
+  flex-direction: column;
+}
+
+#Housing {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.dropdown-content1{
+  overflow: hidden;
+}
+</style>
+
+<script lang="js">
+  function toggleDropdown(dropdownId) {
+    const dropdownContent = document.getElementById(`${dropdownId}Dropdown`);
+    dropdownContent.classList.toggle("show");
+
+    const arrow = event.currentTarget.parentElement.querySelector('.Arrow');
+    if (arrow) { // Check if arrow exists
+      if (arrow.classList.contains('flipped')) {
+        arrow.classList.remove('flipped');
+        arrow.classList.add('unflipped');
+      } else {
+        arrow.classList.remove('unflipped');
+        arrow.classList.add('flipped');
+      }
+    }
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('.dropdown-content1') && !event.target.closest('.dropdown')) {
+      const dropdownContents = document.querySelectorAll(".dropdown-content1");
+      dropdownContents.forEach(content => {
+        if (content.classList.contains('show')) {
+          content.classList.remove('show');
+        }
+      });
+
+      const arrows = document.querySelectorAll('.Arrow.flipped');
+      arrows.forEach(arrow => {
+        arrow.classList.remove('flipped');
+        arrow.classList.add('unflipped');
+      });
+    }
+  };
+</script>

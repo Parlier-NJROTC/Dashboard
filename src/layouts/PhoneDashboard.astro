@@ -1,0 +1,253 @@
+---
+import Nav from "../layouts/Nav-Phone.astro";
+import Fvfer from '../components/SmalCompents/line2.astro';
+import Avdnesseting from '../components/SmalCompents/advindssetting.astro'
+import "./Dashboard2.css";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+import { API_URL } from 'astro:env/client';
+import NavPhone from "../layouts/Nav-Phone.astro";
+
+
+---
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>DashBoard | {title}</title>
+
+</head>
+<body>
+    <script lang="js">
+        console.log("mannn")
+    </script>
+    <div id="Dashboard-Title">
+        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg">
+
+    </div>
+    <header id="Dashboard-Header">
+        <div id="User-Info">
+            <h1> Cadet <span id="User-rank">Loading Rank...</span> <span id="User-primaryLastName"></span></h1>
+            <h3>NS<span id="User-class">0</span></h3>
+            <Fvfer></Fvfer>
+            <div class="dropdown-content" style="display: none;">
+                <a href="/Dashboard/NewPassword">New Password</a>
+                <a href="#DarkMode" id="darkModeLink">Dark Mode</a>
+                <a id="Logout" onclick="location.reload();window.localStorage.removeItem('Token');window.localStorage.removeItem('selectedItems');">Logout</a>
+            </div>
+        </div>
+        <div id="tooltip-container">
+            <span id="tooltip">↑ Click That ↑</span>
+        </div>
+    </header>
+    <script lang="js">
+        console.log("mannn2")
+    </script>
+    <nav id="Dashboard-Navigation">
+        
+    </nav>
+    <div class="Setimg">
+        <Avdnesseting/>
+    </div>
+    <script lang="js">
+        console.log("mannn3")
+    </script>
+    <main id="Dashboard-Content">
+        <slot></slot>
+    </main>
+    <div id="nav-honder">
+        <Nav></Nav>
+    </div>
+    <script lang="js">
+        console.log("mannn4")
+    </script>
+    <script lang="js">
+    document.getElementById('CKSV').addEventListener('click', function() {
+    const astroComponent = document.querySelector('.Setimg');
+    const o = document.querySelector('.astro-component');
+    if (astroComponent && astroComponent.style.display === 'none') {
+        astroComponent.style.display = 'block';
+        astroComponent.style.opacity = '1';
+        o.style.display = 'none';
+        o.style.opacity = '0';
+    } else {
+        astroComponent.style.display = 'none';
+        astroComponent.style.opacity = '0';
+    }
+});
+document.getElementById('Dashboard-Navigation').addEventListener('click', function() {});
+    </script>
+
+</body>
+<style>
+    #nav-honder{
+        position: absolute;
+        z-index: 50;
+        width: 100%;
+    }
+    .Setimg{
+        position: absolute;
+        left: 10%;
+        margin-top: 90px;
+
+        background: white;
+        z-index: 100;
+        width: 80%;
+        height: 80%;
+
+        border: double 3px black;
+        border-radius: 5px;
+
+        overflow-y: scroll;
+        display: none;
+    }
+    hr{
+        width: 10px;
+        margin-right: 156px;
+        margin-bottom: 0px;
+    }
+    .dropdown-content {
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 400px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    body.light-mode {
+        background-color: white;
+        color: black;
+        --img-invert:0%;
+      }
+
+        #tooltip-container {
+            position: absolute;
+            top: 17%;
+            transform: translateY(-50%);
+            left: 43.5vw;
+            cursor: pointer;
+        }
+
+        #tooltip {
+            background-color: #333;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        #tooltip {
+            opacity: 1;
+            width: 90px;
+            text-align: center;
+        }
+        #User-Info{
+            border: 2px solid black;
+        }
+
+      /* Dark mode styles */
+      body.dark-mode {
+        filter: invert(100%);
+        color: rgb(0, 0, 0);
+        --top-nav-bg-color:rgb(255, 255, 255);
+        --nav-bg-color:#f0f0f0;
+        --nav-txt-color:rgb(0, 0, 0);
+        --img-invert:100%;
+        --dropdown-textcolor:#bead91;
+        --nav-box-hover:gold;
+      }
+      body.dark-mode img{
+        filter: invert(100%);
+      }
+      
+
+</style>
+<script lang="js">
+    document.addEventListener('DOMContentLoaded', function() {
+        const userInfoDropdownToggle = document.getElementById('Dashboard-Header');
+        const dropdownContent = document.querySelector('.dropdown-content');
+    
+        userInfoDropdownToggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+
+    // DO NOT TOUCH!!!!
+    function toggleDarkMode() {
+            const body = document.body;
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'true');
+            }
+        }
+
+        function initDarkMode() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        initDarkMode();
+
+        document.getElementById('darkModeLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleDarkMode();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const dashboardHeader = document.getElementById('Dashboard-Header','tooltip-container');
+            const Userinfo = document.getElementById('User-Info');
+            const tooltipContainer = document.getElementById('tooltip-container');
+            
+            if (!localStorage.getItem('dashboardClicked')) {
+                
+                dashboardHeader.addEventListener('click', function() {
+                    localStorage.setItem('dashboardClicked', 'true');
+                    tooltipContainer.style.display = 'none';
+                    Userinfo.style.border = 'none';
+                });
+            } else {
+                tooltipContainer.style.display = 'none';
+                Userinfo.style.border = 'none';
+            }
+        });
+
+    </script>
+    
+</html>
