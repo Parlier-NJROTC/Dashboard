@@ -121,6 +121,8 @@ import { API_URL } from 'astro:env/client';
             padding-left: 15px;
             padding-right: 15px;
 
+            z-index: 100;
+
             background-color: navy;
             transition: ease-in 450ms;
 
@@ -168,10 +170,11 @@ import { API_URL } from 'astro:env/client';
             left: 50%;
             transform: translateX(-50%);
             background-color: whitesmoke;
-            z-index: 99;
+            z-index: 0;
             padding: 10px;
             color: rgb(0, 0, 0);
             width: calc(30% - 25px);
+            min-width: 300px;
             height: calc(80% - 25px);
             display: grid;
             justify-items: center;
@@ -182,6 +185,14 @@ import { API_URL } from 'astro:env/client';
             background-color: #ffffff26;
             backdrop-filter: blur(5px);
         }
+        @media (max-width:500px) {
+            span{
+                top:5vh;
+                height: 90vh;
+                width:90vw
+            }
+        }
+
         img{
             user-select: none;
 			-moz-user-select: none;
