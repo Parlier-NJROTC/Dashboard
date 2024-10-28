@@ -23,7 +23,7 @@ import { API_URL } from 'astro:env/client';
   <!-- if it work no touchy until I says so -->
   <script>
     import { API_URL } from 'astro:env/client';
-    document.getElementById("SubmitRibbons").onclick = async () =>{
+    document.getElementById("SubmitRibbons")!.onclick = async () =>{
       const Response = await fetch(API_URL+"home/request/",{
             method:"POST",
             headers:{
