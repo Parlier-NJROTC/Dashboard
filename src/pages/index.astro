@@ -247,13 +247,19 @@ import { API_URL } from 'astro:env/client';
 
             color: #000;
         }
-        input:-webkit-autofill ,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
-            background: none !important;
+        .input-group:-internal-autofill-selected,
+        .input-group:-webkit-autofill:hover, 
+        .input-group:-webkit-autofill:focus, 
+        .input-group:-webkit-autofill:active{
+            background: black !important;
+            border: double !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+
+            color: #000 !important;
         }
-        input:-moz-autofill {
+        .input-group input[type="password"]:-moz-autofill {
             background-image: none !important;
             background-color: transparent !important;
         }
@@ -317,6 +323,9 @@ import { API_URL } from 'astro:env/client';
         font-size: var(--font-size-CCw);
         transform: rotate(90deg);
         transition: font-size 250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
+    }
+    cursor{
+        color: #ff0000;
     }
 
     #Backtologin:hover {
