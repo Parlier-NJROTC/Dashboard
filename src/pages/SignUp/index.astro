@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Sign Up">
-    <div id="Status"></div>
+    <div id="Status">Only Numbers through 1-4</div>
     <a id="hiddenRedirectionBecauseAstroOnlyDoesThisNow" href="/Dashboard/Home" style="display: none;">this is supposed to be hidden</a>
     <span>
         <div id="SignUp" class="sanchez-regular">
@@ -15,7 +15,7 @@ import Layout from '../../layouts/Layout.astro';
             <div class="SignUp-form">
                 <div class="input-group">
                     <label for="username"></label>
-                    <input placeholder="Saul Sanchez" type="text" id="username" name="username" required aria-required="true" class="input-text-large">
+                    <input placeholder="Saul Sanchez" type="text" id="username" name="username" required aria-required="true" class="input-text-large" >
                 </div>
                 <label for="Email"></label>
                 <div class="input-group">
@@ -29,7 +29,8 @@ import Layout from '../../layouts/Layout.astro';
                         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/refs/heads/main/Other/Hidden.svg" alt="Hide Password" class="show-icon" style="width: 20px;height: 20px;cursor: pointer;">
                     </div>
                 </div>
-                <div class="input-group" style="padding-top: 50px;">
+                <div style="justify-self: center;">NS<input type="number" id="Year3321" min="1" max="4"></div>
+                <div class="input-group" style="padding-top: 25px;">
                     <button class="sanchez-regular">SignUp</button>
                 </div>
             </div>
@@ -156,7 +157,6 @@ import Layout from '../../layouts/Layout.astro';
         .SignUp-form {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 10px;
 
             min-width: 226.5px;
             min-height: 253.5;
@@ -165,7 +165,6 @@ import Layout from '../../layouts/Layout.astro';
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 0px;
         }
         .input-group input[type="text"],
         .input-group input[type="password"],
@@ -176,14 +175,16 @@ import Layout from '../../layouts/Layout.astro';
         }
         .input-group input[type="text"]::placeholder,
         .input-group input[type="password"]::placeholder,
-        .input-group input[type="email"]::placeholder {
+        .input-group input[type="email"]::placeholder,
+        input[type="number"]::placeholder {
         color: rgb(0, 0, 0);
         opacity: 1; 
         }
 
         .input-group input[type="text"]::-ms-input-placeholder,
         .input-group input[type="password"]::-ms-input-placeholder,
-        .input-group input[type="email"]::-ms-input-placeholder { 
+        .input-group input[type="email"]::-ms-input-placeholder,
+        input[type="number"]::-ms-input-placeholder { 
         color: rgb(0, 0, 0);
         background: none !important;
         }
@@ -192,7 +193,8 @@ import Layout from '../../layouts/Layout.astro';
         }
         .input-group input[type="text"],
         .input-group input[type="password"],
-        .input-group input[type="email"] {
+        .input-group input[type="email"],
+        input[type="number"] {
             background: none;
             border: double;
             border-top: none;
@@ -278,19 +280,63 @@ import Layout from '../../layouts/Layout.astro';
         --font-size-CCw: 35px;
         transition: width 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71), --font-size-CCw 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71),; 
     }
-    
-    </style>
+    input[type="number"]{
+        outline: none;
+        width: 11px;
+        
+        font-size: 17px;
+        font-family: "Sanchez", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-<!--
-<Layout title='SignUp'></Layout>
-<body>
-<Box></Box>
-<style>
-body {
-    background-image: url('https://images.unsplash.com/photo-1511307172940-38ec278f7ce2?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 </style>
-</body>
--->
+<script lang="js">
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputField = document.getElementById('Year3321');
+        const statusDiv = document.getElementById('Status');
+
+        inputField.addEventListener('keydown', (e) => {
+            // Prevent default behavior for certain keys
+            if ([8, 9, 13, 16, 17, 18, 20].includes(e.keyCode)) {
+                return;
+            }
+
+            // Allow only numbers between 1 and 4
+            if ((e.key >= 1 && e.key <= 4) || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                return;
+            }
+
+            e.preventDefault();
+        });
+
+        inputField.addEventListener('input', () => {
+            const value = parseInt(inputField.value);
+            if (isNaN(value) || value < 1 || value > 4) {
+                inputField.value = '';
+                showStatusMessage("Only Numbers through 1-4");
+            } else {
+                hideStatusMessage();
+            }
+        });
+    });
+
+    function showStatusMessage(message) {
+        document.getElementById('Status').textContent = message;
+        document.getElementById('Status').style.visibility = 'visible';
+    }
+
+    function hideStatusMessage() {
+        document.getElementById('Status').style.visibility = 'hidden';
+    }
+</script>
