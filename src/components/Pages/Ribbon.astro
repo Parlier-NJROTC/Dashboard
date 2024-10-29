@@ -31,7 +31,7 @@ import { API_URL } from 'astro:env/client';
               "Content-Type":"application/json"
             },
             body:JSON.stringify({
-              requestedList:localStorage.getItem("selectedItems")
+              ribbons:localStorage.getItem("selectedItems")
               // look just dont name it ribbons for some dumb reason
               //ribbons:["what"]//localStorage.getItem("selectedItems")
             })
