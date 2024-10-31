@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>‎</title>
+</head>
+<body>
+    <div id="Dashboard-Title">
+        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg">
+        <h1>NJROTC Dashboard</h1>
+    </div>
+    <div class="digits-container">
+        <span class="digit">4</span>
+        <span class="digit">0</span>
+        <span class="digit">4</span>
+    </div>
+    <br>
+    <h2>We Can't Find the Page you Were Looking For.</h2>
+    <h3>Well You Can <div onclick="history.back()"> Go Back </div> Or <a href="/Dashboard/" onclick="location.reload();window.localStorage.removeItem('Token');window.localStorage.removeItem('selectedItems');"> Go Login </a></h3>
+
+    <style>
+        svg{
+            position: absolute;
+            bottom: 0%;
+            filter: invert(var(--img-invert));
+
+            transition:250ms ease;
+        }
+        svg:active{
+            transform: rotate(90deg);
+        }
+        #Dashboard-Title{
+            grid-area: tile;
+
+            top: 3.4vw;
+            left: 50%;
+            translate: -50% -50%;
+            
+            width: 100%;
+
+            position: absolute;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            column-gap: 5px;
+            box-shadow: 0 10px 8px 5px #0000a4;
+
+            border-bottom: var(--header-border);
+            background: #0000a4;
+            color: white;
+            z-index: 1;
+        }
+        #Dashboard-Title img{
+            width: 80px;
+            height: 80px;
+        }
+        #Dashboard-Title h1{
+            font-size: 40px;
+            font-family: 'Gill Sans MT','Gill Sans', 'Trebuchet MS', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        .digits-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+
+            gap: 20px;
+
+            width: 100%;
+        }
+
+        .digit {
+            font-size: 200px;
+            font-weight: bold;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .flipped {
+            transform: rotateX(180deg);
+        }
+        h2{
+            position: absolute;
+            bottom: 130px;
+
+            left: 50%;
+            translate: -50% -50%;
+        }
+        h3{
+            position: absolute;
+            bottom: 80px;
+
+            display: flex;
+            gap: 5px;
+
+            left: 50%;
+            translate: -50% -50%;
+        }
+        h3 div{
+            color: navy;
+
+            cursor: pointer;
+        }
+        h3 a{
+            text-decoration: none;
+            color: navy;
+
+            cursor: pointer;
+        }
+    </style>
+
+    <script lang="js">
+        const digits = document.querySelectorAll('.digit');
+        let lastFlippedIndex = null;
+        const titles = ["‎", "404"];
+        let currentIndex = 0;
+        
+        let intervalId;
+
+        function flipRandomDigit() {
+            const availableDigits = Array.from(digits).filter(d => d !== lastFlippedIndex);
+            
+            if (availableDigits.length === 0) {
+                setTimeout(() => {
+                    flipRandomDigit();
+                }, 1000);
+                return;
+            }
+
+            const selectedDigit = availableDigits[Math.floor(Math.random() * availableDigits.length)];
+            selectedDigit.classList.add('flipped');
+
+            setTimeout(() => {
+                selectedDigit.classList.remove('flipped');
+            }, 500);
+
+            lastFlippedIndex = selectedDigit;
+        }
+
+        // Wait before Flipping
+        intervalId = setInterval(flipRandomDigit, 404); 
+
+        // Title
+
+        function updateTitle() {
+            document.title = titles[currentIndex];
+            currentIndex = (currentIndex + 1) % titles.length;
+        }
+
+        setInterval(updateTitle, 500);// 500ms cuz it look cool
+    </script>
+</body>
+</html>
