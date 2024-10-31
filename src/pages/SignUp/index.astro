@@ -37,8 +37,10 @@ import Layout from '../../layouts/Layout.astro';
         </form>
     </span>
     <a href="/Dashboard/">
+        <div id="hoverfix">
         <div id="BacktoSignUp" >
             <div class="CCCw">Login</div>
+        </div>
         </div>
     </a>
 </Layout>
@@ -255,6 +257,7 @@ import Layout from '../../layouts/Layout.astro';
 
             left:0px;
             bottom:20px;
+            translate: 0% 12%;
             --font-size-CCw: 20px;
 
 
@@ -267,6 +270,24 @@ import Layout from '../../layouts/Layout.astro';
 
             transition:250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
         }
+        #hoverfix{
+            position:absolute;
+            width: 50px;
+            height: 200px;
+
+            display: flex;
+            border-top-right-radius:10px;
+            border-bottom-right-radius:10px;
+            background-color: none;
+
+
+            left:0px;
+            bottom:20px;
+
+            border: none solid 5px;
+            background-clip: border-box;
+            border-left:none;
+        }
         .CCCw {
         color: white;
         font-family: Sanchez;
@@ -275,10 +296,12 @@ import Layout from '../../layouts/Layout.astro';
         transition: font-size 250ms cubic-bezier(0.5, -1.05, 0.11, 1.71);
     }
 
-    #BacktoSignUp:hover {
-        width: 50px;
-        --font-size-CCw: 35px;
-        transition: width 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71), --font-size-CCw 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71),; 
+    #hoverfix:hover {
+        #BacktoSignUp {
+            width: 50px;
+            --font-size-CCw: 35px;
+            transition: width 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71), --font-size-CCw 300ms cubic-bezier(0.5, -1.05, 0.11, 1.71),; 
+        }
     }
     input[type="number"]{
         outline: none;
