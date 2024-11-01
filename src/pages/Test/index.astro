@@ -23,6 +23,18 @@
       });
     }
   </script>
+  <script lang="js">
+    import { signInWithRedirect } from 'firebase/auth';
+
+    const signIn = async () => {
+    try {
+        await signInWithRedirect(auth, provider);
+    } catch (error) {
+        console.error("Error signing in:", error);
+    }
+    };
+
+  </script>
 
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
