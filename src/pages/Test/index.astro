@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in with Google</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>Google Sign-In Example</title>
     <meta name="google-signin-client_id" content="173246410645-dvhdj5hjj5jsa1decl670sb2k51n2mmt.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <h2>User Information:</h2>
+    <pre id="userInfo"></pre>
+
+    <button onclick="signOut()">Sign out</button>
+
     <script lang="js">
         function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend!
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
 
-        // Send token to your backend server to validate and sign in the user
-        var id_token = googleUser.getAuthResponse().id_token;
-        // ... send id_token to your server ...
+            document.getElementById('userInfo').textContent =
+                'ID: ' + profile.getId() + '\n' +
+                'Name: ' + profile.getName() + '\n' +
+                'Image URL: ' + profile.getImageUrl() + '\n' +
+                'Email: ' + profile.getEmail();
+        }
 
-        // Sign out button
-        document.getElementById('sign-out').style.display = 'block';
-    }
-
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            document.getElementById('sign-out').style.display = 'none';
-        });
-    }
-
-    // Add sign-out button to HTML
-    document.body.innerHTML += '<button id="sign-out" onclick="signOut()" style="display:none;">Sign Out</button>';
-
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                document.getElementById('userInfo').textContent = '';
+            });
+        }
     </script>
 </body>
 </html>
