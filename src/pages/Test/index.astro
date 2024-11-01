@@ -1,30 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in with Google</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="173246410645-dvhdj5hjj5jsa1decl670sb2k51n2mmt.apps.googleusercontent.com">
+</head>
+<body>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <script lang="js">
+        function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
 
-<html>
-    <head>
-      <meta name="google-signin-client_id" content="173246410645-dvhdj5hjj5jsa1decl670sb2k51n2mmt.apps.googleusercontent.com">
-    </head>
-    <body>
-      <div id="my-signin2"></div>
-      <script lang="js">
-        function onSuccess(googleUser) {
-          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        }
-        function onFailure(error) {
-          console.log(error);
-        }
-        function renderButton() {
-          gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-          });
-        }
-      </script>
-    
-      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    </body>
-    </html>
+        // Send token to your backend server to validate and sign in the user
+        var id_token = googleUser.getAuthResponse().id_token;
+        // ... send id_token to your server ...
+
+        // Sign out button
+        document.getElementById('sign-out').style.display = 'block';
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+            document.getElementById('sign-out').style.display = 'none';
+        });
+    }
+
+    // Add sign-out button to HTML
+    document.body.innerHTML += '<button id="sign-out" onclick="signOut()" style="display:none;">Sign Out</button>';
+
+    </script>
+</body>
+</html>
