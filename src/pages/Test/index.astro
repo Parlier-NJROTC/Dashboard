@@ -1,42 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign-In Example</title>
-    <meta name="google-signin-client_id" content="173246410645-dvhdj5hjj5jsa1decl670sb2k51n2mmt.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
 </head>
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <div id="my-signin2"></div>
+  <script lang="js">
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
 
-    <h2>User Information:</h2>
-    <pre id="userInfo"></pre>
-
-    <button onclick="signOut()">Sign out</button>
-
-    <script lang="js">
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend!
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            alert('Email: ' + profile.getEmail());
-
-            document.getElementById('userInfo').textContent =
-                'ID: ' + profile.getId() + '\n' +
-                'Name: ' + profile.getName() + '\n' +
-                'Image URL: ' + profile.getImageUrl() + '\n' +
-                'Email: ' + profile.getEmail();
-        }
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-                document.getElementById('userInfo').textContent = '';
-            });
-        }
-    </script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
 </html>
