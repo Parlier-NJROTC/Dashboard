@@ -19,7 +19,7 @@ const { title ,link = title} = Astro.props
 </script>
 
 <span>
-    <a href=`/Dashboard/${link}`> {title} </a>
+    <a href=`/Dashboard/${link}`> <div class="textsss">{title}</div> </a>
 </span>
 
 
@@ -65,6 +65,9 @@ const { title ,link = title} = Astro.props
 
         color: var(--nav-txt-color);
     }
+    .textsss{
+        transition: ease 250ms;
+    }
     span a:hover{
         background-color: var(--nav-bg-color);
 
@@ -72,5 +75,8 @@ const { title ,link = title} = Astro.props
         padding-right: 20px;
 
         translate: 5% 0%;
+        .textsss{
+            transform: skew(-15deg);
+        }
     }
 </style>
