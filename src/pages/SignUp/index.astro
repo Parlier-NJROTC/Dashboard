@@ -19,17 +19,17 @@ import Layout from '../../layouts/Layout.astro';
                 </div>
                 <label for="Email"></label>
                 <div class="input-group">
-                    <input placeholder="18000644@parlierusd.org" type="email" style="font-size: 20px;font-weight:540;" autocomplete="email">
+                    <input placeholder="********@parlierusd.org" type="email" style="font-size: 20px;font-weight:540;" autocomplete="email">
                 </div>
                 <div class="input-group password-container"  style="padding-down: 50px;">
                     <label for="password"></label>
-                    <input placeholder="Parlier1" type="password" id="password" name="password"  class="input-text-large" autocomplete="current-password">
+                    <input placeholder="Password" type="password" id="password" name="password"  class="input-text-large" autocomplete="current-password">
                     <div class="password-checkbox">
                         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/refs/heads/main/Other/Show.svg" alt="Show Password" class="hide-icon" style="width: 20px;height: 20px;cursor: pointer;display: none;">
                         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/refs/heads/main/Other/Hidden.svg" alt="Hide Password" class="show-icon" style="width: 20px;height: 20px;cursor: pointer;">
                     </div>
                 </div>
-                <div style="justify-self: center;">NS<input type="number" id="Year3321" min="1" max="4"></div>
+                <div style="justify-self: center;">NS<input type="number" placeholder="#" id="Year3321" min="1" max="4"></div>
                 <div class="input-group" style="padding-top: 25px;">
                     <button class="sanchez-regular">SignUp</button>
                 </div>
@@ -181,6 +181,7 @@ import Layout from '../../layouts/Layout.astro';
         input[type="number"]::placeholder {
         color: rgb(0, 0, 0);
         opacity: 1; 
+        size: 20px;
         }
 
         .input-group input[type="text"]::-ms-input-placeholder,

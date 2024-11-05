@@ -37,7 +37,7 @@ import { API_URL } from 'astro:env/client';
     <script lang="js">
         console.log("mannn")
     </script>
-    <div id="Dashboard-Title">
+    <div id="Dashboard-Title" onclick="location.href='/Dashboard/Home';"> <!-- <a></a> breaks things so Don't Use it -->
         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/c5cddb2fd71a4737ac4ae89491347a84d3608f23/Other/NJROTC-Seal.svg">
         <h1>NJROTC Dashboard</h1>
     </div>
@@ -146,8 +146,7 @@ import { API_URL } from 'astro:env/client';
         astroComponent.style.display = 'none';
         astroComponent.style.opacity = '0';
     }
-});
-
+    }); 
     </script>
 
 </body>
