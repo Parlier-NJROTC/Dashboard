@@ -15,7 +15,8 @@ import { API_URL } from 'astro:env/client';
       <div class="box">
         <File></File>
         <button id="Buttonn">Open Items Selector</button>
-        <input type="submit" id="SubmitRibbons"></input>
+        <button id="SubmitRibbons-NoFile">Put In A Image</button>
+        <input type="submit" id="SubmitRibbons" style="display: none;"></input>
         </div>
       </div>
     </div>
@@ -40,15 +41,48 @@ import { API_URL } from 'astro:env/client';
   </script>
 
   <script lang="js">
+    const email = document.querySelector('#SubmitRibbons');
+    const noemail = document.querySelector('#SubmitRibbons-NoFile');
+    const fileInput = document.querySelector('input[type="file"]');
+    let previousFiles = [];
 
-    document.getElementById('Buttonn').addEventListener('mousedown', function() {
-      const astroComponent = document.querySelector('.astro-component');
-      const o = document.querySelector('.Setimg');
-      astroComponent.style.display = 'block';
-      astroComponent.style.opacity = '1';
-      o.style.display = 'none';
-      o.style.opacity = '0';
+  document.getElementById('Buttonn').addEventListener('mousedown', function() {
+    const astroComponent = document.querySelector('.astro-component');
+    const o = document.querySelector('.Setimg');
+    astroComponent.style.display = 'block';
+    astroComponent.style.opacity = '1';
+    o.style.display = 'none';
+    o.style.opacity = '0';
+  });
+
+  fileInput.addEventListener('input', (event) => {
+    const currentFiles = Array.from(event.target.files);
+
+    const addedFiles = currentFiles.filter(file => !previousFiles.includes(file));
+    
+    if (addedFiles.length > 0) {
+      console.log('File changes detected!');
+      
+      if (addedFiles.length > 0) {
+        console.log(`Added ${addedFiles.length} new file(s):`);
+        addedFiles.forEach(file => console.log(file.name));
+        email.style.display = 'block';
+        email.style.opacity = '1';
+      }
+      
+      document.getElementById('remove-image').addEventListener('mousedown', function() {
+      noemail.style.display = 'block';
+      noemail.style.opacity = '1';
+      email.style.display = 'none';
+      email.style.opacity = '0';
     });
+    } else {
+      console.log('No file changes detected.');
+    }
+
+    // Update previousFiles for next comparison
+    previousFiles = currentFiles;
+  });
   </script>
 
   <style>
@@ -101,6 +135,22 @@ import { API_URL } from 'astro:env/client';
 
       width: 20vw;
       height: 5vw;
+
+      font-family: 'Sanchez';
+    }
+    #SubmitRibbons-NoFile{
+      position: absolute;
+      bottom: 40px;
+
+      width: 20vw;
+      height: 5vw;
+
+      background-color: whitesmoke;
+      border: 5px double #000000;
+      border-radius: 5px;
+
+      background-clip:content-box;
+      
 
       font-family: 'Sanchez';
     }
