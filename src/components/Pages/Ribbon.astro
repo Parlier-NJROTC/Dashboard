@@ -55,34 +55,20 @@ import { API_URL } from 'astro:env/client';
     o.style.opacity = '0';
   });
 
-  fileInput.addEventListener('input', (event) => {
-    const currentFiles = Array.from(event.target.files);
-
-    const addedFiles = currentFiles.filter(file => !previousFiles.includes(file));
-    
-    if (addedFiles.length > 0) {
-      console.log('File changes detected!');
+  // why was is so Easy to fix it??? 
+    document.getElementById('image-upload-wrap').addEventListener('change', function() {
+      noemail.style.display = 'none';
+      noemail.style.opacity = '1';
+      email.style.display = 'block';
+      email.style.opacity = '1';
       
-      if (addedFiles.length > 0) {
-        console.log(`Added ${addedFiles.length} new file(s):`);
-        addedFiles.forEach(file => console.log(file.name));
-        email.style.display = 'block';
-        email.style.opacity = '1';
-      }
-      
-      document.getElementById('remove-image').addEventListener('mousedown', function() {
+    document.getElementById('remove-image').addEventListener('mousedown', function() {
       noemail.style.display = 'block';
       noemail.style.opacity = '1';
       email.style.display = 'none';
       email.style.opacity = '0';
     });
-    } else {
-      console.log('No file changes detected.');
-    }
-
-    // Update previousFiles for next comparison
-    previousFiles = currentFiles;
-  });
+  })
   </script>
 
   <style>
@@ -136,7 +122,30 @@ import { API_URL } from 'astro:env/client';
       width: 20vw;
       height: 5vw;
 
+      background-color: whitesmoke;
+      border: 5px double #000000;
+      border-radius: 5px;
+      
+
       font-family: 'Sanchez';
+
+      animation: fadeIn 0.5s ease-in-out forwards;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    #SubmitRibbons:hover{
+      background-color: rgb(255, 255, 255);
+      border: 5px double #000000;
+
+      transform: scale(1.1);
+    }
+    #SubmitRibbons:active{
+      background-color:  #000000;
+      color: whitesmoke;
+      border: 5px double whitesmoke;
+
+      cursor: alias;
+
+      transform: scale(0.9);
     }
     #SubmitRibbons-NoFile{
       position: absolute;
@@ -149,14 +158,49 @@ import { API_URL } from 'astro:env/client';
       border: 5px double #000000;
       border-radius: 5px;
 
-      background-clip:content-box;
       
 
       font-family: 'Sanchez';
+
+      animation: fadeIn 0.5s ease-in-out forwards;
+
+      transition: transform 0.3s ease;
+    }
+    #SubmitRibbons-NoFile:hover{
+      transform: scale(1.1);
+    }
+    #SubmitRibbons-NoFile:active{
+      animation: No 500ms ease-in-out infinite;
+
+      cursor: help;
+
+      transform: scale(0.9);
+    }
+    @keyframes No{
+      25%{
+        background-color:  #000000;
+        color: whitesmoke;
+        border: 5px double whitesmoke;
+      }
+      50%{
+        background-color: whitesmoke;
+        color: 000000;
+        border: 5px double #000000;
+      }
+      75%{
+        background-color:  #000000;
+        color: whitesmoke;
+        border: 5px double whitesmoke;
+      }
+      100%{
+        background-color: whitesmoke;
+        color: 000000;
+        border: 5px double #000000;
+      }
     }
     @keyframes fadeIn {
       0% {
-        opacity: 0;
+        opacity: 0.2;
       }
       100% {
         opacity: 1;

@@ -48,7 +48,7 @@ import ribbons from "./ribbons.json"
 
 let ribbons_Selected = 0
 let ribbons_count = 0
-const MAX_SELECTIONS = 15;
+const MAX_SELECTIONS = 8;
 
 function loadSavedSelections() {
     try {
@@ -102,7 +102,7 @@ function createRibbonBox(i: string): HTMLElement {
         const isSelected = box.style.backgroundColor === "rgb(27, 165, 211)";
 
         if (!isSelected && ribbons_Selected >= MAX_SELECTIONS) {
-            alert('You cannot select more than 15 Items.');
+            alert('You cannot select more than 8 Items.');
             return;
         }
 
@@ -124,7 +124,7 @@ function createRibbonBox(i: string): HTMLElement {
 function updateSelectionCount() {
     const selectionCountElement = document.getElementById("selectionCount");
     if (selectionCountElement) {
-        selectionCountElement.innerText = `Items: ${ribbons_Selected} / 15`;
+        selectionCountElement.innerText = `Items: ${ribbons_Selected} / 8`;
     }
 }
 
