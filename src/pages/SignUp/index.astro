@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+import { API_URL } from 'astro:env/client';
+
 ---
 
 <Layout title="Sign Up">
@@ -19,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
                 </div>
                 <label for="Email"></label>
                 <div class="input-group">
-                    <input placeholder="Email@parlierusd.org" type="email" style="font-size: 20px;font-weight:540;" autocomplete="email">
+                    <input id="Email" placeholder="Email@parlierusd.org" name="email" type="email" style="font-size: 20px;font-weight:540;" aria-required="true" autocomplete="email">
                 </div>
                 <div class="input-group password-container"  style="padding-down: 50px;">
                     <label  for="password"></label>
@@ -29,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
                         <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/refs/heads/main/Other/Hidden.svg" alt="Hide Password" class="show-icon" style="width: 20px;height: 20px;cursor: pointer;">
                     </div>
                 </div>
-                <div style="justify-self: center;">NS<input type="number" placeholder="#" id="Year3321" min="1" max="4"></div>
+                <div style="justify-self: center;">NS<input type="number" name="class" placeholder="#" id="Year3321" min="1" max="4"></div>
                 <div class="input-group" style="padding-top: 25px;">
                     <button class="sanchez-regular">SignUp</button>
                 </div>
@@ -44,9 +46,73 @@ import Layout from '../../layouts/Layout.astro';
         </div>
     </a>
 </Layout>
-<script lang="js">
-    // Crazy Cool Sign Up Goes Here
-</script>
+<script lang="js" define:vars={{API_URL}}>
+    /**
+     * @type {HTMLFormElement}
+     */
+    let form = document.getElementById("The-SignUp-Form");
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData(e.target);
+        const jsonData = Object.fromEntries(formData.entries());
+
+        console.log('Sending data:', jsonData);
+
+        jsonData.userdata = {
+            class: parseInt(document.getElementById('Year3321').value)
+        };
+
+    
+        try {
+            const response = await fetch(API_URL+"auth/signup", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            });
+    
+            const result = await response.json();
+            console.log(result);
+    
+            if (result.success) {
+                localStorage.setItem('Token', result.token);
+                console.log("My Crazy Code Works");
+                window.location.href = '/Home';
+                document.getElementById("Status").innerText = `${result.message}`;
+            } else {
+                document.getElementById("Status").innerText = `${result.message}`;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById("Status").innerText = `${error.message}`;
+        }
+    });
+    
+    // Validate class input
+    const classInput = document.getElementById('Year3321');
+    
+    classInput.addEventListener('input', () => {
+        const value = parseInt(classInput.value);
+        if (isNaN(value) || value < 1 || value > 4) {
+            showStatusMessage("Only Numbers through 1-4");
+        } else {
+            hideStatusMessage();
+        }
+    });
+    
+    function showStatusMessage(message) {
+        document.getElementById('Status').textContent = message;
+        document.getElementById('Status').style.visibility = 'visible';
+    }
+    
+    function hideStatusMessage() {
+        document.getElementById('Status').style.visibility = 'hidden';
+    }
+    </script>
+    
 <script lang="js" >
 
     // Don't touch Plaes

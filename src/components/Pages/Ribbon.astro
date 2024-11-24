@@ -46,7 +46,7 @@ import { API_URL } from 'astro:env/client';
     const fileInput = document.querySelector('input[type="file"]');
     let previousFiles = [];
 
-  document.getElementById('Buttonn').addEventListener('mousedown', function() {
+  document.getElementById('Buttonn').addEventListener('click', function() {
     const astroComponent = document.querySelector('.astro-component');
     const o = document.querySelector('.Setimg');
     astroComponent.style.display = 'block';
@@ -62,7 +62,7 @@ import { API_URL } from 'astro:env/client';
       email.style.display = 'block';
       email.style.opacity = '1';
       
-    document.getElementById('remove-image').addEventListener('mousedown', function() {
+    document.getElementById('remove-image').addEventListener('click', function() {
       noemail.style.display = 'block';
       noemail.style.opacity = '1';
       email.style.display = 'none';
