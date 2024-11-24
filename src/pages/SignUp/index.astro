@@ -70,6 +70,7 @@ import { API_URL } from 'astro:env/client';
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify(jsonData),
                 credentials: 'include' // do your magic
