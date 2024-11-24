@@ -51,7 +51,7 @@ import { API_URL } from 'astro:env/client';
      * @type {HTMLFormElement}
      */
     let form = document.getElementById("The-SignUp-Form");
-    
+    console.warn("1.10")
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
     
@@ -60,9 +60,6 @@ import { API_URL } from 'astro:env/client';
 
         console.log('Sending data:', jsonData);
 
-        jsonData.userdata = {
-            class: parseInt(document.getElementById('Year3321').value)
-        };
 
     
         try {
@@ -70,10 +67,8 @@ import { API_URL } from 'astro:env/client';
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify(jsonData),
-                credentials: 'include' // do your magic
             });
     
             const result = await response.json();
@@ -93,7 +88,6 @@ import { API_URL } from 'astro:env/client';
         }
     });
     
-    // Validate class input
     const classInput = document.getElementById('Year3321');
     
     classInput.addEventListener('input', () => {
