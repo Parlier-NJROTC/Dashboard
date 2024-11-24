@@ -72,6 +72,7 @@ import { API_URL } from 'astro:env/client';
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(jsonData),
+                credentials: 'include' // do your magic
             });
     
             const result = await response.json();
