@@ -89,12 +89,14 @@ import { API_URL } from 'astro:env/client';
 
         // edit 2:14a.m. I think something is seriously wrong with this projects
 
+	// edit 1:15 a.m. Too annoying, disabling
+	/*
         if(localStorage.getItem("Token") == "" || localStorage.getItem("Token") == null){
             console.log("not logged in, returing to to login")
             window.location.href = "/Dashboard/"
             window.localStorage.removeItem('Token');
             window.localStorage.removeItem('selectedItems');
-        }
+        }*/
         fetch(API_URL+"home/info",{
             method:"GET",
             headers:{
