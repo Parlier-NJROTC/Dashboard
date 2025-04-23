@@ -107,9 +107,12 @@ import { API_URL } from 'astro:env/client';
             if(res.status != 200){
                 console.log("an error occured, returning to login")
                 // turn off in development when needed
-                window.location.href = "/Dashboard/"
-                window.localStorage.removeItem('Token');
-                window.localStorage.removeItem('selectedItems');
+
+		// edit 9:44p.m. forgot this existed
+
+                //window.location.href = "/Dashboard/"
+                //window.localStorage.removeItem('Token');
+                //window.localStorage.removeItem('selectedItems');
             }
             console.log("sup")
             console.log("Fortnite")
